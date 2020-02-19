@@ -1,27 +1,15 @@
-## What functionality does this accomplish?
-closes #
+## Description
+Completes User Story #
 
-**Description:**
+## Type of change
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] Refactor (non-breaking change which maintains existing functionality)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 
-## What did you struggle on to complete?
+## Notes
 
-## Current Test Suite:
-### Test Coverage Percentage: x%
-- [ ] No Tests have been changed
-- [ ] Some Tests have been changed
-- [ ] All of the Tests have been changed(Please describe what in the world happened):
-- [ ] New Tests added for new features
+## RSpec Results
+```
 
-## Checklist:
-- [ ] My code has no unused/commented out code
-- [ ] I have reviewed my code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have fully tested my code
-- [ ] I have partially tested my code (please explain why):
-
-## Helpful Resources:
-* Resource link AND small description of info gathered/learned
-
-## Review Requests(optional):
-
-## Please include a gif of how you feel about this branch:
+```
