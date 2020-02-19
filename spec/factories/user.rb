@@ -7,6 +7,6 @@ FactoryBot.define do
     zip               { Faker::Address.zip }
     email             { Faker::Internet.email }
     password          { "burger32" }
-    roll              { 0 }
+    role              { 0 }
   end
 end
