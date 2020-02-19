@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "As a visitor", type: :feature do
   it "can login with valid username and password as regular user" do
 
-    regular_user = create(:random_user, email: "ray@gmail.com", password: "password123")
+    regular_user = create(:regular_user, email: "ray@gmail.com", password: "password123")
 
     visit '/'
     click_on 'Log In'
@@ -24,7 +24,7 @@ RSpec.describe "As a visitor", type: :feature do
 
   it "cannot log in with bad credentials" do
 
-    regular_user = create(:random_user, email: "ray@gmail.com", password: "password123")
+    regular_user = create(:regular_user, email: "ray@gmail.com", password: "password123")
 
     visit "/"
 
@@ -40,7 +40,7 @@ RSpec.describe "As a visitor", type: :feature do
   end
 
   it "can log out" do
-    regular_user = create(:random_user, email: "ray@gmail.com", password: "password123")
+    regular_user = create(:regular_user, email: "ray@gmail.com", password: "password123")
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
 
@@ -56,7 +56,7 @@ RSpec.describe "As a visitor", type: :feature do
 
   it "when I log in as a merchant user I am redirected to my merchant dashboard" do
 
-    regular_user = create(:random_user, role: 1)
+    regular_user = create(:regular_user, role: 1)
 
     visit '/merchants'
     click_on 'Log In'
@@ -88,7 +88,7 @@ RSpec.describe "As a visitor", type: :feature do
     end
 
     it "when I am an admin user I am redirected to my admin dashboard page" do
-      regular_user = create(:random_user, role: 2)
+      regular_user = create(:regular_user, role: 2)
 
       visit '/merchants'
       click_on 'Log In'

@@ -77,12 +77,8 @@ GEM
     ffi (1.12.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-<<<<<<< HEAD
-    i18n (1.8.2)
-=======
     gotfaker (0.1.7)
-    i18n (1.7.0)
->>>>>>> 65538f8f98895ebdb36207826028236bdf43bc84
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
