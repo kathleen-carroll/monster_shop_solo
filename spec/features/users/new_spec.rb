@@ -71,7 +71,7 @@ RSpec.describe "user creation" do
   end
 
   it "displays flash message for same email already existing" do
-    create(:random_user, email: "john@mail.com")
+    create(:regular_user, email: "john@mail.com")
 
     visit "/"
 
