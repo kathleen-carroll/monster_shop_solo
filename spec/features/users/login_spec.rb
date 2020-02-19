@@ -17,5 +17,8 @@ RSpec.describe "As a visitor", type: :feature do
     expect(current_path).to eq("/profile")
 
     expect(page).to have_content("Welcome ray@gmail.com")
+    expect(page).to have_link("Log out")
+    expect(page).to_not have_link("Register as a User")
+    expect(page).to_not have_link("I already have an account")
   end
 end
