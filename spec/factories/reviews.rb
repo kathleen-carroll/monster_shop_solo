@@ -3,6 +3,6 @@ FactoryBot.define do
     title             { Faker::Hipster.sentence(word_count: 4) }
     content           { Faker::TvShows::SouthPark.quote }
     rating            { rand(1..5) }
-    item_id           { rand(1..1000) }
+    association    :item, factory: :random_item
   end
 end
