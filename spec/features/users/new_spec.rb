@@ -20,7 +20,7 @@ RSpec.describe "user creation" do
     click_button "Submit"
     new_user = User.last
 
-    expect(new_user.regular_user?).to eq(true)
+    expect(new_user.regular?).to eq(true)
     expect(current_path).to eq("/profile")
     expect(page).to have_content("New account successfully created! You are now logged in.")
   end
