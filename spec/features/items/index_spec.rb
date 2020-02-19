@@ -18,8 +18,6 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_link(@tire.merchant.name)
       expect(page).to have_link(@pull_toy.name)
       expect(page).to have_link(@pull_toy.merchant.name)
-      expect(page).to have_link(@dog_bone.name)
-      expect(page).to have_link(@dog_bone.merchant.name)
     end
 
     it "all items images are links to item show page" do
@@ -27,8 +25,8 @@ RSpec.describe "Items Index Page" do
 
       expect(page).to have_link("image-#{@tire.id}")
       expect(page).to have_link("image-#{@pull_toy.id}")
-      click_link("image-#{@dog_bone.id}")
-      expect(current_path).to eq("/items/#{@dog_bone.id}")
+      click_link("image-#{@pull_toy.id}")
+      expect(current_path).to eq("/items/#{@pull_toy.id}")
     end
 
     it "I can see a list of all of the items "do
@@ -52,16 +50,6 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_content("Inventory: #{@pull_toy.inventory}")
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@pull_toy.image}']")
-      end
-
-      within "#item-#{@dog_bone.id}" do
-        expect(page).to have_link(@dog_bone.name)
-        expect(page).to have_content(@dog_bone.description)
-        expect(page).to have_content("Price: $#{@dog_bone.price}")
-        expect(page).to have_content("Inactive")
-        expect(page).to have_content("Inventory: #{@dog_bone.inventory}")
-        expect(page).to have_link(@brian.name)
-        expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
     end
 
