@@ -82,7 +82,7 @@ RSpec.describe "As a visitor", type: :feature do
 
     click_button "Submit"
 
-    expect(current_path).to eq('/merchant')
+    expect(current_path).to eq('/merchants')
     expect(page).to have_content("Welcome Merchant #{regular_user.email}")
 
     end
