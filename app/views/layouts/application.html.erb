@@ -16,6 +16,8 @@
       <%= link_to "Register", "/register"%>
       <%= link_to "Admin Dashboard", "/admin" if current_user && current_user.admin? %>
       <%= link_to "Users", '/admin/users' %>
+      <%= link_to "Log Out", "/logout" if current_user%>
+      <%= link_to "Log In", "/login" %>
     </nav>
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
