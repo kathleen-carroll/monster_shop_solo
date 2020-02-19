@@ -42,4 +42,9 @@ Rails.application.routes.draw do
     # get "/orders", to: "orders#index"
   end
 
+  namespace :admin do
+    get "/", to: "dashboard#index"
+    get "/users", to: "users#index"
+  end
+
 end
