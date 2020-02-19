@@ -6,6 +6,6 @@ FactoryBot.define do
     sequence(:image)  {|n| "https://picsum.photos/id/#{1000 + n}/300/300"}
     active?           {true}
     inventory         {rand(1..100)}
-    association       :merchant, factory: :jomah_merchant
+    association       :merchant, factory: :factory_shop
   end
 end
