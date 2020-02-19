@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :random_merchant, class: User do
+  factory :merchant_user, class: User do
     name              { GOTFaker::Character.random_name }
     address           { Faker::Address.street_address }
     city              { GOTFaker::Geography.region }
