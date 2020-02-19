@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get '/', to: "welcome#index"
 
+  get "/admin", to: "admins#index"
+
   get "/merchants", to: "merchants#index"
   get "/merchants/new", to: "merchants#new"
   get "/merchants/:id", to: "merchants#show"
@@ -42,4 +44,7 @@ Rails.application.routes.draw do
     # get "/orders", to: "orders#index"
   end
 
+  get "/login", to: "sessions#new"
+  post '/login', to: 'sessions#create'
+  get "/logout", to: "sessions#destroy"
 end
