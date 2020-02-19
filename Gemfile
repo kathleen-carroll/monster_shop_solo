@@ -26,7 +26,11 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
   gem 'faker'
+<<<<<<< HEAD
   gem 'json'
+=======
+  gem 'gotfaker'
+>>>>>>> 65538f8f98895ebdb36207826028236bdf43bc84
 end
 
 group :development do
