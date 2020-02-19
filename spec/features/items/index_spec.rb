@@ -64,5 +64,12 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_css("img[src*='#{@dog_bone.image}']")
       end
     end
+
+    it "I can't see inactive items" do
+      inactive_item = create(:random_item, active?: false)
+      visit '/items'
+      expect(page).to_not have_css("#item-#{inactive_item.id}")
+      expect(page).to_not have_css("#item-#{@dog_bone.id}")
+    end
   end
 end
