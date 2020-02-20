@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   namespace :profile do
     get "/", to: "users#show"
-    # get "/orders", to: "orders#index"
+    get "/edit", to: "users#edit"
   end
 
   namespace :admin do
