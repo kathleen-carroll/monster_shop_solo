@@ -47,5 +47,22 @@ describe Item, type: :model do
       order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
+
+    it 'quantity_bought' do
+      expect(@chain.quantity_bought).to eq(0)
+      order1 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order2 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order3 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494)
+      order4 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494)
+      order1.item_orders.create(item: @chain, price: @chain.price, quantity: 1)
+      expect(@chain.quantity_bought).to eq(1)
+      order2.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
+      expect(@chain.quantity_bought).to eq(3)
+      order3.item_orders.create(item: @chain, price: @chain.price, quantity: 3)
+      expect(@chain.quantity_bought).to eq(6)
+      order4.item_orders.create(item: @chain, price: @chain.price, quantity: 4)
+      expect(@chain.quantity_bought).to eq(10)
+
+    end
   end
 end
