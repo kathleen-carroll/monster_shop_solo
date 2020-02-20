@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     redirect_to "/"
   end
 
-  private 
+  private
 
   def welcome(user)
     if current_admin?
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       redirect_to "/admin"
     elsif current_merchant?
       flash[:success] = "Welcome Merchant #{user.email}! You are logged in."
-      redirect_to merchants_path
+      redirect_to "/merchant"
     else
       flash[:success] = "Welcome #{user.email}! You are logged in."
       redirect_to profile_path

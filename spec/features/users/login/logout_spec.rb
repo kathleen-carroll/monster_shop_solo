@@ -45,7 +45,7 @@ RSpec.describe "As a visitor", type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
 
     visit "/profile"
-    
+
     expect(regular_user.email).to eq("ray@gmail.com")
     expect(current_path).to eq('/profile')
 
@@ -68,11 +68,11 @@ RSpec.describe "As a visitor", type: :feature do
 
     click_button "Submit"
 
-    expect(current_path).to eq('/merchants')
+    expect(current_path).to eq('/merchant')
     expect(page).to have_content("Welcome Merchant #{regular_user.email}")
     click_on "Log Out"
 
-    visit '/merchants'
+    visit '/merchant'
     click_on 'Log In'
 
     expect(current_path).to eq("/login")
@@ -82,7 +82,7 @@ RSpec.describe "As a visitor", type: :feature do
 
     click_button "Submit"
 
-    expect(current_path).to eq('/merchants')
+    expect(current_path).to eq('/merchant')
     expect(page).to have_content("Welcome Merchant #{regular_user.email}")
 
     end
@@ -104,4 +104,3 @@ RSpec.describe "As a visitor", type: :feature do
       expect(page).to have_content("Welcome Admin #{regular_user.email}!")
     end
 end
-

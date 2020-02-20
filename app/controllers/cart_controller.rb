@@ -1,4 +1,6 @@
 class CartController < ApplicationController
+  before_action :exclude_admin
+
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)
@@ -29,4 +31,10 @@ class CartController < ApplicationController
   #   end
   #   redirect_to "/cart"
   # end
+
+  private
+
+  def exclude_admin
+    render file: "/public/404" if current_admin?
+  end
 end
