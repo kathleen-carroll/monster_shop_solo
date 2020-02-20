@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   namespace :profile do
     get "/", to: "users#show"
     get "/edit", to: "users#edit"
+    patch '/', to: "users#update"
   end
 
   namespace :admin do
