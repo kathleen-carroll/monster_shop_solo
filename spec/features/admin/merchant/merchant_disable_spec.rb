@@ -78,4 +78,21 @@ RSpec.describe "on the admin merchant index" do
     expect(page).to have_content(item4.name)
     expect(page).to have_content(item5.name)
   end
+
+  it "can enable merchants from merchant index" do
+    user = create(:admin_user)
+    merchant = create(:random_merchant, active?: false)
+    merchant_2 = create(:random_merchant)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit "/merchants"
+
+    within "#merchant-#{merchant.id}" do
+      click_button "Enable"
+    end
+    
+    expect(current_path).to eq("/admin/merchants")
+    expect(page).to have_content("#{merchant.name} has been activated.")
+  end
 end
+
