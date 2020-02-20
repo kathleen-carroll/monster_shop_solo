@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20200220162128) do
     t.integer "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "active", default: true
     t.boolean "active?", default: true
   end
 

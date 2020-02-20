@@ -22,6 +22,14 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
+  def edit_quantity
+    item = Item.find(params[:item_id].to_i)
+    if item.inventory != cart.contents[item.id.to_s]
+      cart.contents[item.id.to_s] += 1
+    end
+    redirect_to '/cart'
+  end
+
   # def increment_decrement
   #   if params[:increment_decrement] == "increment"
   #     cart.add_quantity(params[:item_id]) unless cart.limit_reached?(params[:item_id])

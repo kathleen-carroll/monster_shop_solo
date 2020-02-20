@@ -30,7 +30,9 @@
       </td>
       <td>
         <center>
-          <p><%=quantity%></p>
+          <p><%=quantity%>
+          <%= button_to "+", "cart/#{item.id}", method: :patch%>
+          <%= button_to "-", "cart/#{item.id}", method: :patch%></p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
         </td>
