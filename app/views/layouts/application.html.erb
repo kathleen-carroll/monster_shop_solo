@@ -20,6 +20,7 @@
       <%= link_to "Merchant Dashboard", '/merchant' if current_merchant? %>
       <%= link_to "Log Out", "/logout" if current_user %>
       <%= link_to "Log In", "/login"if current_user.nil? %>
+      <div id="loggedIn"><%= "Logged in as: #{current_user.name}" if !current_user.nil? %></div>
     </nav>
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
