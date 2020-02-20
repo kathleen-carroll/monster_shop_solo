@@ -2,6 +2,7 @@
 
 <% if !@items.empty? %>
 <center>
+<h4> <%= "Please register or log in to checkout." unless current_user %></h4>
 <table class = "cart-items">
   <tr>
     <th>Item</th>
@@ -50,7 +51,7 @@
 </table>
   <p>Total: <%= number_to_currency(cart.total) %></p>
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
-  <p><%= link_to "Checkout", "/orders/new", method: :get %></p>
+  <p><%= link_to "Checkout", "/orders/new", method: :get if current_user%></p>
 <% else %>
   <h3 align= "center">Cart is currently empty</h3>
 <% end %>
