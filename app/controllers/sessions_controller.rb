@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-      if current_admin?
+    if current_admin?
       flash[:success] = "You are already logged in as admin."
       redirect_to "/admin"
     elsif current_merchant?
