@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 RSpec.describe 'Site Navigation' do
@@ -13,10 +12,28 @@ RSpec.describe 'Site Navigation' do
       expect(current_path).to eq('/items')
 
       within 'nav' do
+        click_link 'Home'
+      end
+
+      expect(current_path).to eq('/')
+
+      within 'nav' do
         click_link 'All Merchants'
       end
 
       expect(current_path).to eq('/merchants')
+
+      within 'nav' do
+        click_link 'Register'
+      end
+
+      expect(current_path).to eq('/register')
+
+      within 'nav' do
+        click_link 'Log In'
+      end
+
+      expect(current_path).to eq('/login')
     end
 
     it "I can see a cart indicator on all pages" do
