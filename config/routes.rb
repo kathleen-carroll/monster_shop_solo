@@ -45,6 +45,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/", to: "dashboard#index"
     get "/users", to: "users#index"
+
+    resources :merchants, only: [:index] do
+      patch "/toggle_active", to: "merchants#toggle_active"
+    end
   end
 
   get "/login", to: "sessions#new"
