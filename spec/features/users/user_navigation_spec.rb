@@ -22,7 +22,7 @@ RSpec.describe 'As a regular user', type: :feature do
       end
 
       within 'nav' do
-        expect(page).to have_link('Logout')
+        expect(page).to have_link('Log Out')
       end
 
       within 'nav' do
