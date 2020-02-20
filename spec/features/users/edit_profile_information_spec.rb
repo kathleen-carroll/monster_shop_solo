@@ -59,6 +59,20 @@ RSpec.describe 'As a registered user', type: :feature do
       within("div.userInfo") do
         expect(page).to have_content('Maine')
       end
+
+      click_link 'Edit Profile'
+
+      within("div.userInfo") do
+        fill_in 'name', with: ''
+      end
+
+      within("div.userInfo") do
+        fill_in 'state', with: 'Maine'
+      end
+
+      click_button 'Update Profile'
+
+      expect(page).to have_content("Name can't be blank")
     end
   end
 end
