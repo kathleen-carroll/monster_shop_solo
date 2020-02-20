@@ -12,6 +12,13 @@ class Item <ApplicationRecord
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
 
+  def self.popular(limit, order)
+     Item.select("items.*, SUM(quantity) AS total")
+       .joins(:item_orders)
+       .group(:id)
+       .order("total #{order}")
+       .limit(limit)
+  end
 
   def average_review
     reviews.average(:rating)

@@ -59,5 +59,71 @@ RSpec.describe "Items Index Page" do
       expect(page).to_not have_css("#item-#{inactive_item.id}")
       expect(page).to_not have_css("#item-#{@dog_bone.id}")
     end
+
+    it "I can see popular item statistics" do
+      item7 = create(:random_item)
+      item6 = create(:random_item)
+      item5 = create(:random_item)
+      item4 = create(:random_item)
+      item3 = create(:random_item)
+      item2 = create(:random_item)
+      item1 = create(:random_item)
+
+      20.times { create(:random_item_order, item: item1, price: item1.price, quantity: 5) }
+      14.times { create(:random_item_order, item: item2, price: item1.price, quantity: 5) }
+      11.times { create(:random_item_order, item: item3, price: item1.price, quantity: 5) }
+      10.times { create(:random_item_order, item: item4, price: item1.price, quantity: 5) }
+      8.times { create(:random_item_order, item: item5, price: item1.price, quantity: 5) }
+      3.times { create(:random_item_order, item: item6, price: item1.price, quantity: 5) }
+      1.times { create(:random_item_order, item: item7, price: item1.price, quantity: 5) }
+
+      visit '/items'
+
+      within("#most_popular") do
+        within("#top-1") do
+          expect(page).to have_link(item1.name)
+          expect(page).to have_content("Total amount ordered: #{item1.quantity_bought}")
+        end
+        within("#top-2") do
+          expect(page).to have_link(item2.name)
+          expect(page).to have_content("Total amount ordered: #{item2.quantity_bought}")
+        end
+        within("#top-3") do
+          expect(page).to have_link(item3.name)
+          expect(page).to have_content("Total amount ordered: #{item3.quantity_bought}")
+        end
+        within("#top-4") do
+          expect(page).to have_link(item4.name)
+          expect(page).to have_content("Total amount ordered: #{item4.quantity_bought}")
+        end
+        within("#top-5") do
+          expect(page).to have_link(item5.name)
+          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
+        end
+      end
+
+      within("#least_popular") do
+        within("#bottom-1") do
+          expect(page).to have_link(item7.name)
+          expect(page).to have_content("Total amount ordered: #{item7.quantity_bought}")
+        end
+        within("#bottom-2") do
+          expect(page).to have_link(item6.name)
+          expect(page).to have_content("Total amount ordered: #{item6.quantity_bought}")
+        end
+        within("#bottom-3") do
+          expect(page).to have_link(item5.name)
+          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
+        end
+        within("#bottom-4") do
+          expect(page).to have_link(item4.name)
+          expect(page).to have_content("Total amount ordered: #{item4.quantity_bought}")
+        end
+        within("#bottom-5") do
+          expect(page).to have_link(item3.name)
+          expect(page).to have_content("Total amount ordered: #{item3.quantity_bought}")
+        end
+      end
+    end
   end
 end
