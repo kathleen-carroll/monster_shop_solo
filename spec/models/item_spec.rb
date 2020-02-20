@@ -64,7 +64,7 @@ describe Item, type: :model do
       expect(@chain.quantity_bought).to eq(10)
     end
 
-    it 'most_popular' do
+    it 'popular' do
       item7 = create(:random_item)
       item6 = create(:random_item)
       item5 = create(:random_item)
@@ -83,29 +83,30 @@ describe Item, type: :model do
       3.times { create(:random_item_order, item: item6, price: item1.price, quantity: 5) }
       1.times { create(:random_item_order, item: item7, price: item1.price, quantity: 5) }
 
-      expect(Item.most_popular(5)).to eq([super_item, item1, item2, item3, item4])
+      expect(Item.popular(5, "desc")).to eq([super_item, item1, item2, item3, item4])
+      expect(Item.popular(5, "asc")).to eq([item7, item6, item5, item4, item3])
     end
 
-    it 'least_popular' do
-      item7 = create(:random_item)
-      item6 = create(:random_item)
-      item5 = create(:random_item)
-      super_item = create(:random_item)
-      item4 = create(:random_item)
-      item3 = create(:random_item)
-      item2 = create(:random_item)
-      item1 = create(:random_item)
-
-      20.times { create(:random_item_order, item: item1, price: item1.price, quantity: 5) }
-      14.times { create(:random_item_order, item: item2, price: item1.price, quantity: 5) }
-      11.times { create(:random_item_order, item: item3, price: item1.price, quantity: 5) }
-      10.times { create(:random_item_order, item: item4, price: item1.price, quantity: 5) }
-      100.times { create(:random_item_order, item: super_item, price: item1.price, quantity: 15) }
-      8.times { create(:random_item_order, item: item5, price: item1.price, quantity: 5) }
-      3.times { create(:random_item_order, item: item6, price: item1.price, quantity: 5) }
-      1.times { create(:random_item_order, item: item7, price: item1.price, quantity: 5) }
-
-      expect(Item.least_popular(5)).to eq([item7, item6, item5, item4, item3])
-    end
+    # it 'least_popular' do
+    #   item7 = create(:random_item)
+    #   item6 = create(:random_item)
+    #   item5 = create(:random_item)
+    #   super_item = create(:random_item)
+    #   item4 = create(:random_item)
+    #   item3 = create(:random_item)
+    #   item2 = create(:random_item)
+    #   item1 = create(:random_item)
+    #
+    #   20.times { create(:random_item_order, item: item1, price: item1.price, quantity: 5) }
+    #   14.times { create(:random_item_order, item: item2, price: item1.price, quantity: 5) }
+    #   11.times { create(:random_item_order, item: item3, price: item1.price, quantity: 5) }
+    #   10.times { create(:random_item_order, item: item4, price: item1.price, quantity: 5) }
+    #   100.times { create(:random_item_order, item: super_item, price: item1.price, quantity: 15) }
+    #   8.times { create(:random_item_order, item: item5, price: item1.price, quantity: 5) }
+    #   3.times { create(:random_item_order, item: item6, price: item1.price, quantity: 5) }
+    #   1.times { create(:random_item_order, item: item7, price: item1.price, quantity: 5) }
+    #
+    #   expect(Item.least_popular(5)).to eq([item7, item6, item5, item4, item3])
+    # end
   end
 end

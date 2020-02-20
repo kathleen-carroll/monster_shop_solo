@@ -12,19 +12,11 @@ class Item <ApplicationRecord
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
 
-  def self.most_popular(limit)
+  def self.popular(limit, order)
      Item.select("items.*, SUM(quantity) AS total")
        .joins(:item_orders)
        .group(:id)
-       .order("total desc")
-       .limit(limit)
-  end
-
-  def self.least_popular(limit)
-     Item.select("items.*, SUM(quantity) AS total")
-       .left_outer_joins(:item_orders)
-       .group(:id)
-       .order("total asc")
+       .order("total #{order}")
        .limit(limit)
   end
 
