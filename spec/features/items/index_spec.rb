@@ -104,24 +104,24 @@ RSpec.describe "Items Index Page" do
 
       within("#least_popular") do
         within("#bottom-1") do
-          expect(page).to have_link(item1.name)
-          expect(page).to have_content("Total amount ordered: #{item1.quantity_bought}")
+          expect(page).to have_link(item7.name)
+          expect(page).to have_content("Total amount ordered: #{item7.quantity_bought}")
         end
         within("#bottom-2") do
-          expect(page).to have_link(item2.name)
-          expect(page).to have_content("Total amount ordered: #{item2.quantity_bought}")
+          expect(page).to have_link(item6.name)
+          expect(page).to have_content("Total amount ordered: #{item6.quantity_bought}")
         end
         within("#bottom-3") do
-          expect(page).to have_link(item3.name)
-          expect(page).to have_content("Total amount ordered: #{item3.quantity_bought}")
+          expect(page).to have_link(item5.name)
+          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
         end
         within("#bottom-4") do
           expect(page).to have_link(item4.name)
           expect(page).to have_content("Total amount ordered: #{item4.quantity_bought}")
         end
         within("#bottom-5") do
-          expect(page).to have_link(item5.name)
-          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
+          expect(page).to have_link(item3.name)
+          expect(page).to have_content("Total amount ordered: #{item3.quantity_bought}")
         end
       end
     end
