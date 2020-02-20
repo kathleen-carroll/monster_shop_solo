@@ -46,9 +46,7 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index"
     get "/users", to: "users#index"
 
-    resources :merchants, only: [:index] do
-      patch "/toggle_active", to: "merchants#toggle_active"
-    end
+    resources :merchants, only: [:index, :update] 
   end
 
   get "/login", to: "sessions#new"

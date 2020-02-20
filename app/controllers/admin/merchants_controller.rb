@@ -3,8 +3,8 @@ class Admin::MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  def toggle_active
-    merchant = Merchant.find(params[:merchant_id])
+  def update
+    merchant = Merchant.find(params[:id])
     merchant.toggle!(:active)
     if !merchant.active?
       flash[:notice] = "#{merchant.name} has been deactivated."
