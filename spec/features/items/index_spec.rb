@@ -59,5 +59,30 @@ RSpec.describe "Items Index Page" do
       expect(page).to_not have_css("#item-#{inactive_item.id}")
       expect(page).to_not have_css("#item-#{@dog_bone.id}")
     end
+
+    it "I can see the five most popular items" do
+      within("#most_popular") do
+        within("first") do
+          expect(page).to have_link(item_1.name)
+          expect(page).to have_content("Total amount ordered: #{item_1.quantity_bought}")
+        end
+        within("second") do
+          expect(page).to have_link(item_2.name)
+          expect(page).to have_content("Total amount ordered: #{item_2.quantity_bought}")
+        end
+        within("third") do
+          expect(page).to have_link(item_3.name)
+          expect(page).to have_content("Total amount ordered: #{item_3.quantity_bought}")
+        end
+        within("fourth") do
+          expect(page).to have_link(item_4.name)
+          expect(page).to have_content("Total amount ordered: #{item_4.quantity_bought}")
+        end
+        within("fifth") do
+          expect(page).to have_link(item_5.name)
+          expect(page).to have_content("Total amount ordered: #{item_5.quantity_bought}")
+        end
+      end
+    end
   end
 end
