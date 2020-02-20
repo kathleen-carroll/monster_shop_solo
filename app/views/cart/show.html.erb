@@ -29,10 +29,16 @@
         <p><%=number_to_currency(item.price)%></p>
       </td>
       <td>
-        <center>
-          <p><%=quantity%>
-          <%= button_to "+", "cart/#{item.id}", method: :patch%>
-          <%= button_to "-", "cart/#{item.id}", method: :patch%></p>
+        <center id='qty'>
+          <p><%=quantity%></p>
+          <div class="qty-button">
+          <div id="add">
+            <%= button_to "+", "cart/#{item.id}", method: :patch, params: {value: :add}%>
+          </div>
+          <div id="sub">
+            <%= button_to "-", "cart/#{item.id}", method: :patch, params: {value: :sub}%>
+          </div>
+          </div>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
         </td>
