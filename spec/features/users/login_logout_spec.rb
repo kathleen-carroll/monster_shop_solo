@@ -103,4 +103,38 @@ RSpec.describe "As a visitor", type: :feature do
       expect(current_path).to eq('/admin')
       expect(page).to have_content("Welcome Admin #{regular_user.email}!")
     end
+
+    
+  it "redirects to approprate path when login as a regular user" do
+    regular_user = create(:regular_user, email: "ray@gmail.com", password: "password123")
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(regular_user)
+
+    visit "/login"
+
+    expect(current_path).to eq("/profile")
+    expect(page).to have_content("You are already logged in as user.")
+  end
+
+  it "redirects to approprate path when login as a admin user" do
+    user = create(:admin_user, email: "ray@gmail.com", password: "password123")
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit "/login"
+
+    expect(current_path).to eq("/admin")
+    expect(page).to have_content("You are already logged in as admin.")
+  end
+
+  it "redirects to approprate path when login as a merchant user" do
+    user = create(:merchant_user, email: "ray@gmail.com", password: "password123")
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit "/login"
+
+    expect(current_path).to eq("/merchant")
+    expect(page).to have_content("You are already logged in as merchant.")
+  end
 end
