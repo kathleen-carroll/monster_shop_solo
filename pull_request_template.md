@@ -1,7 +1,5 @@
 ## Description
 Completes User Story #
-Test Percentage:
-Number of Test:
 
 ## Type of change
 - [ ] Bug fix (non-breaking change which fixes an issue)
