@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'As a registered user', type: :feature do
   describe 'When I visit my profile page' do
     it 'I see all my profile data on the page except my password' do
+
       user = create(:regular_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -17,6 +18,7 @@ RSpec.describe 'As a registered user', type: :feature do
       expect(page).to have_content(user.role)
       expect(page).to_not have_content(user.password)
       expect(page).to have_link('Edit Profile')
+
     end
   end
 end
