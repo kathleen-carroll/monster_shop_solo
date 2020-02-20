@@ -30,7 +30,7 @@ RSpec.describe 'Site Navigation' do
       expect(current_path).to eq('/register')
 
       within 'nav' do
-        click_link 'Login'
+        click_link 'Log In'
       end
 
       expect(current_path).to eq('/login')
