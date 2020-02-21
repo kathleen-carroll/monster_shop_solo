@@ -1,4 +1,4 @@
-<%= form_with url: "/profile/users/:id", method: :patch do |f| %>
+<%= form_with url: profile_path, method: :patch do |f| %>
   <p><%= label_tag :name %></p>
   <p><%= f.text_field :name, value: pre_fill[:name] %></p>
 
