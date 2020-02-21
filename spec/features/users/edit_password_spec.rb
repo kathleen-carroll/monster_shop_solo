@@ -31,20 +31,8 @@ RSpec.describe 'As a registered user', type: :feature do
 
       click_button 'Update Password'
 
-      expect(current_path).to eq("/profile/edit_pw")
-      expect(page).to have_content('Password updated')
+      expect(current_path).to eq("/profile/edit/pw")
+      expect(page).to have_content("Password confirmation doesn't match Password")
     end
   end
 end
-
-# User Story 21, User Can Edit their Password
-
-# As a registered user
-# When I visit my profile page
-# I see a link to edit my password
-# When I click on the link to edit my password
-# I see a form with fields for a new password, and a new password confirmation
-# When I fill in the same password in both fields
-# And I submit the form
-# Then I am returned to my profile page
-# And I see a flash message telling me that my password is updated
