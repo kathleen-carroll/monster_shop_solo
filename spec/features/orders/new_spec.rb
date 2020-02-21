@@ -17,6 +17,9 @@ RSpec.describe("New Order Page") do
       click_on "Add To Cart"
     end
     it "I see all the information about my current cart" do
+      user = create(:regular_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
       visit "/cart"
 
       click_on "Checkout"
@@ -49,6 +52,9 @@ RSpec.describe("New Order Page") do
     end
 
     it "I see a form where I can enter my shipping info" do
+      user = create(:regular_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      
       visit "/cart"
       click_on "Checkout"
 

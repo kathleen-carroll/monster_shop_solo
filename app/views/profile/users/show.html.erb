@@ -1,4 +1,4 @@
-<div>
+<div class="userInfo">
   <p><%= current_user.name  %></p>
   <p><%= current_user.address  %></p>
   <p><%= current_user.city  %></p>
@@ -6,6 +6,6 @@
   <p><%= current_user.zip  %></p>
   <p><%= current_user.email  %></p>
   <p><%= current_user.role  %></p>
-  <%= link_to 'Edit Profile', 'profile_edit_path' %>
+  <%= link_to 'Edit Profile', profile_edit_path %>
   <%= link_to 'My Orders', profile_orders_path %>
 </div>
