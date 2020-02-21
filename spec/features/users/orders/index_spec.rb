@@ -10,8 +10,8 @@ RSpec.describe 'profile orders index page', type: :feature do
       item2 = create(:random_item)
       item1 = create(:random_item)
 
-      @order1 = create(:random_order)
-      @order2 = create(:random_order)
+      @order1 = create(:random_order, user: user)
+      @order2 = create(:random_order, user: user)
 
       create(:random_item_order, item: item1, order: @order1, price: item1.price, quantity: 3)
       create(:random_item_order, item: item2, order: @order1, price: item2.price, quantity: 7)
@@ -29,11 +29,11 @@ RSpec.describe 'profile orders index page', type: :feature do
       visit('/profile/orders')
 
       within("#order-#{@order1.id}") do
-        expect(page).to have_link(@order1.id)
+        expect(page).to have_link(@order1.id.to_s)
         expect(page).to have_content("Created: #{@order1.created_at}")
         expect(page).to have_content("Updated: #{@order1.updated_at}")
         expect(page).to have_content("Status: #{@order1.status}")
-        expect(page).to have_content("Number of items: #{@order1.items.count}")
+        expect(page).to have_content("Number of items: 10")
         expect(page).to have_content("Grand total: #{@order1.grandtotal}")
       end
     end
