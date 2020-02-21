@@ -41,10 +41,9 @@ Rails.application.routes.draw do
   namespace :profile do
     get "/", to: "users#show"
     get "/edit", to: "users#edit"
-    get "/edit_pw", to: "users#edit_pw"
+    get "/edit/pw", to: "users#edit_pw"
     get "/orders", to: "orders#index"
-    patch "/users/:id", to: "users#update"
-    patch "/users/:id", to: "users#update_pw"
+    patch "/", to: "users#update"
   end
 
   namespace :admin do
