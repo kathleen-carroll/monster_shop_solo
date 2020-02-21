@@ -4,5 +4,7 @@ class User < ApplicationRecord
   validates :password_digest, confirmation: true
   enum role: %w(regular merchant admin)
 
+  has_many :orders
+
   has_secure_password
 end

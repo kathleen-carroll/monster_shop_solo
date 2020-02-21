@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
+  patch "/cart/:item_id", to: "cart#edit_quantity"
 
   get "/orders/new", to: "orders#new"
   post "/orders", to: "orders#create"
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
   namespace :profile do
     get "/", to: "users#show"
     get "/edit", to: "users#edit"
+    get "/orders", to: "orders#index"
     patch '/', to: "users#update"
   end
 
@@ -47,7 +49,7 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index"
     get "/users", to: "users#index"
 
-    resources :merchants, only: [:index, :update] 
+    resources :merchants, only: [:index, :update]
   end
 
   get "/login", to: "sessions#new"

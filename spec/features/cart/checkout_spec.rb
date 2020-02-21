@@ -20,7 +20,12 @@ RSpec.describe 'Cart show' do
 
     it 'Theres a link to checkout' do
       visit "/cart"
+      expect(page).to_not have_link("Checkout")
 
+      user = create(:regular_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+      visit "/cart"
       expect(page).to have_link("Checkout")
 
       click_on "Checkout"
