@@ -42,17 +42,17 @@ describe Item, type: :model do
 
     it 'no orders' do
       expect(@chain.no_orders?).to eq(true)
-      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
       order.item_orders.create(item: @chain, price: @chain.price, quantity: 2)
       expect(@chain.no_orders?).to eq(false)
     end
 
     it 'quantity_bought' do
       expect(@chain.quantity_bought).to eq(0)
-      order1 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-      order2 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-      order3 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494)
-      order4 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494)
+      order1 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
+      order2 = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
+      order3 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494, user: create(:regular_user))
+      order4 = Order.create(name: 'Bleg', address: '123 Blang Ave', city: 'Bershey', state: 'BA', zip: 49494, user: create(:regular_user))
       order1.item_orders.create(item: @chain, price: @chain.price, quantity: 1)
       expect(@chain.quantity_bought).to eq(1)
       order2.item_orders.create(item: @chain, price: @chain.price, quantity: 2)

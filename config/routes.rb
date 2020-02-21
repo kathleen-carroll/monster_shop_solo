@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   namespace :profile do
     get "/", to: "users#show"
     get "/edit", to: "users#edit"
+    get "/orders", to: "orders#index"
     patch '/', to: "users#update"
   end
 

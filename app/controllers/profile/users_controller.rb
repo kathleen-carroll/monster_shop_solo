@@ -1,6 +1,4 @@
-class Profile::UsersController < ApplicationController
-  before_action :require_user
-
+class Profile::UsersController < Profile::BaseController
   def show
     @user = current_user
   end
