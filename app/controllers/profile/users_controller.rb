@@ -29,7 +29,7 @@ class Profile::UsersController < Profile::BaseController
       redirect_to profile_path
     else
       flash[:error] = @user.errors.full_messages.to_sentence
-      redirect_to profile_edit_pw_path
+      redirect_to "/profile/edit_pw"
     end
   end
 
