@@ -11,10 +11,25 @@ class Profile::UsersController < Profile::BaseController
     @user = current_user
     if @user.update(user_params)
       flash[:success] = 'Profile successfully updated'
-      redirect_to '/profile'
+      redirect_to profile_path
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render :edit
+    end
+  end
+
+  def edit_pw
+    @user = current_user
+  end
+
+  def update_pw
+    @user = current_user
+    if @user.update(user_params)
+      flash[:success] = 'Password updated'
+      redirect_to profile_path
+    else
+      flash[:error] = @user.errors.full_messages.to_sentence
+      redirect_to profile_edit_pw_path
     end
   end
 
