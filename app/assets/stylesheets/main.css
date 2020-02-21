@@ -4,3 +4,15 @@
   margin: auto;
   padding: 7px;
 }
+
+.qty-button {
+    display: inline-block;
+    margin: 5px; /* space between buttons */
+    /* float: left; */
+    justify-content: center;
+}
+
+#add , #sub {
+display:inline-block;
+/**other codes**/
+}
