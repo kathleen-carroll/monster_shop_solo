@@ -9,9 +9,16 @@ class Profile::UsersController < Profile::BaseController
 
   def update
     @user = current_user
-    if @user.update(user_params)
+    current_pw = @user.password
+    if @user.update(user_params) && current_pw == @user.password
       flash[:success] = 'Profile successfully updated'
       redirect_to '/profile'
+    elsif @user.update(user_params) && current_pw != @user.password
+      flash[:success] = 'Password updated'
+      redirect_to '/profile'
+    elsif user_params[:password] != user_params[:password_confirmation]
+      flash[:error] = @user.errors.full_messages.to_sentence
+      redirect_to '/profile/edit/pw'
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       redirect_to '/profile/edit'
