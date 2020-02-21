@@ -11,7 +11,7 @@ RSpec.describe 'As a registered user', type: :feature do
       expect(page).to have_content('Edit Password')
 
       click_link 'Edit Password'
-      expect(current_path).to eq("/profile/edit_pw")
+      expect(current_path).to eq(profile_edit_pw_path)
 
       expect(page).to have_field(:password)
       expect(page).to have_field(:password_confirmation)
@@ -21,7 +21,7 @@ RSpec.describe 'As a registered user', type: :feature do
 
       click_button 'Update Password'
 
-      expect(current_path).to eq('/profile')
+      expect(current_path).to eq(profile_path)
       expect(page).to have_content('Password updated')
 
       click_link 'Edit Password'
