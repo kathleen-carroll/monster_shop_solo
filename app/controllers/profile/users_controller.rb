@@ -34,7 +34,9 @@ class Profile::UsersController < ApplicationController
       :state,
       :zip,
       :email,
-      :role
+      :role,
+      :password,
+      :password_confirmation
     )
   end
 end
