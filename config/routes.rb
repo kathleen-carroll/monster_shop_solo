@@ -58,6 +58,7 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: "dashboard#index"
-    resources :items, only: [:show, :update]
+    get '/:id/items', to: "items#show" 
+    resources :items, only: [:update, :destroy]
   end
 end
