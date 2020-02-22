@@ -1,0 +1,10 @@
+<%= form_with url: "/profile/user/pw", local: true, method: :patch do |f| %>
+
+  <p><%= label_tag :password %></p>
+  <p><%= password_field_tag :password %></p>
+
+  <p><%= label_tag :password_confirmation %></p>
+  <p><%= password_field_tag :password_confirmation %></p>
+
+  <p><%= submit_tag "Update Password" %></p>
+<% end %>

@@ -7,4 +7,12 @@ class User < ApplicationRecord
   has_many :orders
 
   has_secure_password
+
+  def pw_check_not_empty(params)
+    !params[:password].empty? && !params[:password_confirmation].empty?
+  end
+
+  def pw_check_empty(params)
+    params[:password].empty? || params[:password_confirmation].empty?
+  end
 end

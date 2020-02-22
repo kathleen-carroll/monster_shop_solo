@@ -5,6 +5,7 @@ RSpec.describe 'As a registered user', type: :feature do
     it 'I see a form like the registration page pre-populated with my user data' do
 
       user = create(:regular_user)
+      user2 = create(:regular_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       visit '/profile'
@@ -73,6 +74,18 @@ RSpec.describe 'As a registered user', type: :feature do
       click_button 'Update Profile'
 
       expect(page).to have_content("Name can't be blank")
+      expect(current_path).to eq(profile_edit_path)
+
+      visit '/profile'
+      click_link 'Edit Profile'
+
+      within("div.userInfo") do
+        fill_in 'email', with: "#{user2.email}"
+      end
+
+      click_button 'Update Profile'
+
+      expect(page).to have_content('Email has already been taken')
     end
   end
 end

@@ -14,8 +14,12 @@ class Profile::UsersController < Profile::BaseController
       redirect_to '/profile'
     else
       flash[:error] = @user.errors.full_messages.to_sentence
-      render :edit
+      redirect_to '/profile/edit'
     end
+  end
+
+  def edit_pw
+    @user = current_user
   end
 
   private
@@ -32,7 +36,9 @@ class Profile::UsersController < Profile::BaseController
       :state,
       :zip,
       :email,
-      :role
+      :role,
+      :password,
+      :password_confirmation
     )
   end
 end
