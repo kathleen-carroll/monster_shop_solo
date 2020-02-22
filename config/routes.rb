@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     get "/edit", to: "users#edit"
     get "/edit/pw", to: "users#edit_pw"
     patch "/user", to: "users#update"
+    patch "/user/pw", to: "security#update"
     get "/orders", to: "orders#index"
   end
 
