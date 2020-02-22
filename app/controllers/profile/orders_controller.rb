@@ -1,6 +1,10 @@
 class Profile::OrdersController < Profile::BaseController
   def index
-    @orders = current_user.orders
+    @user = current_user
+  end
+
+  def show
+    @order = Order.find(params[:id])
   end
 
   def new
