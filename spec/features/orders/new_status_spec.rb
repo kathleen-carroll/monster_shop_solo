@@ -31,7 +31,7 @@ RSpec.describe 'new order changes status' do
 
       expect(current_path).to eq('/profile/orders')
       expect(page).to have_content('Your order was created.')
-      expect(page).to have_content("#{order}")
+      expect(page).to have_content("Order##{order.id}")
       expect(page).to have_content("Cart: 0")
 
       visit "orders/#{order.id}"
