@@ -23,10 +23,12 @@
       <p>Inventory: <%= item.inventory %> </p>
       <% if item.active? %>
         <p>Active</p>
-        <%= link_to "deactivate", "/merchant/items/#{item.id}", method: :patch if current_merchant? || !@merchant %>
+        <%= link_to "deactivate", "/merchant/items/#{item.id}", method: :patch if current_merchant? || (current_merchant? && !@merchant) %>
       <% else %>
         <p>Inactive</p>
+        <%= link_to "activate", "/merchant/items/#{item.id}", method: :patch if current_merchant? || (current_merchant? && !@merchant) %>
       <% end %>
+      <%= link_to "delete", "/merchant/items/#{item.id}", method: :delete if current_merchant? || (current_merchant? && !@merchant) %>
     </section>
     <% end %>
 </section>
