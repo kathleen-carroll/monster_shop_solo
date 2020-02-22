@@ -15,30 +15,35 @@ RSpec.describe 'profile orders show page', type: :feature do
 
       @item_order1 = create(:random_item_order, item: @item1, order: @order1, price: @item1.price, quantity: 3)
       @item_order2 = create(:random_item_order, item: @item2, order: @order1, price: @item2.price, quantity: 7)
-      create(:random_item_order, item: item3, order: @order2, price: item3.price, quantity: 12)
+      @item_order3 = create(:random_item_order, item: item3, order: @order2, price: item3.price, quantity: 12)
 
       visit profile_orders_path
     end
 
     it "I can see the information for my order" do
+      expected_date = @order1.created_at.to_formatted_s(:long)
       click_link(@order1.id.to_s)
+
       expect(current_path).to eq(profile_order_path(@order1.id))
-      save_and_open_page
       expect(page).to have_content(@order1.id)
-      expect(page).to have_content(@order1.created_at)
-      expect(page).to have_content(@order1.updated_at)
+      expect(page).to have_content(expected_date)
+      expect(page).to have_content(expected_date)
       expect(page).to have_content(@order1.status)
-      within("items") do
+      expect(page).to have_content("Total number of items: #{@order1.item_count}")
+      expect(page).to have_content(@order1.grandtotal)
+      within("#items") do
         within("#item_order-#{@item_order1.id}") do
           expect(page).to have_content(@item1.name)
           expect(page).to have_content(@item1.description)
-          expect(page).to have_content(@item1.image)
-          expect(page).to have_content(@item1.quantity)
+          expect(page).to have_css("img[src*='#{@item1.image}']")
+          expect(page).to have_content(@item_order1.quantity)
           expect(page).to have_content(@item1.price)
           expect(page).to have_content(@item_order1.subtotal)
         end
         expect(page).to have_css("#item_order-#{@item_order2.id}")
+        expect(page).to_not have_css("#item_order-#{@item_order3.id}")
       end
     end
+
   end
 end
