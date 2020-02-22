@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get '/', to: "welcome#index"
 
-  resources :merchants 
+  resources :merchants
   # get "/merchants", to: "merchants#index"
   # get "/merchants/new", to: "merchants#new"
   # get "/merchants/:id", to: "merchants#show"
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   # get "/items/:id", to: "items#show"
   # get "/items/:id/edit", to: "items#edit"
   # patch "/items/:id", to: "items#update"
+
   get "/merchants/:merchant_id/items", to: "items#index"
   get "/merchants/:merchant_id/items/new", to: "items#new"
   post "/merchants/:merchant_id/items", to: "items#create"
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
   namespace :profile do
     get "/", to: "users#show"
     get "/edit", to: "users#edit"
+    resources :orders, only: [:index, :show]
+    patch '/', to: "users#update"
     get "/edit/pw", to: "users#edit_pw"
     patch "/user", to: "users#update"
     patch "/user/pw", to: "security#update"
@@ -62,7 +65,7 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: "dashboard#index"
-    get '/:id/items', to: "items#show" 
+    get '/:id/items', to: "items#show"
     resources :items, only: [:update, :destroy]
   end
 end
