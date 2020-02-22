@@ -33,6 +33,22 @@ RSpec.describe 'As a registered user', type: :feature do
 
       expect(current_path).to eq("/profile/edit/pw")
       expect(page).to have_content("Password confirmation doesn't match Password")
+
+      fill_in :password, with: ''
+      fill_in :password_confirmation, with: 'none5'
+
+      click_button 'Update Password'
+
+      expect(current_path).to eq("/profile/edit/pw")
+      expect(page).to have_content("Password can't be blank")
+
+      fill_in :password, with: 'none5'
+      fill_in :password_confirmation, with: ''
+
+      click_button 'Update Password'
+
+      expect(current_path).to eq("/profile/edit/pw")
+      expect(page).to have_content("Password can't be blank")
     end
   end
 end
