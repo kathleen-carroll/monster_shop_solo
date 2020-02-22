@@ -31,9 +31,9 @@ Rails.application.routes.draw do
   delete "/cart/:item_id", to: "cart#remove_item"
   patch "/cart/:item_id", to: "cart#edit_quantity"
 
-  get "/orders/new", to: "orders#new"
-  post "/orders", to: "orders#create"
-  get "/orders/:id", to: "orders#show"
+  # get "/orders/new", to: "orders#new"
+  # post "/orders", to: "orders#create"
+  # get "/orders/:id", to: "orders#show"
 
   get "/register", to: "users#new"
   post "/users", to: "users#create"
@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     get "/edit", to: "users#edit"
     get "/orders", to: "orders#index"
     patch '/', to: "users#update"
+    get "/orders/new", to: "orders#new"
+    post '/orders', to: "orders#create"
+    get '/orders/:id', to: "orders#show"
   end
 
   namespace :admin do
