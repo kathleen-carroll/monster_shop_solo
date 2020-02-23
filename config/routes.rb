@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     resources :users, only: %i[index show]
     resources :orders, only: [:update]
-    resources :merchants, only: %i[index update]
+    resources :merchants, only: %i[index show update]
   end
 
   namespace :merchant do
