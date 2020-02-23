@@ -22,26 +22,41 @@ RSpec.describe 'As an admin', type: :feature do
       expect(page).to have_content(item_order1.order.id)
       expect(page).to have_content(item_order1.order.status)
       expect(page).to have_content(item_order1.order.created_at.to_formatted_s(:long))
+      click_link "#{item_order1.order.name}"
+      expect(current_path).to eq("/admin/users/#{item_order1.order.user.id}")
+      visit '/admin'
 
       expect(page).to have_link(item_order2.order.name)
       expect(page).to have_content(item_order2.order.id)
       expect(page).to have_content(item_order2.order.status)
       expect(page).to have_content(item_order2.order.created_at.to_formatted_s(:long))
+      click_link "#{item_order2.order.name}"
+      expect(current_path).to eq("/admin/users/#{item_order2.order.user.id}")
+      visit '/admin'
 
       expect(page).to have_link(item_order3.order.name)
       expect(page).to have_content(item_order3.order.id)
       expect(page).to have_content(item_order3.order.status)
       expect(page).to have_content(item_order3.order.created_at.to_formatted_s(:long))
+      click_link "#{item_order3.order.name}"
+      expect(current_path).to eq("/admin/users/#{item_order3.order.user.id}")
+      visit '/admin'
 
       expect(page).to have_link(item_order4.order.name)
       expect(page).to have_content(item_order4.order.id)
       expect(page).to have_content(item_order4.order.status)
       expect(page).to have_content(item_order4.order.created_at.to_formatted_s(:long))
+      click_link "#{item_order4.order.name}"
+      expect(current_path).to eq("/admin/users/#{item_order4.order.user.id}")
+      visit '/admin'
 
       expect(page).to have_link(item_order5.order.name)
       expect(page).to have_content(item_order5.order.id)
       expect(page).to have_content(item_order5.order.status)
       expect(page).to have_content(item_order5.order.created_at.to_formatted_s(:long))
+      click_link "#{item_order5.order.name}"
+      expect(current_path).to eq("/admin/users/#{item_order5.order.user.id}")
+
     end
   end
 end
