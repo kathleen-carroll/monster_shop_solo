@@ -29,7 +29,8 @@ merchant_user = User.create(name: "John Bill",
   email: "john@mail.com",
   password: "burgers",
   password_confirmation: "burgers",
-  role: 1
+  role: 1,
+  merchant: bike_shop
 )
 
 admin_user = User.create(name: "John Bill",
