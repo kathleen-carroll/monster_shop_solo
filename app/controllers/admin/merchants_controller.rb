@@ -1,5 +1,5 @@
-class Admin::MerchantsController < ApplicationController
-  
+class Admin::MerchantsController < Admin::BaseController
+
   def index
     @merchants = Merchant.all
   end
@@ -16,6 +16,5 @@ class Admin::MerchantsController < ApplicationController
     end
     redirect_to admin_merchants_path
   end
+
 end
-
-
