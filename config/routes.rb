@@ -56,17 +56,4 @@ Rails.application.routes.draw do
   get '/orders/new', to: 'orders#new'
   post '/orders', to: 'orders#create'
   get '/orders/:id', to: 'orders#show'
-
-  # get "/merchants", to: "merchants#index"
-  # get "/merchants/new", to: "merchants#new"
-  # get "/merchants/:id", to: "merchants#show"
-  # post "/merchants", to: "merchants#create"
-  # get "/merchants/:id/edit", to: "merchants#edit"
-  # patch "/merchants/:id", to: "merchants#update"
-  # delete "/merchants/:id", to: "merchants#destroy"
-
-  # get "/items", to: "items#index"
-  # get "/items/:id", to: "items#show"
-  # get "/items/:id/edit", to: "items#edit"
-  # # patch "/items/:id", to: "items#update"
 end
