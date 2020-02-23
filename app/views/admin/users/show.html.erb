@@ -1,10 +1,10 @@
 <div class="userInfo">
-  <p><%= current_user.name  %></p>
-  <p><%= current_user.address  %></p>
-  <p><%= current_user.city  %></p>
-  <p><%= current_user.state  %></p>
-  <p><%= current_user.zip  %></p>
-  <p><%= current_user.email  %></p>
-  <p><%= current_user.role  %></p>
-  <%= link_to 'My Orders', profile_orders_path unless current_user.orders.empty? %>
+  <p><%= @user.name  %></p>
+  <p><%= @user.address  %></p>
+  <p><%= @user.city  %></p>
+  <p><%= @user.state  %></p>
+  <p><%= @user.zip  %></p>
+  <p><%= @user.email  %></p>
+  <p><%= @user.role  %></p>
+  <%= link_to 'My Orders', profile_orders_path unless @user.orders.empty? %>
 </div>
