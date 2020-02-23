@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true, case_sensitive: false
   validates :password_digest, confirmation: true
   enum role: %w(regular merchant admin)
+  # validates :merchant_id, numericality: {allow_blank: true}
+  belongs_to :merchant, optional: true
 
   has_many :orders
 

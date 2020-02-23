@@ -4,6 +4,7 @@ describe User, type: :model do
 
   describe "relationships" do
     it {should have_many :orders}
+    # it {should belong_to :merchant}
   end
 
   describe "validations" do
@@ -16,6 +17,7 @@ describe User, type: :model do
     it {should validate_presence_of :password}
     it {should validate_uniqueness_of :email}
     it {should define_enum_for(:role).with_values([:regular, :merchant, :admin])}
+    # it {should validate_presence_of :merchant}
   end
 
   describe 'model methods' do
