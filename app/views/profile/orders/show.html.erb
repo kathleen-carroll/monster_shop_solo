@@ -59,3 +59,7 @@
     </tr>
   </table>
 </section>
+
+<% if @order.status != 'shipped' %>
+  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}" %>
+<% end %>
