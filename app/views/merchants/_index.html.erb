@@ -3,12 +3,20 @@
 <section class = "grid-container">
   <% @merchants.each do |merchant|%>
     <section id="merchant-<%= merchant.id %>" class="grid-item" >
-      <h2><%=link_to merchant.name, "/merchants/#{merchant.id}"%></h2>
-      <% if current_admin? && merchant.active? %>
-        <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %>
-      <% elsif current_admin? && !merchant.active? %>
-        <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
+      <% if current_admin? == true %>
+        <h2><%= link_to merchant.name, admin_merchant_path(merchant) %></h2>
+      <% else %>
+        <h2><%= link_to merchant.name, merchant_path(merchant) %></h2>
       <% end %>
+      <p><%= merchant.city %></p>
+      <p><%= merchant.state %></p>
+      <div>
+        <% if current_admin? && merchant.active? %>
+          <%= button_to "Disable", "/admin/merchants/#{merchant.id}", method: :patch %>
+        <% elsif current_admin? && !merchant.active? %>
+          <%= button_to "Enable", "/admin/merchants/#{merchant.id}", method: :patch %>
+        <% end %>
+      </div>
     </section>
   <% end %>
 </section>
