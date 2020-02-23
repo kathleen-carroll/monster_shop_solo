@@ -19,10 +19,7 @@ Rails.application.routes.draw do
     get '/edit/pw', to: 'users#edit_pw'
     patch '/user', to: 'users#update'
     patch '/user/pw', to: 'security#update'
-    # patch '/orders/:id', to: 'orders#patch'
-      resources :orders, only: [:index, :show, :new, :create]
-      # patch '/', to: "users#update"
-      patch '/', to: "users#update"
+    resources :orders, only: [:index, :show, :new, :create]
   end
 
   namespace :admin do
