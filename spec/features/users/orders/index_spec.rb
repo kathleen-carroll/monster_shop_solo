@@ -26,15 +26,16 @@ RSpec.describe 'profile orders index page', type: :feature do
     end
 
     it "I see a list of my orders" do
+      expected_date = @order1.created_at.to_formatted_s(:long)
       visit('/profile/orders')
 
       within("#order-#{@order1.id}") do
         expect(page).to have_link(@order1.id.to_s)
-        expect(page).to have_content("Created: #{@order1.created_at}")
-        expect(page).to have_content("Updated: #{@order1.updated_at}")
+        expect(page).to have_content("Created: #{expected_date}")
+        expect(page).to have_content("Updated: #{expected_date}")
         expect(page).to have_content("Status: #{@order1.status}")
         expect(page).to have_content("Number of items: 10")
-        expect(page).to have_content("Grand total: #{@order1.grandtotal}")
+        expect(page).to have_content(@order1.grandtotal)
       end
     end
   end
