@@ -2,10 +2,13 @@
   <section class="activeOrders">
     <% @orders.by_status.each do |order| %>
       <div id="order_<%= order.id %>">
-       <p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p>
-       <p><%= order.id  %></p>
-       <p><%= order.status  %></p>
-       <p><%= order.created_at.to_formatted_s(:long) %></p>
+        <p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p>
+        <p><%= order.id  %></p>
+        <p><%= order.status  %></p>
+        <p><%= order.created_at.to_formatted_s(:long) %></p>
+        <% if order.status == 'packaged' %>
+          <%= link_to 'Ship Order', "/admin/orders/#{order.id}", method: :patch %>
+        <% end %>
       </div>
     <% end %>
   </section>
