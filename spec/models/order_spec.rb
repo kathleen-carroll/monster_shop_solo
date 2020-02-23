@@ -7,7 +7,7 @@ describe Order, type: :model do
     it { should validate_presence_of :city }
     it { should validate_presence_of :state }
     it { should validate_presence_of :zip }
-    it {should define_enum_for(:status).with_values([:pending, :packaged, :shipped, :cancelled])}
+    it {should define_enum_for(:status).with_values([:packaged, :pending, :shipped, :cancelled])}
   end
 
   describe "relationships" do
@@ -34,6 +34,24 @@ describe Order, type: :model do
     end
     it "item_count" do
       expect(@order_1.item_count).to eq(5)
+    end
+  end
+
+  describe 'model class methods' do
+    it 'order by status' do
+      item_order1 = create(:random_item_order)
+      item_order2 = create(:random_item_order)
+      item_order3 = create(:random_item_order)
+      item_order4 = create(:random_item_order)
+      item_order5 = create(:random_item_order)
+
+      sorted_orders = Order.by_status
+      expect(sorted_orders.count).to eq(5)
+      expect(sorted_orders[0]).to eq(item_order1.order)
+      expect(sorted_orders[1]).to eq(item_order2.order)
+      expect(sorted_orders[2]).to eq(item_order3.order)
+      expect(sorted_orders[3]).to eq(item_order4.order)
+      expect(sorted_orders[4]).to eq(item_order5.order)
     end
   end
 end
