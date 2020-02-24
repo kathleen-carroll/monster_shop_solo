@@ -1,18 +1,19 @@
 class Merchant::ItemsController < Merchant::BaseController
 
   def new
-    @merchant = Merchant.find(params[:merchant_id])
+    merchant = Merchant.find(params[:merchant_id])
+    @item = merchant.items.create(item_params)
   end
 
   def create
-    @merchant = Merchant.find(params[:merchant_id])
+    merchant = Merchant.find(params[:merchant_id])
     params.delete :image if params[:image].blank?
-    item = @merchant.items.create(item_params)
-    if item.save
-      flash[:success] = "#{item.name} has been saved."
-      redirect_to "/merchants/#{@merchant.id}/items"
+    @item = merchant.items.create(item_params)
+    if @item.save
+      flash[:success] = "#{@item.name} has been saved."
+      redirect_to "/merchants/#{merchant.id}/items"
     else
-      flash[:error] = item.errors.full_messages.to_sentence
+      flash[:error] = @item.errors.full_messages.to_sentence
       render :new
     end
   end
