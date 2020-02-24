@@ -49,6 +49,9 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       within("#item-#{@item1.id}") { click_link("Fulfill Order") }
 
       expect(current_path).to eq("/merchant/orders/#{@order1.id}")
+      expect(page).to have_content("Item has been fulfilled")
+      within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
+      within("#item-#{@item1.id}") { expect(page).to have_content('fulfilled') }
     end
 
   end
