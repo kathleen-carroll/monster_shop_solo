@@ -56,20 +56,20 @@ RSpec.describe "As a visitor", type: :feature do
 
   it "when I log in as a merchant user I am redirected to my merchant dashboard" do
 
-    regular_user = create(:regular_user, role: 1)
+    merchant_user = create(:merchant_user, role: 1)
 
     visit '/merchants'
     click_on 'Log In'
 
     expect(current_path).to eq("/login")
 
-    fill_in :email, with: regular_user.email
-    fill_in :password, with: regular_user.password
+    fill_in :email, with: merchant_user.email
+    fill_in :password, with: merchant_user.password
 
     click_button "Submit"
 
     expect(current_path).to eq('/merchant')
-    expect(page).to have_content("Welcome Merchant #{regular_user.email}")
+    expect(page).to have_content("Welcome Merchant #{merchant_user.email}")
     click_on "Log Out"
 
     visit '/merchant'
@@ -77,34 +77,34 @@ RSpec.describe "As a visitor", type: :feature do
 
     expect(current_path).to eq("/login")
 
-    fill_in :email, with: regular_user.email
-    fill_in :password, with: regular_user.password
+    fill_in :email, with: merchant_user.email
+    fill_in :password, with: merchant_user.password
 
     click_button "Submit"
 
     expect(current_path).to eq('/merchant')
-    expect(page).to have_content("Welcome Merchant #{regular_user.email}")
+    expect(page).to have_content("Welcome Merchant #{merchant_user.email}")
 
     end
 
     it "when I am an admin user I am redirected to my admin dashboard page" do
-      regular_user = create(:regular_user, role: 2)
+      admin_user = create(:admin_user, role: 2)
 
       visit '/merchants'
       click_on 'Log In'
 
       expect(current_path).to eq("/login")
 
-      fill_in :email, with: regular_user.email
-      fill_in :password, with: regular_user.password
+      fill_in :email, with: admin_user.email
+      fill_in :password, with: admin_user.password
 
       click_button "Submit"
 
       expect(current_path).to eq('/admin')
-      expect(page).to have_content("Welcome Admin #{regular_user.email}!")
+      expect(page).to have_content("Welcome Admin #{admin_user.email}!")
     end
 
-    
+
   it "redirects to approprate path when login as a regular user" do
     regular_user = create(:regular_user, email: "ray@gmail.com", password: "password123")
 
