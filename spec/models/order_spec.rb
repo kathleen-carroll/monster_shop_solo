@@ -35,6 +35,15 @@ describe Order, type: :model do
     it "item_count" do
       expect(@order_1.item_count).to eq(5)
     end
+    it "cancel" do
+      @order_1.item_orders.second.update(status: "fulfilled")
+      @order_1.cancel
+
+      expect(@order_1.status).to eq("cancelled")
+      expect(@order_1.item_orders.second.status).to eq("unfulfilled")
+      expect(Item.first.inventory).to eq(12)
+      expect(Item.last.inventory).to eq(35)
+    end
   end
 
   describe 'model class methods' do
