@@ -15,11 +15,11 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       @item3 = create(:random_item, merchant: @other_shop)
 
       @order1 = create(:random_order, user: user)
-      @order2 = create(:random_order, user: user)
+      @order2 = create(:random_order, name: "NOT ME", address: "NOT HERE")
 
       @item_order1 = create(:random_item_order, item: @item1, order: @order1, price: @item1.price, quantity: 3)
       @item_order2 = create(:random_item_order, item: @item2, order: @order1, price: @item2.price, quantity: 7)
-      @item_order3 = create(:random_item_order, item: @item3, order: @order2, price: @item3.price, quantity: 12)
+      @item_order3 = create(:random_item_order, item: @item3, order: @order1, price: @item3.price, quantity: 12)
 
       visit "/merchant/orders/#{@order1.id}"
     end
@@ -27,6 +27,8 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
     it "I can see the order information pertaining to my shop" do
       expect(page).to have_content(@order1.name)
       expect(page).to have_content(@order1.address)
+      expect(page).to_not have_content(@order2.name)
+      expect(page).to_not have_content(@order2.address)
       within("#item-#{@item1.id}") do
         expect(page).to have_link(@item1.name)
         expect(page).to have_css("img[src*='#{@item1.image}']")
