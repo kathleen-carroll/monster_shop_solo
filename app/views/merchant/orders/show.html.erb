@@ -27,6 +27,7 @@
       <th>Item</th>
       <th>Price</th>
       <th>Quantity</th>
+      <th>Status</th>
     </tr>
   <% @order.item_orders.by_merchant(current_user.merchant.id).each do |item_order|%>
     <tr>
@@ -35,6 +36,12 @@
         <td><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
         <td><p><%= number_to_currency(item_order.price)%></p></td>
         <td><p><%= item_order.quantity%></p></td>
+        <td><p>
+          <%= item_order.status%>
+          <% if item_order.unfulfilled? %>
+            - <%= link_to "Fulfill Order", merchant_item_order_path(item_order.id), method: :patch %>
+          <% end %>
+        </p></td>
       </section>
     </tr>
   <% end %>
