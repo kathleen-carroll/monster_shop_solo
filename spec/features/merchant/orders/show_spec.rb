@@ -21,7 +21,7 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       @item_order2 = create(:random_item_order, item: @item2, order: @order1, price: @item2.price, quantity: 7)
       @item_order3 = create(:random_item_order, item: @item3, order: @order2, price: @item3.price, quantity: 12)
 
-      visit "/merchants/orders/#{@order1.id}"
+      visit "/merchant/orders/#{@order1.id}"
     end
 
     it "I can see the order information pertaining to my shop" do
