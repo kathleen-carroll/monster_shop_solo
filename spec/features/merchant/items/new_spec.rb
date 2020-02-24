@@ -27,9 +27,9 @@ RSpec.describe "As a merchant", type: :feature do
 
         click_button "Create Item"
 
-        
+
         new_item = Item.last
-        
+
         expect(page).to have_content("#{new_item.name} has been saved.")
         expect(current_path).to eq("/merchants/#{@merchant.id}/items")
         expect(new_item.name).to eq(name)
@@ -53,9 +53,9 @@ RSpec.describe "As a merchant", type: :feature do
         fill_in :inventory, with: inventory
 
         click_button "Create Item"
-        
+
         new_item = Item.last
-        
+
         expect(page).to have_content("#{new_item.name} has been saved.")
         expect(current_path).to eq("/merchants/#{@merchant.id}/items")
         expect(new_item.name).to eq(name)
@@ -68,7 +68,7 @@ RSpec.describe "As a merchant", type: :feature do
         expect(current_path).to eq("/merchant/#{@merchant.id}/items/new")
 
         name = "blinker fluid"
-        price = 18
+        price = 18.00
         description = "No more chaffin'!"
 
         fill_in :name, with: name
@@ -77,7 +77,7 @@ RSpec.describe "As a merchant", type: :feature do
         fill_in :image, with: ""
 
         click_button "Create Item"
-        
+
         expect(page).to have_content("Inventory can't be blank")
         expect(current_path).to eq("/merchant/#{@merchant.id}/items")
         find_field :name, with: name
