@@ -46,10 +46,10 @@ describe ItemOrder, type: :model do
 
       expect(item_order1.status).to eq('unfulfilled')
       expect(item1.inventory).to eq(20)
-      item_order1.fulfill
+      expect(item_order1.fulfill).to eq(true)
       expect(item_order1.status).to eq('fulfilled')
       expect(item1.inventory).to eq(10)
-      item_order2.fulfill
+      expect(item_order2.fulfill).to eq(false)
       expect(item_order2.status).to eq('unfulfilled')
       expect(item1.inventory).to eq(10)
     end
