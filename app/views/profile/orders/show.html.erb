@@ -61,5 +61,5 @@
 </section>
 
 <% if @order.status != 'shipped' %>
-  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}" %>
+  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
 <% end %>
