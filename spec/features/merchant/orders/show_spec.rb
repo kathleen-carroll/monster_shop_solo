@@ -23,6 +23,7 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       @item_order3 = create(:random_item_order, item: @item1, order: @order2, price: @item1.price, quantity: 12)
       @item_order4 = create(:random_item_order, item: @item3, order: @order2, price: @item3.price, quantity: 12)
 
+
       create(:random_item_order, order: @order2)
 
       visit "/merchant/orders/#{@order1.id}"
@@ -50,11 +51,11 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
 
       expect(current_path).to eq("/merchant/orders/#{@order1.id}")
       expect(page).to have_content("Item has been fulfilled")
-      within("#item-#{@item1.id}") { expect(page).to_not have_content('unfulfilled') }
-      within("#item-#{@item1.id}") { expect(page).to have_content('fulfilled') }
+      within("#item-#{@item1.id}") { expect(page).to have_content('already fulfilled') }
+      within("#item-#{@item2.id}") { expect(page).to have_content('unfulfilled') }
+      expect(page).to_not have_css("#item-#{@item3.id}")
 
       visit "/merchants/#{@shop.id}/items"
-      save_and_open_page
       within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
     end
 
