@@ -35,23 +35,26 @@ describe Order, type: :model do
     it "item_count" do
       expect(@order_1.item_count).to eq(5)
     end
+    it "cancel" do
+      @order_1.item_orders.second.update(status: "fulfilled")
+      @order_1.cancel
+
+      expect(@order_1.status).to eq("cancelled")
+      expect(@order_1.item_orders.second.status).to eq("unfulfilled")
+      expect(Item.first.inventory).to eq(12)
+      expect(Item.last.inventory).to eq(35)
+    end
   end
 
   describe 'model class methods' do
     it 'order by status' do
-      item_order1 = create(:random_item_order)
-      item_order2 = create(:random_item_order)
-      item_order3 = create(:random_item_order)
-      item_order4 = create(:random_item_order)
-      item_order5 = create(:random_item_order)
-
+      order1 = create(:random_order)
+      order2 = create(:random_order, status: "cancelled")
+      order3 = create(:random_order, status: "packaged")
+      order4 = create(:random_order, status: "packaged")
+      order5 = create(:random_order, status: "shipped")
       sorted_orders = Order.by_status
-      expect(sorted_orders.count).to eq(5)
-      expect(sorted_orders[0]).to eq(item_order1.order)
-      expect(sorted_orders[1]).to eq(item_order2.order)
-      expect(sorted_orders[2]).to eq(item_order3.order)
-      expect(sorted_orders[3]).to eq(item_order4.order)
-      expect(sorted_orders[4]).to eq(item_order5.order)
+      expect(sorted_orders).to eq([order3, order4, order1, order5, order2])
     end
   end
 end

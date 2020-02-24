@@ -13,7 +13,7 @@ describe ItemOrder, type: :model do
     it {should belong_to :order}
   end
 
-  describe 'instance methods' do
+  describe 'methods' do
     it 'subtotal' do
       meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
@@ -21,6 +21,34 @@ describe ItemOrder, type: :model do
       item_order_1 = order_1.item_orders.create!(item: tire, price: tire.price, quantity: 2)
 
       expect(item_order_1.subtotal).to eq(200)
+    end
+
+    it 'restock' do
+      meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
+      item_order_1 = order_1.item_orders.create!(item: tire, price: tire.price, quantity: 2, status: "fulfilled")
+      item_order_1.restock
+      expect(item_order_1.status).to eq("unfulfilled")
+      expect(item_order_1.item.inventory).to eq(14)
+    end
+
+    it "by_merchant" do
+      shop = create(:random_merchant)
+      other_shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop)
+      item2 = create(:random_item, merchant: shop)
+      item3 = create(:random_item, merchant: other_shop)
+
+      order1 = create(:random_order)
+
+      item_order1 = create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 3)
+      item_order2 = create(:random_item_order, item: item2, order: order1, price: item2.price, quantity: 7)
+      item_order3 = create(:random_item_order, item: item3, order: order1, price: item3.price, quantity: 12)
+
+      expect(order1.item_orders.by_merchant(shop.id)).to eq([item_order1, item_order2])
+      expect(order1.item_orders.by_merchant(other_shop.id)).to eq([item_order3])
     end
   end
 
