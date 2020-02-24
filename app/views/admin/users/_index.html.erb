@@ -3,7 +3,7 @@
     <section id="user_<%= user.id %>">
       <p><%= link_to user.name, admin_user_path(user) %></p>
       <p><%= user.created_at.to_formatted_s(:long) %></p>
-      <p><%= user.role.to_s %></p>
+      <p><%= user.role %></p>
     </section>
   <% end %>
 </div>
