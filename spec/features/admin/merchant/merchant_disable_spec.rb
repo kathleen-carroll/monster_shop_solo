@@ -9,6 +9,14 @@ RSpec.describe "on the admin merchant index" do
     visit "/admin/merchants"
 
     within "#merchant-#{merchant.id}" do
+      expect(page).to have_link("#{merchant.name}")
+      click_link "#{merchant.name}"
+      expect(current_path).to eq(admin_merchant_path(merchant))
+    end
+
+    visit "/admin/merchants"
+
+    within "#merchant-#{merchant.id}" do
       expect(page).to have_button("Disable")
       expect(page).not_to have_button("Enable")
       click_on "Disable"
