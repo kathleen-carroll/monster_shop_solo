@@ -56,6 +56,7 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       expect(page).to_not have_css("#item-#{@item3.id}")
 
       visit "/merchants/#{@shop.id}/items"
+
       within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
     end
 
@@ -74,13 +75,28 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       within("#item-#{@item1.id}") { expect(page).to have_content("unfulfilled - unable to fulfill") }
 
       visit "/merchant/orders/#{exact_order.id}"
+
       within("#item-#{@item1.id}") { click_link("Fulfill Order") }
       expect(current_path).to eq("/merchant/orders/#{exact_order.id}")
       expect(page).to have_content("Item has been fulfilled")
       within("#item-#{@item1.id}") { expect(page).to have_content('already fulfilled') }
 
       visit "/merchants/#{@shop.id}/items"
+
       within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 0') }
+    end
+
+    it "I can't fulfill an order that was already fulfilled" do
+      @item_order1.update(status: "fulfilled")
+      within("#item-#{@item1.id}") { click_link("Fulfill Order") }
+
+      expect(current_path).to eq("/merchant/orders/#{@order1.id}")
+      expect(page).to have_content("Cannot fulfill order.")
+      within("#item-#{@item1.id}") { expect(page).to have_content('already fulfilled') }
+
+      visit "/merchants/#{@shop.id}/items"
+
+      within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 20') }
     end
 
   end
