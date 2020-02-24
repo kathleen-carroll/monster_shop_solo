@@ -5,6 +5,13 @@ class ItemOrder <ApplicationRecord
   belongs_to :item
   belongs_to :order
 
+  def self.by_merchant(id)
+    self
+      .all
+      .joins(:item)
+      .where("items.merchant_id = #{id}")
+  end
+
   def subtotal
     price * quantity
   end

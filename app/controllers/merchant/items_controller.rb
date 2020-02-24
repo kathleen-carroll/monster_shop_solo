@@ -1,8 +1,8 @@
-class Merchant::ItemsController < ApplicationController
+class Merchant::ItemsController < Merchant::BaseController
 
   def update
     item = Item.find(params[:id])
-    merchant = item.merchant 
+    merchant = item.merchant
     item.toggle!(:active?)
     redirect_to "/merchants/#{merchant.id}/items"
     if item.active?
