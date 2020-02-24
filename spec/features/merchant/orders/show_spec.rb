@@ -49,7 +49,6 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       within("#item-#{@item1.id}") { click_link("Fulfill Order") }
 
       expect(current_path).to eq("/merchant/orders/#{@order1.id}")
-
     end
 
   end
