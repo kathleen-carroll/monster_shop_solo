@@ -46,12 +46,27 @@ describe ItemOrder, type: :model do
 
       expect(item_order1.status).to eq('unfulfilled')
       expect(item1.inventory).to eq(20)
-      expect(item_order1.fulfill).to eq(true)
+      item_order1.fulfill
       expect(item_order1.status).to eq('fulfilled')
       expect(item1.inventory).to eq(10)
-      expect(item_order2.fulfill).to eq(false)
+      item_order2.fulfill
       expect(item_order2.status).to eq('unfulfilled')
       expect(item1.inventory).to eq(10)
+    end
+
+    it "can_fulfill?" do
+      shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop, inventory: 20)
+
+      order1 = create(:random_order)
+      order2 = create(:random_order)
+
+      item_order1 = create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 10)
+      item_order2 = create(:random_item_order, item: item1, order: order2, price: item1.price, quantity: 25)
+
+      expect(item_order2.can_fulfill?).to eq(false)
+      expect(item_order1.can_fulfill?).to eq(true)
     end
   end
 
