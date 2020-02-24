@@ -6,13 +6,13 @@ RSpec.describe "Create Merchant Items" do
       @brian = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
     end
 
-    it 'I see a link to add a new item for that merchant' do
+    xit 'I see a link to add a new item for that merchant' do
       visit "/merchants/#{@brian.id}/items"
 
       expect(page).to have_link "Add New Item"
     end
 
-    it 'I can add a new item by filling out a form' do
+    xit 'I can add a new item by filling out a form' do
       visit "/merchants/#{@brian.id}/items"
 
       name = "Chamois Buttr"
@@ -51,7 +51,7 @@ RSpec.describe "Create Merchant Items" do
       expect(page).to have_content("Inventory: #{new_item.inventory}")
     end
 
-    it 'I get an alert if I dont fully fill out the form' do
+    xit 'I get an alert if I dont fully fill out the form' do
       visit "/merchants/#{@brian.id}/items"
 
       name = ""
