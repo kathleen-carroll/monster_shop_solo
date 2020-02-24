@@ -21,6 +21,7 @@ class ItemsController<ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
     item = @merchant.items.create(item_params)
     if item.save
+      flash[:success] = "#{item.name} has been saved."
       redirect_to "/merchants/#{@merchant.id}/items"
     else
       flash[:error] = item.errors.full_messages.to_sentence
