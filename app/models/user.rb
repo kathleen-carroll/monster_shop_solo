@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :password_digest, confirmation: true
   enum role: %w(regular merchant admin)
   # validates :merchant_id, numericality: {allow_blank: true}
+  validates :merchant, presence: true, if: :merchant? 
   belongs_to :merchant, optional: true
 
   has_many :orders
