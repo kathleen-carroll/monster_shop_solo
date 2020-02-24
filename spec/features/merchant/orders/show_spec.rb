@@ -59,5 +59,29 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
       within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
     end
 
+    it "I can't fulfill an order if inventory is too low" do
+      expect(@item1.inventory).to eq(20)
+
+      impossible_order = create(:random_order)
+      exact_order = create(:random_order)
+
+      create(:random_item_order, item: @item1, order: impossible_order, price: @item1.price, quantity: 21)
+      create(:random_item_order, item: @item1, order: exact_order, price: @item1.price, quantity: 20)
+
+      visit "/merchant/orders/#{impossible_order.id}"
+
+      within("#item-#{@item1.id}") { expect(page).to_not have_link("Fulfill Order") }
+      within("#item-#{@item1.id}") { expect(page).to have_content("unfulfilled - unable to fulfill") }
+
+      visit "/merchant/orders/#{exact_order.id}"
+      within("#item-#{@item1.id}") { click_link("Fulfill Order") }
+      expect(current_path).to eq("/merchant/orders/#{exact_order.id}")
+      expect(page).to have_content("Item has been fulfilled")
+      within("#item-#{@item1.id}") { expect(page).to have_content('already fulfilled') }
+
+      visit "/merchants/#{@shop.id}/items"
+      within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 0') }
+    end
+
   end
 end
