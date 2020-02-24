@@ -66,5 +66,25 @@ RSpec.describe 'profile orders show page', type: :feature do
       within("#order-#{@semi_fulfilled_order.id}") { expect(page).to have_content("Status: cancelled") }
      end
 
+    it "I can't cancel a shipped order" do
+      visit "/profile/orders/#{@semi_fulfilled_order.id}"
+
+      @semi_fulfilled_order.item_orders.last.update(status: 'fulfilled')
+      @semi_fulfilled_order.update(status: "shipped")
+
+      click_link("Cancel Order")
+
+      expect(current_path).to eq("/profile")
+
+      expect(@merchant.items.first.inventory).to eq(100)
+      expect(@merchant.items.second.inventory).to eq(200)
+      expect(@merchant.items.third.inventory).to eq(300)
+      expect(page).to have_content("Unable to cancel an order that is already")
+
+      visit "/profile/orders"
+
+      within("#order-#{@semi_fulfilled_order.id}") { expect(page).to have_content("Status: shipped") }
+     end
+
   end
 end
