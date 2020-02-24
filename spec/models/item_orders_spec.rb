@@ -13,7 +13,7 @@ describe ItemOrder, type: :model do
     it {should belong_to :order}
   end
 
-  describe 'methods' do
+  describe 'instance methods' do
     it 'subtotal' do
       meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
@@ -33,6 +33,29 @@ describe ItemOrder, type: :model do
       expect(item_order_1.item.inventory).to eq(14)
     end
 
+    it 'fulfill' do
+      shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop, inventory: 20)
+
+      order1 = create(:random_order)
+      order2 = create(:random_order)
+
+      item_order1 = create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 10)
+      item_order2 = create(:random_item_order, item: item1, order: order2, price: item1.price, quantity: 15)
+
+      expect(item_order1.status).to eq('unfulfilled')
+      expect(item1.inventory).to eq(20)
+      item_order1.fulfill
+      expect(item_order1.status).to eq('fulfilled')
+      expect(item1.inventory).to eq(10)
+      item_order2.fulfill
+      expect(item_order2.status).to eq('unfulfilled')
+      expect(item1.inventory).to eq(10)
+    end
+  end
+
+  describe 'class methods' do
     it "by_merchant" do
       shop = create(:random_merchant)
       other_shop = create(:random_merchant)
