@@ -36,4 +36,8 @@ class Item <ApplicationRecord
     item_orders.sum(:quantity)
   end
 
+  def order_total
+    Order.find(order_id).grandtotal
+  end
+
 end
