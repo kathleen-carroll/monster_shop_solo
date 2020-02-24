@@ -50,8 +50,12 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
 
       expect(current_path).to eq("/merchant/orders/#{@order1.id}")
       expect(page).to have_content("Item has been fulfilled")
-      within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
+      within("#item-#{@item1.id}") { expect(page).to_not have_content('unfulfilled') }
       within("#item-#{@item1.id}") { expect(page).to have_content('fulfilled') }
+
+      visit "/merchants/#{@shop.id}/items"
+      save_and_open_page
+      within("#item-#{@item1.id}") { expect(page).to have_content('Inventory: 17') }
     end
 
   end
