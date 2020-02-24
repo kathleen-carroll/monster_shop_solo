@@ -31,13 +31,16 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
+    get '/:id/items', to: 'items#show'
+    get '/:merchant_id/items/new', to: 'items#new'
+    post '/:merchant_id/items', to: 'items#create'
+    patch '/items/:id', to: 'toggle#update'
     resources :items, only: %i[update destroy show]
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
   end
 
   get '/merchants/:merchant_id/items', to: 'items#index'
-  get '/merchants/:merchant_id/items/new', to: 'items#new'
   post '/merchants/:merchant_id/items', to: 'items#create'
   delete '/items/:id', to: 'items#destroy'
 
