@@ -6,6 +6,10 @@ class Order <ApplicationRecord
   has_many :item_orders
   has_many :items, through: :item_orders
 
+  def self.by_status
+    order(status: :asc)
+  end
+
   def grandtotal
     item_orders.sum('price * quantity')
   end
@@ -14,7 +18,11 @@ class Order <ApplicationRecord
     items.sum(:quantity)
   end
 
-  def self.by_status
-    order(status: :asc)
+  def cancel
+    update(status: "cancelled")
+    item_orders.where(status: "fulfilled").each do |item_order|
+      item_order.item.increment!(:inventory, item_order.quantity)
+    end
+    item_orders.update(status: "unfulfilled")
   end
 end
