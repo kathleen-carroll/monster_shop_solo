@@ -9,7 +9,7 @@
     <%= text_field_tag :description, "#{@item.description}" %>
 
     <%= label_tag :price %>
-    <%= text_field_tag :price, "#{number_to_currency(@item.price)}" %>
+    <%= text_field_tag :price, "#{@item.price}" %>
 
     <%= label_tag :image %>
     <%= text_field_tag :image, "#{@item.image}" %>
