@@ -157,4 +157,12 @@ tr:nth-child(even) {
   background-color: #F0F8FF;
 }
 
-
+.small {
+  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
