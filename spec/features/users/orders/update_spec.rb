@@ -38,7 +38,6 @@ RSpec.describe 'profile orders show page', type: :feature do
       expect(@item_order2.status).to eq("unfulfilled")
       expect(@merchant.items.first.inventory).to eq(100)
       expect(@merchant.items.second.inventory).to eq(200)
-      expect(@order1.status).to eq("cancelled")
       expect(page).to have_content("Your order has been cancelled.")
 
       visit "/profile/orders"
@@ -60,7 +59,6 @@ RSpec.describe 'profile orders show page', type: :feature do
       expect(@merchant.items.first.inventory).to eq(200)
       expect(@merchant.items.second.inventory).to eq(250)
       expect(@merchant.items.third.inventory).to eq(300)
-      expect(@semi_fulfilled_order.status).to eq("cancelled")
       expect(page).to have_content("Your order has been cancelled.")
 
       visit "/profile/orders"
