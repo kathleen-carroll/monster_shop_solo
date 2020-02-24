@@ -1,19 +1,17 @@
 <% if !@merchant.nil? %>
-<h1>Merchant Info</h1>
-<p>Employer: <%= @merchant.name %> </p>
-<p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
+  <h1>Merchant Info</h1>
+  <p>Employer: <%= @merchant.name %> </p>
+  <p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
 <% end %>
 
 <% if !@item_orders.nil? %>
-<h1>Order Info</h1>
-<! -- require "pry"; binding.pry %> -->
-<% @item_orders.each do |order| %>
-<section id="id-<%= order.order_id %>"> 
-<!-- require "pry"; binding.pry %> -->
-<p>Order#<%= link_to order.order_id, "merchant/orders/#{order.order_id}" %> </p>
-<p>Order placed: <%= order.created_at.to_formatted_s(:long) %></p>
-<p>Number of items: <%= order.quantity %></p>
-<p>Total Price: <%= number_to_currency(order.order_total) %></p>
-</section>
-<% end %>
+  <h1>Order Info</h1>
+    <% @item_orders.each do |order| %>
+      <section id="id-<%= order.order_id %>">
+        <p>Order#<%= link_to order.order_id, "merchant/orders/#{order.order_id}" %> </p>
+        <p>Order placed: <%= order.created_at.to_formatted_s(:long) %></p>
+        <p>Number of items: <%= order.quantity %></p>
+        <p>Total Price: <%= number_to_currency(order.order_total) %></p>
+      </section>
+    <% end %>
 <% end %>
