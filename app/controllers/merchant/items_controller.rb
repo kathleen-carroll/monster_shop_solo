@@ -1,14 +1,19 @@
-class Merchant::ItemsController < ApplicationController
+class Merchant::ItemsController < Merchant::BaseController
 
-  def update
-    item = Item.find(params[:id])
-    merchant = item.merchant 
-    item.toggle!(:active?)
-    redirect_to "/merchants/#{merchant.id}/items"
-    if item.active?
-      flash[:success] = "#{item.name} is now available for sale."
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    params.delete :image if params[:image].blank?
+    item = @merchant.items.create(item_params)
+    if item.save
+      flash[:success] = "#{item.name} has been saved."
+      redirect_to "/merchants/#{@merchant.id}/items"
     else
-      flash[:success] = "#{item.name} is no longer for sale."
+      flash[:error] = item.errors.full_messages.to_sentence
+      render :new
     end
   end
 
@@ -18,4 +23,11 @@ class Merchant::ItemsController < ApplicationController
     flash[:success] = "Item Deleted."
     redirect_to "/merchants/#{item.merchant.id}/items"
   end
+
+    private
+
+  def item_params
+    params.permit(:name,:description,:price,:inventory,:image)
+  end
 end
+

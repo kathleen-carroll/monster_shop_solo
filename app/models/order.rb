@@ -7,7 +7,7 @@ class Order <ApplicationRecord
   has_many :items, through: :item_orders
 
   def self.by_status
-    order(status: :asc)
+    order(:status, id: :asc)
   end
 
   def grandtotal
