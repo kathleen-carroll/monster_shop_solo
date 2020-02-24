@@ -18,6 +18,22 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.save
+      flash[:success] = "#{@item.name} has been updated."
+      redirect_to "/merchants/#{@item.merchant.id}/items"
+    else
+      flash[:error] = @item.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
