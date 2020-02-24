@@ -1,7 +1,7 @@
 class Merchant::OrdersController < Merchant::BaseController
 
   def show
-    @order = Order.where(id: params[:id]).take
+    @order = Order.find_by(id: params[:id])
     render file: "/public/404" if no_order
   end
 
