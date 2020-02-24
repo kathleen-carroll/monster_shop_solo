@@ -31,12 +31,7 @@ class Profile::OrdersController < Profile::BaseController
 
   def update
     order = Order.find(params[:id])
-
-    # fulfilled = order.item_orders.where(status: :fulfilled)
-
-    order.update(status: 3)
-    order.item_orders.update(status: 'unfulfilled')
-
+    order.cancel
     flash[:success] = "Your order has been cancelled."
     redirect_to "/profile"
   end
