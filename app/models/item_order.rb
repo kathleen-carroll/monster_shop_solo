@@ -8,4 +8,11 @@ class ItemOrder <ApplicationRecord
   def subtotal
     price * quantity
   end
+
+  def restock
+    unless status == "unfulfilled"
+      item.increment!(:inventory, quantity)
+      update(status: "unfulfilled")
+    end
+  end
 end
