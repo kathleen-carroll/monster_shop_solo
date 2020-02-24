@@ -48,9 +48,6 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      # ItemOrder.find_by(item_id: @paper.id)
-      # item_order = ItemOrder.find_by(order_id: new_order.id)
-
       expect(current_path).to eq("/profile/orders")
 
       visit "/profile/orders/#{new_order.id}"
