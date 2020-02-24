@@ -8,7 +8,7 @@
 </section>
 <% if @merchant %>
   <h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
-  <p align="center"><%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" if @merchant && current_merchant_employee? %></p>
+  <p align="center"><%= link_to "Add New Item", "/merchant/#{@merchant.id}/items/new" if @merchant && current_merchant_employee? %></p>
 <% else %>
   <h1>All Items</h1>
 <% end %>
