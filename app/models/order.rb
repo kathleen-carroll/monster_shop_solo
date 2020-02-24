@@ -24,4 +24,10 @@ class Order <ApplicationRecord
       item_order.restock
     end
   end
+
+  def ready
+    if item_orders.where(status: "unfulfilled").empty?
+      update({status: 'packaged'})
+    end
+  end
 end
