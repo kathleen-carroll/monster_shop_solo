@@ -24,12 +24,13 @@ class ItemOrder <ApplicationRecord
   end
 
   def fulfill
-    if item.inventory >= quantity
-      item.decrement!(:inventory, quantity) #if can_fulfill?
+    if can_fulfill?
+      item.decrement!(:inventory, quantity)
       update(status: "fulfilled")
-      true
-    else
-      false
     end
+  end
+
+  def can_fulfill?
+    item.inventory >= quantity
   end
 end
