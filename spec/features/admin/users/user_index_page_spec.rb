@@ -6,14 +6,11 @@ RSpec.describe 'As an admin', type: :feature do
       user = create(:admin_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      user1 = create(:regular_user)
-      user2 = create(:regular_user)
-      user3 = create(:regular_user)
-      user3.update(role: 1)
-      user4 = create(:regular_user)
-      user4.update(role: 1)
-      user5 = create(:regular_user)
-      user5.update(role: 2)
+      @user1 = create(:regular_user)
+      @user2 = create(:regular_user)
+      @user3 = create(:merchant_user)
+      @user4 = create(:merchant_user)
+      @user5 = create(:admin_user)
     end
 
     it 'I see all the users in the system and their details' do
@@ -27,18 +24,35 @@ RSpec.describe 'As an admin', type: :feature do
 
       visit '/admin/users'
 
-      # expect(page).to have_content(user1.name)
+      within("section#user_#{@user1.id}") do
+        expect(page).to have_link(@user1.name)
+        expect(page).to have_content(@user1.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@user1.role)
+      end
+
+      within("section#user_#{@user2.id}") do
+        expect(page).to have_link(@user2.name)
+        expect(page).to have_content(@user2.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@user2.role)
+      end
+
+      within("section#user_#{@user3.id}") do
+        expect(page).to have_link(@user3.name)
+        expect(page).to have_content(@user3.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@user3.role)
+      end
+
+      within("section#user_#{@user4.id}") do
+        expect(page).to have_link(@user4.name)
+        expect(page).to have_content(@user4.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@user4.role)
+      end
+
+      within("section#user_#{@user5.id}") do
+        expect(page).to have_link(@user5.name)
+        expect(page).to have_content(@user5.created_at.to_formatted_s(:long))
+        expect(page).to have_content(@user5.role)
+      end
     end
   end
 end
-
-# User Story 53, Admin User Index Page
-
-# As an admin user
-# When I click the "Users" link in the nav (only visible to admins)
-# Then my current URI route is "/admin/users"
-# Only admin users can reach this path.
-# I see all users in the system
-# Each user's name is a link to a show page for that user ("/admin/users/5")
-# Next to each user's name is the date they registered
-# Next to each user's name I see what type of user they are

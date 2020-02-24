@@ -17,7 +17,6 @@
 <p>Total number of items: <%= @order.item_count %></p>
 <p>Grand total: <%= number_to_currency(@order.grandtotal) %></p>
 
-
 <h1 align = "center">Order Info</h1>
 <center>
   <table>
@@ -60,3 +59,7 @@
     </tr>
   </table>
 </section>
+
+<% if @order.status != 'shipped' %>
+  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
+<% end %>

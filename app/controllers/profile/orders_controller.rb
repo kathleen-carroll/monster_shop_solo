@@ -21,14 +21,24 @@ class Profile::OrdersController < Profile::BaseController
           })
       end
       session.delete(:cart)
-      flash[:notice] = "Your order was created."
+      flash[:success] = "Your order was created."
       redirect_to "/profile/orders"
     else
-      flash[:notice] = "Please complete address form to create an order."
+      flash[:error] = "Please complete address form to create an order."
       render :new
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+    unless order.cancelled? || order.shipped?
+      order.cancel
+      flash[:success] = "Your order has been cancelled."
+    else
+      flash[:error] = "Unable to cancel an order that is already #{order.status}"
+    end
+    redirect_to "/profile"
+  end
 
   private
 

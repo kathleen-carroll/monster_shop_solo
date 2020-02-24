@@ -84,13 +84,9 @@ RSpec.describe("Order Creation") do
         expect(page).to have_content("$2")
       end
 
-      # within "#grandtotal" do
         expect(page).to have_content("Grand total: $142")
-      # end
 
-      # within "#datecreated" do
         expect(page).to have_content(new_order.created_at.to_formatted_s(:long))
-      # end
     end
 
     it 'i cant create order if info not filled out' do

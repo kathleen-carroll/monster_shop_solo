@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get '/edit/pw', to: 'users#edit_pw'
     patch '/user', to: 'users#update'
     patch '/user/pw', to: 'security#update'
-    resources :orders, only: [:index, :show, :new, :create]
+    resources :orders, only: [:index, :show, :new, :create, :update]
   end
 
   namespace :admin do
@@ -32,12 +32,15 @@ Rails.application.routes.draw do
   namespace :merchant do
     get '/', to: 'dashboard#index'
     get '/:id/items', to: 'items#show'
-    resources :items, only: %i[update destroy]
+    get '/:merchant_id/items/new', to: 'items#new'
+    post '/:merchant_id/items', to: 'items#create'
+    patch '/items/:id', to: 'toggle#update'
+    resources :items, only: %i[update destroy show]
     resources :orders, only: [:show]
+    resources :item_orders, only: [:update]
   end
 
   get '/merchants/:merchant_id/items', to: 'items#index'
-  get '/merchants/:merchant_id/items/new', to: 'items#new'
   post '/merchants/:merchant_id/items', to: 'items#create'
   delete '/items/:id', to: 'items#destroy'
 
