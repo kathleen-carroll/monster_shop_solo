@@ -30,8 +30,7 @@
       <th>Status</th>
     </tr>
   <% @order.item_orders.by_merchant(current_user.merchant.id).each do |item_order|%>
-    <tr>
-    <section id = "item-<%=item_order.item_id%>">
+    <tr id="item-<%=item_order.item_id%>">
       <td><p class='small'><%= link_to image_tag(item_order.item.image), item_path(item_order.item.id) %></p></td>
       <td><p><%= link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
       <td><p><%= number_to_currency(item_order.price)%></p></td>
@@ -49,7 +48,6 @@
           <% end %>
         <% end %>
       </p></td>
-    </section>
-  </tr>
+    </tr>
   <% end %>
 </table>
