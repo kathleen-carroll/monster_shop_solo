@@ -4,8 +4,8 @@ RSpec.describe "As a merchant employee" do
   it "can see all my items with info and deactivate the item" do
     user = create(:merchant_user)
     merchant = create(:random_merchant)
-    item1 = create(:random_item, merchant: merchant)
-    item2 = create(:random_item, merchant: merchant)
+    item1 = create(:random_item, merchant: merchant, price: 53.31)
+    item2 = create(:random_item, merchant: merchant, price: 67.98)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -19,7 +19,7 @@ RSpec.describe "As a merchant employee" do
       expect(page).to have_content("Active")
       expect(page).to have_content(item1.inventory)
     end
-    
+
     within "#item-#{item2.id}" do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item2.description)
@@ -43,8 +43,8 @@ RSpec.describe "As a merchant employee" do
   it "can activate item" do
     user = create(:merchant_user)
     merchant = create(:random_merchant)
-    item1 = create(:random_item, active?: false, merchant: merchant)
-    item2 = create(:random_item, merchant: merchant)
+    item1 = create(:random_item, active?: false, merchant: merchant, price: 99.99)
+    item2 = create(:random_item, merchant: merchant, price: 2.75)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -58,7 +58,7 @@ RSpec.describe "As a merchant employee" do
       expect(page).to have_content("Inactive")
       expect(page).to have_content(item1.inventory)
     end
-    
+
     within "#item-#{item2.id}" do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item2.description)
@@ -79,8 +79,3 @@ RSpec.describe "As a merchant employee" do
     expect(item1.active?).to eq(true)
   end
 end
-
-
-
-
-
