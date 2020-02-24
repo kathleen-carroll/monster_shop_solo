@@ -21,8 +21,7 @@ class Order <ApplicationRecord
   def cancel
     update(status: "cancelled")
     item_orders.where(status: "fulfilled").each do |item_order|
-      item_order.item.increment!(:inventory, item_order.quantity)
+      item_order.restock
     end
-    item_orders.update(status: "unfulfilled")
   end
 end
