@@ -30,7 +30,7 @@ RSpec.describe 'Cart show' do
 
       click_on "Checkout"
 
-      expect(current_path).to eq("/orders/new")
+      expect(current_path).to eq("/profile/orders/new")
     end
   end
 
