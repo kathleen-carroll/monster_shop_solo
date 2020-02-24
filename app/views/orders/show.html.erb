@@ -18,6 +18,10 @@
   </table>
 </section>
 
+<% if @order.status != 'shipped' %>
+  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}" %>
+<% end %>
+
 <h1 align = "center">Order Info</h1>
 <center>
   <table>
