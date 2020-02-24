@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get '/:id/items', to: 'items#show'
     resources :items, only: %i[update destroy]
+    resources :orders, only: [:show]
   end
 
   get '/merchants/:merchant_id/items', to: 'items#index'
