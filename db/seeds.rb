@@ -43,3 +43,20 @@ admin_user = User.create(name: "John Bill",
   password_confirmation: "burgers",
   role: 2
 )
+
+regular_user = User.create(name: "John Bill",
+  address: "1491 Street St",
+  city: "Denver",
+  state: "CO",
+  zip: "801231",
+  email: "bill@mail.com",
+  password: "burgers",
+  password_confirmation: "burgers",
+  role: 0
+)
+
+
+order = Order.create(name: "John Bill", address: "1491 Street St", city: "Denver", state: "CO", zip: "80123", user: regular_user, status: 'pending')
+# item_order = ItemOrder.create(item: tire, order: order, quanity: 100, price: 2)
+
+tire.item_orders.create(quantity: 100, price: 2, order: order)
