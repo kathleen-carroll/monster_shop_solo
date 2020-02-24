@@ -26,7 +26,7 @@ RSpec.describe("Order Creation") do
 
       user = create(:regular_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-      
+
       visit "/cart"
       click_on "Checkout"
     end
@@ -48,7 +48,9 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      expect(current_path).to eq("/profile/orders")
+
+      visit "/profile/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)
@@ -82,13 +84,9 @@ RSpec.describe("Order Creation") do
         expect(page).to have_content("$2")
       end
 
-      within "#grandtotal" do
-        expect(page).to have_content("Total: $142")
-      end
+      expect(page).to have_content("Grand total: $142")
 
-      within "#datecreated" do
-        expect(page).to have_content(new_order.created_at)
-      end
+      expect(page).to have_content(new_order.created_at.to_formatted_s(:long))
     end
 
     it 'i cant create order if info not filled out' do
