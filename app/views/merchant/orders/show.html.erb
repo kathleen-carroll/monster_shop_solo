@@ -45,7 +45,7 @@
           <% if item_order.can_fulfill? %>
             - <%= link_to "Fulfill Order", merchant_item_order_path(item_order.id), method: :patch %>
           <% else %>
-            unable to fulfill
+            - unable to fulfill
           <% end %>
         <% end %>
       </p></td>
