@@ -19,7 +19,7 @@ RSpec.describe "As a Merchant" do
 
         expect(current_path).to eq("/merchant/items/#{@item1.id}/edit")
         find_field :name, with: @item1.name
-        find_field :price, with: "100"
+        find_field :price, with: "100.0"
         find_field :description, with: @item1.description
 
         fill_in :name, with: "special"
