@@ -24,4 +24,5 @@ class Order <ApplicationRecord
       item_order.restock
     end
   end
+
 end
