@@ -88,7 +88,7 @@ RSpec.describe "as a merchant employee user" do
 
     visit '/merchant'
 
-    # click_on "My Items"
-    # expect(current_path).to eq('/merchant/items')
+    click_on "My Items"
+    expect(current_path).to eq('/merchant/items')
   end
 end
