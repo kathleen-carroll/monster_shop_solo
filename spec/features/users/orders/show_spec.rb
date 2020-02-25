@@ -30,14 +30,14 @@ RSpec.describe 'profile orders show page', type: :feature do
       expect(page).to have_content(expected_date)
       expect(page).to have_content(@order1.status)
       expect(page).to have_content("Total number of items: #{@order1.item_count}")
-      expect(page).to have_content(@order1.grandtotal)
+      expect(page).to have_content(@order1.grandtotal.round(2))
       within("section#item_order-#{@item_order1.id}") do
         expect(page).to have_content(@item1.name)
         expect(page).to have_content(@item1.description)
         expect(page).to have_css("img[src*='#{@item1.image}']")
         expect(page).to have_content(@item_order1.quantity)
-        expect(page).to have_content(@item1.price)
-        expect(page).to have_content(@item_order1.subtotal)
+        expect(page).to have_content(@item1.price.round(2))
+        expect(page).to have_content(@item_order1.subtotal.round(2))
       end
       expect(page).to have_css("#item_order-#{@item_order2.id}")
       expect(page).to_not have_css("#item_order-#{@item_order3.id}")

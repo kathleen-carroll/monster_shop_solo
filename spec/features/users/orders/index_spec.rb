@@ -6,9 +6,9 @@ RSpec.describe 'profile orders index page', type: :feature do
       user = create(:regular_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      item3 = create(:random_item)
-      item2 = create(:random_item)
-      item1 = create(:random_item)
+      item3 = create(:random_item, price: 10.2424)
+      item2 = create(:random_item, price: 100.99)
+      item1 = create(:random_item, price: 15.75)
 
       @order1 = create(:random_order, user: user)
       @order2 = create(:random_order, user: user)
