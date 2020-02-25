@@ -9,7 +9,7 @@
   <h1>Order Info</h1>
     <% @orders.each do |order| %>
       <section id="id-<%= order.id %>">
-        <p>Order#<%= link_to order.id, "merchant/orders/#{order.id}" %> </p>
+        <p>Order#<%= link_to order.id, "/merchant/orders/#{order.id}" %> </p>
         <p>Order placed: <%= order.created_at.to_formatted_s(:long) %></p>
         <p>Number of items: <%= @item_orders2[order.id] %></p>
         <p>Total Price: <%= number_to_currency(@item_orders[order.id]) %></p>
