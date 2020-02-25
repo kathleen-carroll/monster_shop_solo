@@ -11,6 +11,10 @@ class ItemsController<ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    if !@item.active? && (merchant_of_item?(@item) || current_admin?)
+    else
+      render file: "/public/404"
+    end
   end
 
   def edit
@@ -39,5 +43,9 @@ class ItemsController<ApplicationController
 
   def item_params
     params.permit(:name,:description,:price,:inventory,:image)
+  end
+
+  def merchant_of_item?(item)
+    current_user && item.merchant == current_user.merchant
   end
 end
