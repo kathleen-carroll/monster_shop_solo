@@ -3,7 +3,11 @@ class ItemsController<ApplicationController
   def index
     if params[:merchant_id]
       @merchant = Merchant.find(params[:merchant_id])
-      @items = @merchant.items
+      if current_merchant_employee?
+        @items = @merchant.items
+      else
+        @items = @merchant.items.where(active?: true)
+      end
     else
       @items = Item.where(active?: true)
     end
