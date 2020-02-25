@@ -36,7 +36,8 @@ Rails.application.routes.draw do
     post '/:merchant_id/items', to: 'items#create'
     get '/items/:id/edit', to: 'items#edit'
     patch '/items/:id/toggle', to: 'toggle#update'
-    patch '/items/:id', to: 'items#update' 
+    patch '/items/:id', to: 'items#update'
+    get '/items', to: 'items#index'
     resources :items, only: %i[update destroy show]
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
