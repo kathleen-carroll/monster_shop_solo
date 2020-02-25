@@ -15,7 +15,7 @@ class Item <ApplicationRecord
   def self.popular(limit, order)
     left_outer_joins(:item_orders)
       .group(:id)
-      .order("COALESCE(SUM(quantity), 0) #{order}")
+      .order("COALESCE(SUM(quantity), 0) #{order}, items.id")
       .limit(limit)
   end
 
