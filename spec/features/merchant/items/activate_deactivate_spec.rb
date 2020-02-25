@@ -21,7 +21,7 @@ RSpec.describe "As a merchant employee" do
       expect(page).to have_content("Active")
       expect(page).to have_content(item1.inventory)
     end
-    
+
     within "#item-#{item2.id}" do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item2.description)
@@ -40,7 +40,7 @@ RSpec.describe "As a merchant employee" do
     expect(current_path).to eq("/merchants/#{merchant.id}/items")
     expect(page).to have_content("#{item1.name} is no longer for sale.")
     expect(item1.active?).to eq(false)
-    
+
     visit "/merchants/#{merchant2.id}/items"
 
     expect(item2.active?).to eq(true)
@@ -69,7 +69,7 @@ RSpec.describe "As a merchant employee" do
       expect(page).to have_content("Inactive")
       expect(page).to have_content(item1.inventory)
     end
-    
+
     within "#item-#{item2.id}" do
       expect(page).to have_content(item2.name)
       expect(page).to have_content(item2.description)
@@ -96,8 +96,3 @@ RSpec.describe "As a merchant employee" do
     end
   end
 end
-
-
-
-
-
