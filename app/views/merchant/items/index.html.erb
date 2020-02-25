@@ -1,5 +1,5 @@
 <h1>My Items</h1>
 
 <% @items.each do |item| %>
-  <%= item %>
+  <%= link_to item.name, "/items/#{item.id}" %>
 <% end %>

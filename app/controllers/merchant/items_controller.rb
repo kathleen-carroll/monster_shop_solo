@@ -1,4 +1,7 @@
 class Merchant::ItemsController < Merchant::BaseController
+  def index
+    @items = current_user.merchant.items.distinct
+  end
 
   def new
     merchant = Merchant.find(params[:merchant_id])
@@ -47,4 +50,3 @@ class Merchant::ItemsController < Merchant::BaseController
     params.permit(:name,:description,:price,:inventory,:image)
   end
 end
-
