@@ -83,7 +83,7 @@ describe Item, type: :model do
       1.times { create(:random_item_order, item: item7, price: item1.price, quantity: 5) }
 
       expect(Item.popular(5, "desc")).to eq([super_item, item1, item2, item3, item4])
-      expect(Item.popular(5, "asc")).to eq([item7, item6, item5, item4, item3])
+      expect(Item.popular(5, "asc")).to eq([@chain, item7, item6, item5, item4])
     end
   end
 end
