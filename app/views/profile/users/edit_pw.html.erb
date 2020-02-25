@@ -1,4 +1,4 @@
-<%= form_with url: "/profile/user/pw", local: true, method: :patch do |f| %>
+<%= form_with url: profile_user_pw_path, local: true, method: :patch do |f| %>
 
   <p><%= label_tag :password %></p>
   <p><%= password_field_tag :password %></p>
