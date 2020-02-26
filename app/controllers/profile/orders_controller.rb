@@ -31,13 +31,20 @@ class Profile::OrdersController < Profile::BaseController
 
   def update
     order = Order.find(params[:id])
-    unless order.cancelled? || order.shipped?
+    role = current_user.role
+
+    if !order.cancelled? || !order.shipped?
       order.cancel
-      flash[:success] = "Your order has been cancelled."
+      flash[:success] = 'Order cancelled'
     else
       flash[:error] = "Unable to cancel an order that is already #{order.status}"
     end
-    redirect_to "/profile"
+
+    if role == 'regular'
+      redirect_to profile_path
+    else
+      redirect_to admin_path
+    end
   end
 
   private
