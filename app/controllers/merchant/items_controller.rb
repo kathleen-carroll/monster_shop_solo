@@ -37,6 +37,10 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+  end
+
   def destroy
     item = Item.find(params[:id])
     item.destroy
