@@ -52,5 +52,14 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities).to eq(["Denver", "Hershey"])
     end
 
+    it 'active_items' do
+      item2 = create(:random_item, merchant: @meg, active?: false)
+      item3 = create(:random_item, merchant: @meg)
+      item4 = create(:random_item, merchant: @meg, active?: false)
+      item5 = create(:random_item, merchant: @meg)
+
+      expect(@meg.active_items).to eq([@tire, item3, item5])
+    end
+
   end
 end
