@@ -36,8 +36,6 @@ class Profile::OrdersController < Profile::BaseController
     if !order.cancelled? || !order.shipped?
       order.cancel
       flash[:success] = 'Order cancelled'
-    else
-      flash[:error] = "Unable to cancel an order that is already #{order.status}"
     end
 
     if role == 'regular'
