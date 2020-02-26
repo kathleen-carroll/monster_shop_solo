@@ -30,7 +30,13 @@ RSpec.describe 'As an admin', type: :feature do
         expect(page).to have_content('cancelled')
       end
 
-      expect(order1.reload.status).to eq('cancelled')
+      within("#order_#{order1.id}") do
+        order1.reload
+        click_link "#{order1.id}"
+      end
+
+      expect(page).to have_content('Status: cancelled')
+      expect(page).to_not have_link('Cancel Order')
     end
   end
 end
