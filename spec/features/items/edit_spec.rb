@@ -1,19 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe "As a Visitor" do
+RSpec.describe "As a Merchant" do
   describe "When I visit an Item Show Page" do
     describe "and click on edit item" do
       it 'I can see the prepopulated fields of that item' do
-        @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-        @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+        tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        merchant_employee = create(:merchant_user, merchant: meg)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
 
-        visit "/items/#{@tire.id}"
+
+        visit "/items/#{tire.id}"
 
         expect(page).to have_link("Edit Item")
 
         click_on "Edit Item"
 
-        expect(current_path).to eq("/items/#{@tire.id}/edit")
+        expect(current_path).to eq("/items/#{tire.id}/edit")
         expect(page).to have_link("Gatorskins")
         expect(find_field('Name').value).to eq "Gatorskins"
         expect(find_field('Price').value).to eq '100.0'
@@ -23,10 +26,13 @@ RSpec.describe "As a Visitor" do
       end
 
       it 'I can change and update item with the form' do
-        @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-        @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+        tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        merchant_employee = create(:merchant_user, merchant: meg)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
 
-        visit "/items/#{@tire.id}"
+
+        visit "/items/#{tire.id}"
 
         click_on "Edit Item"
 
@@ -38,7 +44,7 @@ RSpec.describe "As a Visitor" do
 
         click_button "Update Item"
 
-        expect(current_path).to eq("/items/#{@tire.id}")
+        expect(current_path).to eq("/items/#{tire.id}")
         expect(page).to have_content("GatorSkins")
         expect(page).to_not have_content("Gatorskins")
         expect(page).to have_content("Price: $110")
@@ -50,10 +56,13 @@ RSpec.describe "As a Visitor" do
       end
 
       it 'I get a flash message if entire form is not filled out' do
-        @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-        @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+        tire = meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+        merchant_employee = create(:merchant_user, merchant: meg)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
 
-        visit "/items/#{@tire.id}"
+
+        visit "/items/#{tire.id}"
 
         click_on "Edit Item"
 

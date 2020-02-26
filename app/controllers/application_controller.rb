@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
                 :current_user, 
                 :current_admin?, 
                 :current_merchant?, 
-                :current_merchant_employee?
+                :current_merchant_employee?,
+                :current_merchant_employee_for_item?
 
   def cart
     @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
@@ -29,5 +30,9 @@ class ApplicationController < ActionController::Base
 
   def current_merchant_employee?
     current_merchant? && current_user.merchant_id == @merchant.id
+  end
+
+  def current_merchant_employee_for_item?
+    @item.merchant && (current_merchant? && current_user.merchant_id == @item.merchant.id)
   end
 end
