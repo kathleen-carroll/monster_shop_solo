@@ -1,9 +1,8 @@
-<% if @merchant %>
-  <h1>Merchant Info</h1>
-  <p>Employer: <%= @merchant.name %> </p>
-  <p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
-  <h1><%= link_to 'My Items', '/merchant/items' %></h1>
-<% end %>
+
+<h1>Merchant Info</h1>
+<p>Employer: <%= @merchant.name %> </p>
+<p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
+<h1><%= link_to 'My Items', '/merchant/items' %></h1>
 
 <h1>Order Info</h1>
 <center>
