@@ -8,7 +8,13 @@
   <% end %>
 </section>
 
-<%= render partial: 'index', locals: {items: @items} %>
+<section class="grid-container">
+  <% @items.each do |item| %>
+    <section class = "grid-item" id= 'item-<%=item.id%>'>
+      <%= render partial: 'item_info', locals: {item: item}%>
+    </section>
+  <% end %>
+</section>
 
 <section id="least_popular"><h2>Least Popular Items</h2>
   <% @items.popular(5, 'asc').each.with_index do |item, index| %>
