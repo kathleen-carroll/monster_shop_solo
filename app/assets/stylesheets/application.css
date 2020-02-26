@@ -56,11 +56,11 @@ section[id*='review'] {
  }
 
  .grid-item{
- 	background-color: #17BEBB;
+ 	background-color: rgb(251, 127, 199);
  	padding: 20px;
   border: solid;
  	border-radius: 12px;
-  border-color: #002244;
+  border-color: #1a0044;
  	text-align: center
  }
  .item-show-grid{
@@ -78,7 +78,7 @@ section[id*='review'] {
 
  .topnav {
    overflow: hidden;
-   background-color: #002244;
+   background-color: #2f0044;
  }
 
  .topnav a {
@@ -91,7 +91,7 @@ section[id*='review'] {
  }
 
  .topnav a:hover {
-   background-color: #17BEBB;
+   background-color: rgb(207, 54, 148);
    color: black;
  }
 
