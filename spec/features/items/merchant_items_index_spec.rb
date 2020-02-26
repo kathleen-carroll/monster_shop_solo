@@ -31,19 +31,36 @@ RSpec.describe "Merchant Items Index Page" do
       end
 
       expect(page).to_not have_css("#item-#{@shifter.id}")
+    end
 
+    it "shows deactivated items if I'm that merchant's employee" do
       user = create(:merchant_user, merchant: @meg)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
       visit "/merchants/#{@meg.id}/items"
 
-      within "#item-#{@shifter.id}" do
-        expect(page).to have_content(@shifter.name)
-        expect(page).to have_content("Price: $#{@shifter.price}")
-        expect(page).to have_css("img[src*='#{@shifter.image}']")
-        expect(page).to have_content("Inactive")
-        expect(page).to have_content(@shifter.description)
-        expect(page).to have_content("Inventory: #{@shifter.inventory}")
-      end
+      expect(page).to have_css("#item-#{@tire.id}")
+      expect(page).to have_css("#item-#{@chain.id}")
+      expect(page).to have_css("#item-#{@shifter.id}")
+    end
+
+    it "shows deactivated items if I'm an administrator" do
+      user = create(:admin_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit "/merchants/#{@meg.id}/items"
+
+      expect(page).to have_css("#item-#{@tire.id}")
+      expect(page).to have_css("#item-#{@chain.id}")
+      expect(page).to have_css("#item-#{@shifter.id}")
+    end
+
+    it "doesn't show another merchant's deactivated items" do
+      user = create(:merchant_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      visit "/merchants/#{@meg.id}/items"
+
+      expect(page).to have_css("#item-#{@tire.id}")
+      expect(page).to have_css("#item-#{@chain.id}")
+      expect(page).to_not have_css("#item-#{@shifter.id}")
     end
   end
 end
