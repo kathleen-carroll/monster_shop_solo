@@ -32,12 +32,6 @@ class Order <ApplicationRecord
   end
 
   def show_cancel
-    if status == 'cancelled'
-      'no show'
-    elsif status == 'shipped'
-      'no show'
-    else
-      'show'
-    end
+    packaged? || pending?
   end
 end
