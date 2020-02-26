@@ -1,0 +1,45 @@
+<section id="most_popular"><h1>Most Popular Items</h1>
+  <% @items.popular(5, 'desc').each.with_index do |item, index| %>
+    <section id="top-<%= index + 1 %>">
+      <p><%= link_to item.name, "/items/#{item.id}" %></p>
+      <p>Total amount ordered: <%= item.quantity_bought %></p>
+    </section>
+  <% end %>
+</section>
+
+<% if @merchant %>
+  <h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
+  <p align="center"><%= link_to "Add New Item", "/merchant/#{@merchant.id}/items/new" if @merchant && current_merchant_employee? %></p>
+<% else %>
+  <h1>All Items</h1>
+<% end %>
+<section class="grid-container">
+  <% @items.each do |item| %>
+    <section class = "grid-item" id= 'item-<%=item.id%>'>
+      <h2> <%=link_to item.name, "/items/#{item.id}" %> </h2>
+      <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
+      <%= link_to image_tag(item.image), "/items/#{item.id}", id: "image-#{item.id}" %>
+      <p> <%= item.description if current_merchant? || !@merchant %> </p>
+      <p>Price: <%=number_to_currency(item.price) %> </p>
+      <p>Inventory: <%= item.inventory %> </p>
+      <% if item.active? %>
+        <p>Active</p>
+        <%= link_to "deactivate", "/merchant/items/#{item.id}/toggle", method: :patch  if @merchant && current_merchant_employee?%>
+      <% else %>
+        <p>Inactive</p>
+        <%= link_to "activate", "/merchant/items/#{item.id}/toggle", method: :patch if @merchant && current_merchant_employee? %>
+      <% end %>
+      <%= link_to "Edit", "/merchant/items/#{item.id}/edit", method: :get if @merchant && current_merchant_employee? %>
+      <%= link_to "delete", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && @merchant && current_merchant_employee? %>
+    </section>
+    <% end %>
+</section>
+
+<section id="least_popular"><h1>Least Popular Items</h1>
+  <% @items.popular(5, 'asc').each.with_index do |item, index| %>
+    <section id="bottom-<%= index + 1 %>">
+      <p><%= link_to item.name, "/items/#{item.id}" %></p>
+      <p>Total amount ordered: <%= item.quantity_bought %></p>
+    </section>
+  <% end %>
+</section>
