@@ -1,17 +1,19 @@
 class Merchant::ItemsController < Merchant::BaseController
   def index
-    @items = current_user.merchant.items.distinct
+    @items = current_user.merchant.items
   end
 
   def new
     merchant = Merchant.find(params[:merchant_id])
     @item = merchant.items.create(item_params)
+    require_merchant_employee
   end
 
   def create
     merchant = Merchant.find(params[:merchant_id])
     params.delete :image if params[:image].blank?
     @item = merchant.items.create(item_params)
+    require_merchant_employee
     if @item.save
       flash[:success] = "#{@item.name} has been saved."
       redirect_to "/merchants/#{merchant.id}/items"
@@ -23,6 +25,7 @@ class Merchant::ItemsController < Merchant::BaseController
 
   def edit
     @item = Item.find(params[:id])
+    require_merchant_employee
   end
 
   def update
@@ -39,6 +42,7 @@ class Merchant::ItemsController < Merchant::BaseController
 
   def show
     @item = Item.find(params[:id])
+    require_merchant_employee
   end
 
   def destroy
@@ -50,7 +54,11 @@ class Merchant::ItemsController < Merchant::BaseController
 
     private
 
-  def item_params
-    params.permit(:name,:description,:price,:inventory,:image)
-  end
+    def item_params
+      params.permit(:name,:description,:price,:inventory,:image)
+    end
+
+    def require_merchant_employee
+      render file: "/public/404" unless current_merchant_employee_for_item?
+    end
 end
