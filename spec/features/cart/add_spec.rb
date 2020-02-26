@@ -34,7 +34,7 @@ RSpec.describe 'Cart creation' do
       end
     end
 
-    it "cant add a deactivated item" do
+    it "I can't add a deactivated item" do
       expect(@pen.active?).to eq(false)
       visit "/items/#{@pen.id}"
       click_on "Add To Cart"
