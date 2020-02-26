@@ -14,7 +14,8 @@ RSpec.describe 'As an admin', type: :feature do
       visit "/admin/users/#{user1.id}/orders/#{order1.id}"
 
       expect(page).to have_content("Order ID: #{order1.id}")
-      expect(page).to have_content("Ordered on: #{order2.created_at.to_formatted_s(:long)}")
+      expect(page).to have_content('Status: pending')
+      expect(page).to have_content("Ordered on: #{order1.created_at.to_formatted_s(:long)}")
       expect(page).to have_content("Total number of items: #{order1.item_count}")
       expect(page).to have_content("#{order1.name}")
       expect(page).to have_link('Cancel Order')
@@ -28,6 +29,8 @@ RSpec.describe 'As an admin', type: :feature do
       within("#order_#{order1.id}") do
         expect(page).to have_content('cancelled')
       end
+
+      expect(order1.reload.status).to eq('cancelled')
     end
   end
 end
