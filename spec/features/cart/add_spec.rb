@@ -35,6 +35,9 @@ RSpec.describe 'Cart creation' do
     end
 
     it "I can't add a deactivated item" do
+      user = create(:merchant_user, merchant: @mike)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      
       expect(@pen.active?).to eq(false)
       visit "/items/#{@pen.id}"
       click_on "Add To Cart"
