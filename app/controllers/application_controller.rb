@@ -30,5 +30,4 @@ class ApplicationController < ActionController::Base
   def current_merchant_employee?
     current_merchant? && current_user.merchant_id == @merchant.id
   end
-
 end
