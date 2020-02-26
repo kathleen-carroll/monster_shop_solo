@@ -7,7 +7,7 @@ class CartController < ApplicationController
       cart.add_item(item.id.to_s)
       flash[:success] = "#{item.name} was successfully added to your cart"
       redirect_to "/items"
-    else 
+    else
       flash[:error] = "Entry error, #{item.name} is an deactivated item!"
       redirect_to "/items"
     end
@@ -37,16 +37,6 @@ class CartController < ApplicationController
     end
     redirect_to '/cart'
   end
-
-  # def increment_decrement
-  #   if params[:increment_decrement] == "increment"
-  #     cart.add_quantity(params[:item_id]) unless cart.limit_reached?(params[:item_id])
-  #   elsif params[:increment_decrement] == "decrement"
-  #     cart.subtract_quantity(params[:item_id])
-  #     return remove_item if cart.quantity_zero?(params[:item_id])
-  #   end
-  #   redirect_to "/cart"
-  # end
 
   private
 
