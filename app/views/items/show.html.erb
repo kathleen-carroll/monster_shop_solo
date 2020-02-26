@@ -9,7 +9,7 @@
       <img src= <%= @item.image %>>
     </section>
     <section style="text-align:left" class = "item-show-item">
-      <p><%= @item.description %></p>
+      <p>Description: <%= @item.description %></p>
       <p>Price: <%= number_to_currency(@item.price )%> </p>
       <p>Inventory: <%= @item.inventory %> </p>
       <% if @item.active? %>
@@ -17,8 +17,8 @@
       <% else %>
         <p style= "color:red">Inactive</p>
       <% end %>
-      <p><%= link_to "Edit Item", "/items/#{@item.id}/edit" %></p>
-      <p><%= link_to "Delete Item", "/items/#{@item.id}", method: :delete if @item.no_orders?%></p>
+      <p><%= link_to "Edit Item", "/items/#{@item.id}/edit" if current_merchant_employee_for_item? %></p>
+      <p><%= link_to "Delete Item", "/items/#{@item.id}", method: :delete if @item.no_orders? && @item.merchant && current_merchant_employee_for_item? %></p>
       <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
       <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
     </section>
