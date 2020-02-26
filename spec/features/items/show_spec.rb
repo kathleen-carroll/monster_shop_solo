@@ -48,4 +48,23 @@ RSpec.describe 'item show page', type: :feature do
       expect(page).to_not have_content("All Reviews")
     end
   end
+
+  it 'doesnt have edit and delete if not the merchant' do
+     merchant = create(:random_merchant)
+     merchant2 = create(:random_merchant)
+     merchant_employee = create(:merchant_user, merchant: merchant)
+     item1 = merchant.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+     item2 = merchant2.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
+
+     visit "/items/#{item2.id}"
+
+     expect(page).to_not have_link("Delete Item")
+     expect(page).to_not have_link("Edit Item")
+
+     visit "/items/#{item1.id}"
+
+     expect(page).to have_link("Delete Item")
+     expect(page).to have_link("Edit Item")
+  end
 end
