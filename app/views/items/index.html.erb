@@ -1,4 +1,5 @@
-<section id="most_popular"><h1>Most Popular Items</h1>
+<h1>All Items</h1>
+<section id="most_popular"><h2>Most Popular Items</h2>
   <% @items.popular(5, 'desc').each.with_index do |item, index| %>
     <section id="top-<%= index + 1 %>">
       <p><%= link_to item.name, "/items/#{item.id}" %></p>
@@ -7,9 +8,9 @@
   <% end %>
 </section>
 
-<%= render 'index' %>
+<%= render partial: 'index', locals: {items: @items} %>
 
-<section id="least_popular"><h1>Least Popular Items</h1>
+<section id="least_popular"><h2>Least Popular Items</h2>
   <% @items.popular(5, 'asc').each.with_index do |item, index| %>
     <section id="bottom-<%= index + 1 %>">
       <p><%= link_to item.name, "/items/#{item.id}" %></p>
