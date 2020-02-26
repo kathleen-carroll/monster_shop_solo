@@ -60,6 +60,6 @@
   </table>
 </section>
 
-<% if @order.status != 'shipped' %>
+<% if @order.status != ('shipped'||'cancelled') %>
   <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
 <% end %>
