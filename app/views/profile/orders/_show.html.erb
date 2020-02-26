@@ -59,6 +59,6 @@
     </tr>
   </table>
 </section>
-<% if @order.show_cancel == 'show' %>
+<% if @order.show_cancel %>
   <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
 <% end %>
