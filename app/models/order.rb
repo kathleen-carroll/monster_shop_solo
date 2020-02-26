@@ -30,4 +30,14 @@ class Order <ApplicationRecord
       update({status: 'packaged'})
     end
   end
+
+  def show_cancel
+    if status == 'cancelled'
+      0
+    elsif status == 'shipped'
+      0
+    else
+      1
+    end
+  end
 end
