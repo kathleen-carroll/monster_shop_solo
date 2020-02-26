@@ -67,4 +67,60 @@ RSpec.describe 'item show page', type: :feature do
      expect(page).to have_link("Delete Item")
      expect(page).to have_link("Edit Item")
   end
+
+  it "can't see deactivated item as visitor" do
+    defective_tire = @bike_shop.items.create(name: "Cheapo Tire", description: "Not worth!", price: 5, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 50, active?: false)
+    visit "/items/#{defective_tire.id}"
+
+    expect(page).to_not have_content(defective_tire.name)
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
+
+  it "can't see deactivated item as regular user" do
+    defective_tire = @bike_shop.items.create(name: "Cheapo Tire", description: "Not worth!", price: 5, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 50, active?: false)
+    visit "/items/#{defective_tire.id}"
+
+    user = create(:regular_user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/items/#{defective_tire.id}"
+
+    expect(page).to_not have_content(defective_tire.name)
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
+
+  it "can't see deactivated item as other merchant employee" do
+    defective_tire = @bike_shop.items.create(name: "Cheapo Tire", description: "Not worth!", price: 5, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 50, active?: false)
+    visit "/items/#{defective_tire.id}"
+
+    user = create(:merchant_user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/items/#{defective_tire.id}"
+
+    expect(page).to_not have_content(defective_tire.name)
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
+
+  it "can see deactivated item as item's merchant's employee" do
+    defective_tire = @bike_shop.items.create(name: "Cheapo Tire", description: "Not worth!", price: 5, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 50, active?: false)
+    visit "/items/#{defective_tire.id}"
+
+    user = create(:merchant_user, merchant: @bike_shop)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/items/#{defective_tire.id}"
+
+    expect(page).to have_content(defective_tire.name)
+    expect(page).to_not have_content("The page you were looking for doesn't exist.")
+  end
+
+  it "can see deactivated item as an administrator" do
+    defective_tire = @bike_shop.items.create(name: "Cheapo Tire", description: "Not worth!", price: 5, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 50, active?: false)
+    visit "/items/#{defective_tire.id}"
+
+    user = create(:admin_user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/items/#{defective_tire.id}"
+
+    expect(page).to have_content(defective_tire.name)
+    expect(page).to_not have_content("The page you were looking for doesn't exist.")
+  end
 end
