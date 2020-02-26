@@ -31,17 +31,18 @@ class Profile::OrdersController < Profile::BaseController
 
   def update
     order = Order.find(params[:id])
-    role = current_user.role
 
-    if !order.cancelled? || !order.shipped?
+    if order.pending? || order.packaged?
       order.cancel
       flash[:success] = 'Order cancelled'
+    else
+      flash[:error] = "Unable to cancel an order that is already #{order.status}"
     end
 
-    if role != 'admin'
-      redirect_to profile_path
-    else
+    if current_admin?
       redirect_to admin_path
+    else
+      redirect_to profile_path
     end
   end
 
