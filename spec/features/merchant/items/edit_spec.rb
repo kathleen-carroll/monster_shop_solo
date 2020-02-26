@@ -11,9 +11,10 @@ RSpec.describe "As a Merchant" do
       end
       it 'I can see the prepopulated fields of that item and i can update my item' do
 
-        visit "/merchants/#{@merchant.id}/items"
+        visit "/merchant/items"
 
-        expect(page).to have_link("Edit")
+        click_on "#{@item1.name}"
+        expect(current_path).to eq("/merchant/items/#{@item1.id}")
 
         click_on "Edit"
 
@@ -28,7 +29,7 @@ RSpec.describe "As a Merchant" do
         fill_in :description, with: "okay"
 
         click_button "Update Item"
-        
+
         expect(current_path).to eq("/merchants/#{@merchant.id}/items")
         expect(page).to have_content("special has been updated.")
         expect(page).to have_content("special")
@@ -40,7 +41,7 @@ RSpec.describe "As a Merchant" do
         expect(page).to have_content("okay")
         expect(page).to_not have_content("They'll never pop!")
         expect(@item1.active?).to eq(true)
-        
+
       end
 
       it 'cant edit if field is missing' do
