@@ -15,7 +15,7 @@ class ItemsController<ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    render file: "/public/404" unless viewable(@item)
+    render file: "/public/404" unless viewable
   end
 
   def edit
@@ -46,13 +46,9 @@ class ItemsController<ApplicationController
       params.permit(:name,:description,:price,:inventory,:image)
     end
 
-    def merchant_of_item?(item)
-      current_user && item.merchant == current_user.merchant
-    end
-
-    def viewable(item)
-      if !item.active?
-        merchant_of_item?(item) || current_admin?
+    def viewable
+      if !@item.active?
+        current_merchant_employee_for_item? || current_admin?
       else
         true
       end
