@@ -11,6 +11,10 @@ RSpec.describe 'As an admin', type: :feature do
       order1 = create(:random_order, user: user1)
       item_order1 = create(:random_item_order, order: order1)
 
+      user2 = create(:regular_user)
+      order2 = create(:random_order, user: user2)
+      item_order2 = create(:random_item_order, order: order2)
+
       visit "/admin/users/#{user1.id}/orders/#{order1.id}"
 
       expect(page).to have_content("Order ID: #{order1.id}")
@@ -37,6 +41,22 @@ RSpec.describe 'As an admin', type: :feature do
 
       expect(page).to have_content('Status: cancelled')
       expect(page).to_not have_link('Cancel Order')
+
+      visit "/admin/users/#{user1.id}/orders/#{order2.id}"
+
+      expect(page).to have_content("Order ID: #{order2.id}")
+      expect(page).to have_content('Status: pending')
+      expect(page).to have_content("Ordered on: #{order2.created_at.to_formatted_s(:long)}")
+      expect(page).to have_content("Total number of items: #{order2.item_count}")
+      expect(page).to have_content("#{order2.name}")
+      expect(page).to have_link('Cancel Order')
+
+      order2.update(status: 'cancelled')
+      order2.reload
+
+      click_link 'Cancel Order'
+
+      expect(page).to have_content("Unable to cancel an order that is already #{order2.status}")
     end
   end
 end
