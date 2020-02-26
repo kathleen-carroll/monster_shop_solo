@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'dashboard#index'
+    get '/users/:id/orders', to: 'user_orders#index'
     get '/users/:id/orders/:id', to: 'user_orders#show'
     patch '/users/:id/orders/:id', to: 'user_orders#update'
     resources :users, only: %i[index show]
