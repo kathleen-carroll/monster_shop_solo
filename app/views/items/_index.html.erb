@@ -9,13 +9,13 @@
       <p>Inventory: <%= item.inventory %> </p>
       <% if item.active? %>
         <p>Active</p>
-        <%= link_to "deactivate", "/merchant/items/#{item.id}/toggle", method: :patch  if @merchant && current_merchant_employee?%>
+        <%= link_to "deactivate", "/merchant/items/#{item.id}/toggle", method: :patch  if current_merchant_employee?%>
       <% else %>
         <p>Inactive</p>
-        <%= link_to "activate", "/merchant/items/#{item.id}/toggle", method: :patch if @merchant && current_merchant_employee? %>
+        <%= link_to "activate", "/merchant/items/#{item.id}/toggle", method: :patch if current_merchant_employee? %>
       <% end %>
-      <%= link_to "Edit", "/merchant/items/#{item.id}/edit", method: :get if @merchant && current_merchant_employee? %>
-      <%= link_to "delete", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && @merchant && current_merchant_employee? %>
+      <%= link_to "Edit", "/merchant/items/#{item.id}/edit", method: :get if current_merchant_employee? %>
+      <%= link_to "delete", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_merchant_employee? %>
     </section>
     <% end %>
 </section>
