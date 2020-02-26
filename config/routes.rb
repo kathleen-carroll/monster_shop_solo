@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   resources :merchants
+  get '/merchants/:merchant_id/items', to: 'merchant_items#index'
+  # post '/merchants/:merchant_id/items', to: 'items#create'
+
   resources :items, only: %i[index show edit update destroy] do
     resources :reviews, only: %i[new create]
   end
@@ -42,9 +45,6 @@ Rails.application.routes.draw do
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
   end
-
-  get '/merchants/:merchant_id/items', to: 'items#index'
-  post '/merchants/:merchant_id/items', to: 'items#create'
 
   resources :reviews, only: [:edit, :update, :destroy]
 
