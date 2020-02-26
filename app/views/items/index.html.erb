@@ -1,12 +1,4 @@
 <h1>All Items</h1>
-<section id="most_popular"><h2>Most Popular Items</h2>
-  <% @items.popular(5, 'desc').each.with_index do |item, index| %>
-    <section id="top-<%= index + 1 %>">
-      <p><%= link_to item.name, "/items/#{item.id}" %></p>
-      <p>Total amount ordered: <%= item.quantity_bought %></p>
-    </section>
-  <% end %>
-</section>
 
 <section class="grid-container">
   <% @items.each do |item| %>
@@ -14,13 +6,29 @@
       <%= render partial: 'item_info', locals: {item: item}%>
     </section>
   <% end %>
-</section>
+</section><br><br>
 
-<section id="least_popular"><h2>Least Popular Items</h2>
-  <% @items.popular(5, 'asc').each.with_index do |item, index| %>
-    <section id="bottom-<%= index + 1 %>">
-      <p><%= link_to item.name, "/items/#{item.id}" %></p>
-      <p>Total amount ordered: <%= item.quantity_bought %></p>
-    </section>
-  <% end %>
-</section>
+<table border="1" id="statistics">
+    <tr>
+        <td colspan="4">Most Popular Items</td>
+        <td colspan="4">Least Popular Items</td>
+    </tr>
+    <tr>
+        <td>Number<td>
+        <td>Item</td>
+        <td>Total Amount Ordered</td>
+        <td>Number<td>
+        <td>Item</td>
+        <td>Total Amount Ordered</td>
+    </tr>
+    <%  @items.popular(5, 'asc').zip(@items.popular(5, 'desc')).each.with_index do |(unpop, pop), index| %>
+      <tr>
+        <td><%= index + 1 %><td>
+        <td><%= link_to pop.name, item_path(pop.id) %></td>
+        <td><%= pop.quantity_bought %></td>
+        <td><%= index + 1 %><td>
+        <td><%= link_to unpop.name, item_path(unpop.id) %> %></td>
+        <td><%= unpop.quantity_bought %></td>
+      </tr>
+    <% end %>
+</table>
