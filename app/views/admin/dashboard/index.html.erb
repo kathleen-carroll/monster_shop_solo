@@ -3,7 +3,7 @@
     <% @orders.by_status.each do |order| %>
       <div id="order_<%= order.id %>">
         <p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p>
-        <p><%= order.id  %></p>
+        <p><%= link_to order.id, "/admin/users/#{order.user.id}/orders/#{order.id}" %></p>
         <p><%= order.status  %></p>
         <p><%= order.created_at.to_formatted_s(:long) %></p>
         <% if order.status == 'packaged' %>
