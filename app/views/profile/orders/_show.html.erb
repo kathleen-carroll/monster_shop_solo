@@ -1,0 +1,65 @@
+<p>Order ID: <%= @order.id %></p>
+<p>Ordered on: <%= @order.created_at.to_formatted_s(:long) %></p>
+<p>Last updated: <%= @order.updated_at.to_formatted_s(:long) %></p>
+<p>Status: <%= @order.status %></p>
+<section class="grid-container" id="items">
+  <% @order.item_orders.each do |item_order| %>
+  <section class ="grid-item" id="item_order-<%=item_order.id%>">
+    <h2> <%=link_to item_order.item.name, item_path(item_order.item.id) %> </h2>
+    <%= link_to image_tag(item_order.item.image), item_path(item_order.item.id), id: "image-#{item_order.item.id}" %>
+    <p> <%= item_order.item.description %> </p>
+    <p>Price: <%=number_to_currency(item_order.item.price) %> </p><br>
+    <p>Amount: <%= item_order.quantity %></p>
+    <p>Subtotal: <%= number_to_currency(item_order.subtotal) %></p>
+  </section>
+  <% end %>
+</section>
+<p>Total number of items: <%= @order.item_count %></p>
+<p>Grand total: <%= number_to_currency(@order.grandtotal) %></p>
+
+<h1 align = "center">Order Info</h1>
+<center>
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Sold By</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  <% @order.item_orders.each do |item_order|%>
+    <tr>
+    <section id = "item-<%=item_order.item_id%>">
+        <td><p><%=link_to item_order.item.name, "/items/#{item_order.item_id}"%></p></td>
+        <td><p><%= link_to item_order.item.merchant.name, "/merchants/#{item_order.item.merchant.id}"%></p></td>
+        <td><p><%= number_to_currency(item_order.price)%></p></td>
+        <td><p><%= item_order.quantity%></p></td>
+        <td><p><%= number_to_currency(item_order.subtotal)%></p></td>
+      </section>
+    </tr>
+  <% end %>
+</table>
+
+<section class = "shipping-address">
+  <h1 align = "center">Shipping Info</h1>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+    </tr>
+    <tr>
+      <td><p><%= @order.name %> </p></td>
+      <td><p><%= @order.address %> </p></td>
+      <td><p><%= @order.city %> </p></td>
+      <td><p><%= @order.state %> </p></td>
+      <td><p><%= @order.zip %> </p></td>
+    </tr>
+  </table>
+</section>
+
+<% if @order.status != 'shipped' %>
+  <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
+<% end %>
