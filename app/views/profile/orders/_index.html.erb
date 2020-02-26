@@ -1,0 +1,16 @@
+<section class="grid-container">
+  <% @user.orders.each do |order| %>
+    <section class = "grid-item" id= 'order-<%=order.id%>'>
+      <% if current_admin? %>
+        <h2>Order#<%= link_to order.id, "/admin/users/#{@user.id}/orders/#{order.id}" %></h2>
+      <% else %>
+        <h2>Order#<%= link_to order.id, "/profile/orders/#{order.id}" %></h2>
+      <% end %>
+      <p>Created: <%= order.created_at.to_formatted_s(:long) %></p>
+      <p>Updated: <%= order.updated_at.to_formatted_s(:long) %></p>
+      <p>Status: <%= order.status %></p>
+      <p>Number of items: <%= order.item_count %></p>
+      <p>Grand total: <%= number_to_currency(order.grandtotal) %></p>
+    </section>
+    <% end %>
+</section>
