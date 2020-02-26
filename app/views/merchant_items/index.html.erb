@@ -2,7 +2,7 @@
 <section class="grid-container">
   <% @items.each do |item| %>
   <section class = "grid-item" id= 'item-<%=item.id%>'>
-    <%= render partial: '/items/item_info', locals: {item: item} %>
+    <%= render partial: '/items/item_info', locals: {item: item, path: item_path(item.id)} %>
   </section>
   <% end %>
 </section>

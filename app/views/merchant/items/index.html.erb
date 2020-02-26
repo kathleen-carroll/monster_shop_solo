@@ -4,14 +4,17 @@
 <section class="grid-container">
   <% @items.each do |item| %>
     <section class = "grid-item" id= 'item-<%=item.id%>'>
-      <%= render partial: 'items/item_info', locals: {item: item}%>
-      <%= link_to item.name, "/merchant/items/#{item.id}" %>
+      <%= render partial: 'items/item_info', locals: {item: item, path: merchant_item_path(item.id)}%>
       <% if item.active? %>
-        <p>Active</p>
-        <%= link_to "Deactivate", "/merchant/items/#{item.id}/toggle", method: :patch %>
+        <p>
+          Active -
+          <%= link_to "Deactivate", "/merchant/items/#{item.id}/toggle", method: :patch %>
+        </p>
       <% else %>
-        <p>Inactive</p>
-        <%= link_to "Activate", "/merchant/items/#{item.id}/toggle", method: :patch %>
+        <p>
+          Inactive -
+          <%= link_to "Activate", "/merchant/items/#{item.id}/toggle", method: :patch %>
+        </p>
       <% end %>
       <%= link_to "Edit", "/merchant/items/#{item.id}/edit", method: :get %>
       <%= link_to "Delete", "/merchant/items/#{item.id}", method: :delete %>
