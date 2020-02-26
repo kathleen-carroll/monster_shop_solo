@@ -1,21 +1,21 @@
-<%= form_with url: "/profile/user", local: true, method: :patch do |f| %>
-  <p><%= label_tag :name %></p>
-  <p><%= f.text_field :name, value: pre_fill[:name] %></p>
+<%= form_with url: profile_user_path, local: true, method: method do |f| %>
+  <p><%= f.label :name %></p>
+  <p><%= f.text_field :name, value: user.name %></p>
 
-  <p><%= label_tag :address %></p>
-  <p><%= f.text_field :address, value: pre_fill[:address] %></p>
+  <p><%= f.label :address %></p>
+  <p><%= f.text_field :address, value: user.address %></p>
 
-  <p><%= label_tag :city %></p>
-  <p><%= f.text_field :city, value: pre_fill[:city] %></p>
+  <p><%= f.label :city %></p>
+  <p><%= f.text_field :city, value: user.city %></p>
 
-  <p><%= label_tag :state %></p>
-  <p><%= f.text_field :state, value: pre_fill[:state] %></p>
+  <p><%= f.label :state %></p>
+  <p><%= f.text_field :state, value: user.state %></p>
 
-  <p><%= label_tag :zip %></p>
-  <p><%= f.text_field :zip, value: pre_fill[:zip] %></p>
+  <p><%= f.label :zip %></p>
+  <p><%= f.text_field :zip, value: user.zip %></p>
 
-  <p><%= label_tag :email %></p>
-  <p><%= f.email_field :email, value: pre_fill[:email] %></p>
+  <p><%= f.label :email %></p>
+  <p><%= f.email_field :email, value: user.email %></p>
 
-  <p><%= submit_tag "Update Profile" %></p>
+  <p><%= submit_tag button_text %></p>
 <% end %>
