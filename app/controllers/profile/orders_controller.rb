@@ -38,7 +38,7 @@ class Profile::OrdersController < Profile::BaseController
       flash[:success] = 'Order cancelled'
     end
 
-    if role == 'regular'
+    if role != 'admin'
       redirect_to profile_path
     else
       redirect_to admin_path
