@@ -1,18 +1,26 @@
-<% if !@merchant.nil? %>
+<% if @merchant %>
   <h1>Merchant Info</h1>
   <p>Employer: <%= @merchant.name %> </p>
   <p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
   <%= link_to 'My Items', '/merchant/items' %>
 <% end %>
 
-<% if !@orders.nil? %>
-  <h1>Order Info</h1>
-    <% @orders.each do |order| %>
-      <section id="id-<%= order.id %>">
-        <p>Order#<%= link_to order.id, "/merchant/orders/#{order.id}" %> </p>
-        <p>Order placed: <%= order.created_at.to_formatted_s(:long) %></p>
-        <p>Number of items: <%= @item_orders2[order.id] %></p>
-        <p>Total Price: <%= number_to_currency(@item_orders[order.id]) %></p>
-      </section>
-    <% end %>
-<% end %>
+<h1>Order Info</h1>
+<center>
+  <table>
+    <tr>
+      <th>Number</th>
+      <th>Placed</th>
+      <th>Number of Items</th>
+      <th>Total Price</th>
+    </tr>
+  <% @orders.each do |order| %>
+    <tr id="item-<%= order.id %>">
+      <td><p>Order#<%= link_to order.id, "/merchant/orders/#{order.id}" %> </p></td>
+      <td><p><%= order.created_at.to_formatted_s(:long) %></p></td>
+      <td><p><%= @item_orders2[order.id] %></p></td>
+      <td><p><%= number_to_currency(@item_orders[order.id]) %></p></td>
+    </tr>
+  <% end %>
+  <%= "No orders have been placed." if @orders.nil? %>
+</table>
