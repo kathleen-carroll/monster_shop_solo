@@ -5,18 +5,18 @@ RSpec.describe "As a Merchant" do
     describe "and click on edit item" do
       before :each do
         @merchant = create(:random_merchant)
-        @merchant_employee = create(:merchant_user, merchant: @merchant)
+        merchant_employee = create(:merchant_user, merchant: @merchant)
         @item1 = @merchant.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
       end
       it 'I can see the prepopulated fields of that item and i can update my item' do
 
         visit "/merchant/items"
 
-        click_on "#{@item1.name}"
+        click_link "#{@item1.name}"
         expect(current_path).to eq("/merchant/items/#{@item1.id}")
 
-        click_on "Edit"
+        click_link "Edit"
 
         expect(current_path).to eq("/merchant/items/#{@item1.id}/edit")
         find_field :name, with: @item1.name
@@ -44,11 +44,11 @@ RSpec.describe "As a Merchant" do
 
       end
 
-      it 'cant edit if field is missing' do
+      it "I can't edit if an item if fields are not filled in" do
 
-        visit "/merchants/#{@merchant.id}/items"
+        visit "/merchants/items"
 
-        click_on "Edit"
+        click_link "Edit"
 
         fill_in 'Name', with: ""
         fill_in 'Price', with: 110
