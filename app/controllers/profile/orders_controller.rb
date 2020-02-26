@@ -39,11 +39,7 @@ class Profile::OrdersController < Profile::BaseController
       flash[:error] = "Unable to cancel an order that is already #{order.status}"
     end
 
-    if current_admin?
-      redirect_to admin_path
-    else
-      redirect_to profile_path
-    end
+    redirect_to profile_path
   end
 
   private
