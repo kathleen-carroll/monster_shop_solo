@@ -59,7 +59,8 @@
     </tr>
   </table>
 </section>
-
-<% if @order.status != 'shipped' %>
+<% if @order.show_cancel && current_admin? %>
+  <%= link_to 'Cancel Order', "/admin/users/#{@order.user.id}/orders/#{@order.id}", method: :patch %>
+<% elsif @order.show_cancel && current_user %>
   <%= link_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :patch %>
 <% end %>
