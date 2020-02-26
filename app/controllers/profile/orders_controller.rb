@@ -31,13 +31,15 @@ class Profile::OrdersController < Profile::BaseController
 
   def update
     order = Order.find(params[:id])
-    unless order.cancelled? || order.shipped?
+
+    if order.pending? || order.packaged?
       order.cancel
-      flash[:success] = "Your order has been cancelled."
+      flash[:success] = 'Order cancelled'
     else
       flash[:error] = "Unable to cancel an order that is already #{order.status}"
     end
-    redirect_to "/profile"
+
+    redirect_to profile_path
   end
 
   private

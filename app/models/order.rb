@@ -30,4 +30,8 @@ class Order <ApplicationRecord
       update({status: 'packaged'})
     end
   end
+
+  def show_cancel
+    packaged? || pending?
+  end
 end
