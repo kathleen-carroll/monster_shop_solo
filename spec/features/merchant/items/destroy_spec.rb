@@ -13,20 +13,11 @@ RSpec.describe "As a merchant employee" do
 
     visit "/merchant/items"
 
-    within "#item-#{item1.id}" do
-      expect(page).to have_content(item1.name)
-      expect(page).to have_content(item1.description)
-      expect(page).to have_content(item1.price)
-      expect(page).to have_css("img[src*='#{item1.image}']")
-      expect(page).to have_content("Active")
-      expect(page).to have_content(item1.inventory)
-    end
+    expect(page).to have_css("#item-#{item1.id}")
 
-    within "#item-#{item1.id}" do
-      click_on "Delete"
-    end
+    within("#item-#{item1.id}") { click_link "Delete" }
 
-    expect(current_path).to eq("/merchants/#{merchant.id}/items")
+    expect(current_path).to eq("/merchant/items")
     expect(page).to have_content("Item Deleted.")
     expect(page).to_not have_css("#item-#{item1.id}")
 
