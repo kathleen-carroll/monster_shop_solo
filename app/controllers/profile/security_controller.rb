@@ -1,4 +1,9 @@
 class Profile::SecurityController < Profile::BaseController
+
+  def edit
+    @user = current_user
+  end
+
   def update
     @user = current_user
     if @user.update(user_params) && @user.pw_check_not_empty(params)
