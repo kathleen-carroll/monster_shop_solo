@@ -9,7 +9,8 @@ RSpec.describe "As a Merchant" do
         @item1 = @merchant.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_employee)
       end
-      it 'I can see the prepopulated fields of that item and i can update my item' do
+      
+      it 'I can see the prepopulated fields of that item and update it' do
 
         visit "/merchant/items"
 
@@ -42,7 +43,6 @@ RSpec.describe "As a Merchant" do
         expect(page).to have_content("okay")
         expect(page).to_not have_content("They'll never pop!")
         expect(@item1.active?).to eq(true)
-
       end
 
       it "I can't edit if an item if fields are not filled in" do
