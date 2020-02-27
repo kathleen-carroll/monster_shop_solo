@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'
   # post '/merchants/:merchant_id/items', to: 'items#create'
 
-  resources :items, only: %i[index show edit update] do
+  resources :items, only: %i[index show] do
     resources :reviews, only: %i[new create]
   end
 
