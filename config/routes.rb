@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   resources :merchants
-  resources :items, only: %i[index show edit update delete]
+  get '/merchants/:merchant_id/items', to: 'merchant_items#index'
+  # post '/merchants/:merchant_id/items', to: 'items#create'
+
+  resources :items, only: %i[index show edit update destroy] do
+    resources :reviews, only: %i[new create]
+  end
 
   namespace :profile do
     get '/', to: 'users#show'
@@ -24,6 +29,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'dashboard#index'
+    get '/users/:id/orders', to: 'user_orders#index'
     get '/users/:id/orders/:id', to: 'user_orders#show'
     patch '/users/:id/orders/:id', to: 'user_orders#update'
     resources :users, only: %i[index show]
@@ -33,28 +39,15 @@ Rails.application.routes.draw do
 
   namespace :merchant do
     get '/', to: 'dashboard#index'
-    get '/:id/items', to: 'items#show'
     get '/:merchant_id/items/new', to: 'items#new'
     post '/:merchant_id/items', to: 'items#create'
-    get '/items/:id/edit', to: 'items#edit'
     patch '/items/:id/toggle', to: 'toggle#update'
-    patch '/items/:id', to: 'items#update'
-    get '/items', to: 'items#index'
-    resources :items, only: %i[update destroy show]
+    resources :items, only: %i[index show edit update destroy]
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
   end
 
-  get '/merchants/:merchant_id/items', to: 'items#index'
-  post '/merchants/:merchant_id/items', to: 'items#create'
-  delete '/items/:id', to: 'items#destroy'
-
-  get '/items/:item_id/reviews/new', to: 'reviews#new'
-  post '/items/:item_id/reviews', to: 'reviews#create'
-
-  get '/reviews/:id/edit', to: 'reviews#edit'
-  patch '/reviews/:id', to: 'reviews#update'
-  delete '/reviews/:id', to: 'reviews#destroy'
+  resources :reviews, only: [:edit, :update, :destroy]
 
   post '/cart/:item_id', to: 'cart#add_item'
   get '/cart', to: 'cart#show'
@@ -62,7 +55,5 @@ Rails.application.routes.draw do
   delete '/cart/:item_id', to: 'cart#remove_item'
   patch '/cart/:item_id', to: 'cart#edit'
 
-  get '/orders/new', to: 'orders#new'
-  post '/orders', to: 'orders#create'
-  get '/orders/:id', to: 'orders#show'
+  resources :orders, only: [:new, :create, :show]
 end

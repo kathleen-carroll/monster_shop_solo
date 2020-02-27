@@ -1,4 +1,8 @@
 class Admin::UserOrdersController < Admin::BaseController
+  def index
+    @user = User.find(params[:id])
+  end
+
   def show
     @order = Order.find(params[:id])
   end

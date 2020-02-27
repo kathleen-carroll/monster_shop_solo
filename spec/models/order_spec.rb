@@ -29,12 +29,15 @@ describe Order, type: :model do
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
+
     it 'grandtotal' do
       expect(@order_1.grandtotal).to eq(230)
     end
+
     it "item_count" do
       expect(@order_1.item_count).to eq(5)
     end
+
     it "cancel" do
       @order_1.item_orders.second.update(status: "fulfilled")
       @order_1.cancel
@@ -43,6 +46,49 @@ describe Order, type: :model do
       expect(@order_1.item_orders.second.status).to eq("unfulfilled")
       expect(Item.first.inventory).to eq(12)
       expect(Item.last.inventory).to eq(35)
+    end
+
+    it 'ready' do
+      expect(@order_1.status).to eq('pending')
+
+      @order_1.item_orders.each do |item|
+        item.update(status: 'fulfilled')
+      end
+
+      expect(@order_1.item_orders.first.status).to eq('fulfilled')
+      expect(@order_1.item_orders.last.status).to eq('fulfilled')
+      expect(@order_1.status).to eq('pending')
+
+      @order_1.ready
+
+      expect(@order_1.status).to eq('packaged')
+    end
+
+    it 'show_cancel' do
+      expect(@order_1.status).to eq('pending')
+      expect(@order_1.show_cancel).to eq(true)
+
+      @order_1.item_orders.each do |item|
+        item.update(status: 'fulfilled')
+      end
+
+      expect(@order_1.item_orders.first.status).to eq('fulfilled')
+      expect(@order_1.item_orders.last.status).to eq('fulfilled')
+      expect(@order_1.status).to eq('pending')
+      expect(@order_1.show_cancel).to eq(true)
+
+      @order_1.ready
+
+      expect(@order_1.status).to eq('packaged')
+      expect(@order_1.show_cancel).to eq(true)
+
+      @order_1.update(status: 'shipped')
+
+      expect(@order_1.show_cancel).to eq(false)
+
+      @order_1.update(status: 'cancelled')
+
+      expect(@order_1.show_cancel).to eq(false)
     end
   end
 

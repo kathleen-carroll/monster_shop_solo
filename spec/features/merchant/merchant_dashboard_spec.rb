@@ -39,7 +39,7 @@ RSpec.describe "as a merchant employee user" do
     expect(page).to have_content("Employer Address: #{user.merchant.address} #{user.merchant.city}, #{user.merchant.state} #{user.merchant.zip}")
   end
 
-  it 'can see orders that have been place for that merchants products' do
+  it 'can see orders that have been placed for that merchants products' do
     user = create(:merchant_user)
     item = create(:random_item, merchant: user.merchant)
     item_order = create(:random_item_order, item: item, price: 20.45, quantity: 2)
@@ -51,12 +51,13 @@ RSpec.describe "as a merchant employee user" do
 
     visit '/merchant'
 
-    within("#id-#{item_order.order_id}") do
+    # add ids to each section of table
+    within("#item-#{item_order.order_id}") do
       expect(page).to have_content("Order##{item_order.order_id}")
       expect(page).to have_link("#{item_order.order_id}")
-      expect(page).to have_content("Order placed: #{item_order.created_at.to_formatted_s(:long)}")
-      expect(page).to have_content("Number of items: #{item_order.quantity}")
-      expect(page).to have_content("Total Price: $#{40.90}")
+      expect(page).to have_content("#{item_order.created_at.to_formatted_s(:long)}")
+      expect(page).to have_content("#{item_order.quantity}")
+      expect(page).to have_content("#{40.90}")
 
       click_on "#{item_order.order_id}"
       expect(current_path).to eq("/merchant/orders/#{item_order.order_id}")
@@ -64,12 +65,12 @@ RSpec.describe "as a merchant employee user" do
 
     visit '/merchant'
 
-    within("#id-#{item_order2.order_id}") do
+    within("#item-#{item_order2.order_id}") do
       expect(page).to have_link("#{item_order2.order_id}")
       expect(page).to have_content("Order##{item_order2.order_id}")
-      expect(page).to have_content("Order placed: #{item_order2.created_at.to_formatted_s(:long)}")
-      expect(page).to have_content("Number of items: #{item_order2.quantity + item_order3.quantity}")
-      expect(page).to have_content("Total Price: $#{203.88}")
+      expect(page).to have_content("#{item_order2.created_at.to_formatted_s(:long)}")
+      expect(page).to have_content("#{item_order2.quantity + item_order3.quantity}")
+      expect(page).to have_content("#{203.88}")
 
       click_on "#{item_order2.order_id}"
       expect(current_path).to eq("/merchant/orders/#{item_order2.order_id}")
