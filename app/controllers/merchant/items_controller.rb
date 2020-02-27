@@ -43,9 +43,13 @@ class Merchant::ItemsController < Merchant::BaseController
 
   def destroy
     item = Item.find_by(id: params[:id])
-    if item
+    if !item
+      flash[:error] = "Item already deleted."
+    elsif item.no_orders?
+      flash[:success] = "'#{item.name}' has been deleted."
       item.destroy
-      flash[:success] = "Item Deleted."
+    else
+      flash[:error] = "Cannot delete an item with orders."
     end
     redirect_to "/merchant/items"
   end
