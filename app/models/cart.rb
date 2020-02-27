@@ -35,10 +35,10 @@ class Cart
   def edit_quantity(params)
     item = Item.find(params[:item_id].to_i)
     if params[:value] == "add"
-      contents[params[:item_id]] += 1 unless inventory_limit?("max", item)#item.inventory != contents[item.id.to_s]
+      contents[params[:item_id]] += 1 unless inventory_limit?("max", item)
     elsif params[:value] == "sub"
       contents[params[:item_id]] -= 1
-      return 0 if inventory_limit?("min", item) #contents[item.id.to_s] == 0
+      return 0 if inventory_limit?("min", item)
     end
   end
 
