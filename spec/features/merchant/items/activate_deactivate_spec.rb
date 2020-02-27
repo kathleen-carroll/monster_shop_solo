@@ -7,7 +7,7 @@ RSpec.describe "As a merchant employee" do
     user = create(:merchant_user, merchant: merchant)
     item1 = create(:random_item, merchant: merchant)
     item2 = create(:random_item, merchant: merchant)
-    item3 = create(:random_item, merchant: merchant2)
+    create(:random_item, merchant: merchant2)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 

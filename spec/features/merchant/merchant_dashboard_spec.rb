@@ -80,10 +80,10 @@ RSpec.describe "as a merchant employee user" do
   it 'can see own items' do
     user = create(:merchant_user)
     item = create(:random_item, merchant: user.merchant)
-    item_order = create(:random_item_order, item: item, price: 20.45, quantity: 2)
+    create(:random_item_order, item: item, price: 20.45, quantity: 2)
     item2 = create(:random_item, merchant: user.merchant)
     item_order2 = create(:random_item_order, item: item, price: 101.94, quantity: 1)
-    item_order3 = create(:random_item_order, item: item2, order_id: item_order2.order_id, price: 101.94, quantity: 1)
+    create(:random_item_order, item: item2, order_id: item_order2.order_id, price: 101.94, quantity: 1)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
