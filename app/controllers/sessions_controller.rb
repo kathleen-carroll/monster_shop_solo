@@ -25,7 +25,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:cart)
     session.delete(:user_id)
     session.delete(:cart)
     flash[:success] = "You are now logged out."
