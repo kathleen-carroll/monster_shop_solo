@@ -28,7 +28,7 @@ tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never po
 pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
 
-alpaca1 = alpaca.items.create(name: "Fur Hat", description: "So soft!", price: 100, image: "https://lh3.googleusercontent.com/proxy/X-NmucCHVib48a4wBvXg_sCp3eSFCHMTl0wYW1hfA_NOk8qI6c2IYDNPwmipZSRPYQR55duK3pbE0HCF3MrtojVk2eOJJL3fIkP157mYrlURonHoPKhnKhxsyW1Zg9k8pntdmqmwrNTg8g", inventory: 12)
+alpaca1 = alpaca.items.create(name: "Fur Hat", description: "So soft!", price: 100, image: "https://sc01.alicdn.com/kf/UT8srXdXWNaXXagOFbXd/856627674/UT8srXdXWNaXXagOFbXd.jpg", inventory: 12)
 alpaca2 = alpaca.items.create(name: "Slippers", description: "Walk on clouds!!", price: 100, image: "https://cdn11.bigcommerce.com/s-4cno098ye2/images/stencil/1280x1280/products/399/1327/IMG_5618__70830.1559948927.JPG?c=2&imbypass=on", inventory: 12)
 alpaca3 = alpaca.items.create(name: "Teddy Bear", description: "The most snuggly bear around", price: 100, image: "https://cdn11.bigcommerce.com/s-76ikz/images/stencil/original/products/36438/112699/22-100-03443__30612.1539371209.jpg?c=2&imbypass=on&imbypass=on", inventory: 12)
 alpaca4 = alpaca.items.create(name: "Scarf", description: "Stay warm and cozy", price: 100, image: "https://assets2.cuyana.com/media/catalog/product/CLCI/aW1hZ2U/MTgwMA/Xw/MTAw/MQ/MQ/MA/MQ/Xw/NWRmMjA1OGY0YTNiOWM0MzI1YWU1MTNlNjNlMzllYjA/9/0/900_20160727_cuyana0202.jpg", inventory: 12)
@@ -42,7 +42,7 @@ record6 = rays.items.create(name: "808s And Heartbreak - Kanye West", descriptio
 
 jam1 = jw.items.create(name: "Pear Vanilla Ice Jam", description: "Delicious, warm, notes of cinnamon", price: 35, image: "https://i1.wp.com/mountainmamacooks.com/wp-content/uploads/2014/01/pear-vanilla-jam-2.jpg?resize=600%2C397&ssl=1", inventory: 40)
 jam2 = jw.items.create(name: "Bohemian Raspberry Jam", description: "Sweet and tangy", price: 35, image: "https://homeinthefingerlakes.com/wp-content/uploads/2018/08/Small-Batch-Raspberry-Jam-in-a-Bread-Machine-1-of-9.jpg", inventory: 40)
-jam3 = jw.items.create(name: "Spiced Girls Blackberry Jam", description: "Sweet and tangy", price: 35, image: "https://lh3.googleusercontent.com/proxy/xWu9_jODkL8Ho2RnnjuS-Gp6Cc9VSO_fPRcKT5YwK4SkRwfunSMKQxwLH1AEvI5QcMEtzqSgNSTTo1LEmH_Ylt8_ICEThhL1dFAiMDb9xfWbbJSwJfGEwsIuZsph7F7fO6x1nE-s1_U", inventory: 40)
+jam3 = jw.items.create(name: "Spiced Girls Blackberry Jam", description: "Sweet and tangy", price: 35, image: "https://hips.hearstapps.com/ame-prod-goodhousekeeping-assets.s3.amazonaws.com/main/embedded/10959/blackberry-jam.png", inventory: 40)
 jam4 = jw.items.create(name: "Lemon on a Prayer Jam", description: "Tart and fresh", price: 35, image: "https://www.onegoodthingbyjillee.com/wp-content/uploads/2014/11/Lemon-Jam-1.jpg", inventory: 40)
 jam5 = jw.items.create(name: "Guns and Rose Jam", description: "Floral and vibrant organic jam", price: 35, image: "https://www.pureindianfoods.com/v/vspfiles/photos/RPP-2T.jpg", inventory: 40)
 
