@@ -16,7 +16,7 @@ RSpec.describe "As a visitor", type: :feature do
 
     expect(current_path).to eq("/profile")
 
-    expect(page).to have_content("Welcome ray@gmail.com")
+    expect(page).to have_content("Welcome #{regular_user.name}")
     expect(page).to have_link("Log Out")
     expect(page).to_not have_link("Register as a User")
     expect(page).to_not have_link("I already have an account")
@@ -69,7 +69,7 @@ RSpec.describe "As a visitor", type: :feature do
     click_button "Submit"
 
     expect(current_path).to eq('/merchant')
-    expect(page).to have_content("Welcome Merchant #{merchant_user.email}")
+    expect(page).to have_content("Welcome Merchant #{merchant_user.name}")
     click_on "Log Out"
 
     visit '/merchant'
@@ -83,7 +83,7 @@ RSpec.describe "As a visitor", type: :feature do
     click_button "Submit"
 
     expect(current_path).to eq('/merchant')
-    expect(page).to have_content("Welcome Merchant #{merchant_user.email}")
+    expect(page).to have_content("Welcome Merchant #{merchant_user.name}")
 
     end
 
@@ -101,7 +101,7 @@ RSpec.describe "As a visitor", type: :feature do
       click_button "Submit"
 
       expect(current_path).to eq('/admin')
-      expect(page).to have_content("Welcome Admin #{admin_user.email}!")
+      expect(page).to have_content("Welcome Admin #{admin_user.name}!")
     end
 
 
