@@ -12,13 +12,13 @@
       <th>Number of Items</th>
       <th>Total Price</th>
     </tr>
-  <% @orders.each do |order| %>
+  <% @merchant.pending_orders.each do |order| %>
     <tr id="item-<%= order.id %>">
       <td><p>Order#<%= link_to order.id, "#{path}#{order.id}" %> </p></td>
       <td><p><%= order.created_at.to_formatted_s(:long) %></p></td>
-      <td><p><%= @item_orders2[order.id] %></p></td>
-      <td><p><%= number_to_currency(@item_orders[order.id]) %></p></td>
+      <td><p><%= order.item_orders.by_merchant(@merchant.id).item_count %></p></td>
+      <td><p><%= number_to_currency(order.item_orders.by_merchant(@merchant.id).total) %></p></td>
     </tr>
   <% end %>
-  <%= "No orders have been placed." if @orders.nil? %>
+  <%= "No orders have been placed." if @merchant.pending_orders.nil? %>
 </table>
