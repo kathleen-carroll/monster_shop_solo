@@ -3,7 +3,7 @@ class CartController < ApplicationController
 
   def add_item
     item = Item.find(params[:item_id])
-    if item.active?
+    if item.active? && !cart.inventory_limit?('max', item)
       cart.add_item(item.id.to_s)
       flash[:success] = "#{item.name} was successfully added to your cart."
       redirect_to "/items"
