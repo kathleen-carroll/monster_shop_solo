@@ -14,21 +14,21 @@ RSpec.describe "As a merchant employee" do
     visit "/merchant/items"
 
     within("#item-#{item1.id}") do
-      expect(page).to have_content(item1.name, count: 1)
-      expect(page).to have_content(item1.description, count: 1)
-      expect(page).to have_content(item1.price, count: 1)
-      expect(page).to have_css("img[src*='#{item1.image}']", count: 1)
-      expect(page).to have_content("Active", count: 1)
-      expect(page).to have_content(item1.inventory, count: 1)
+      expect(page).to have_content(item1.name)
+      expect(page).to have_content(item1.description)
+      expect(page).to have_content(item1.price)
+      expect(page).to have_css("img[src*='#{item1.image}']")
+      expect(page).to have_content("Active")
+      expect(page).to have_content(item1.inventory)
     end
 
     within("#item-#{item2.id}") do
-      expect(page).to have_content(item2.name, count: 1)
-      expect(page).to have_content(item2.description, count: 1)
-      expect(page).to have_content(item2.price, count: 1)
-      expect(page).to have_css("img[src*='#{item2.image}']", count: 1)
-      expect(page).to have_content("Active", count: 1)
-      expect(page).to have_content(item2.inventory, count: 1)
+      expect(page).to have_content(item2.name)
+      expect(page).to have_content(item2.description)
+      expect(page).to have_content(item2.price)
+      expect(page).to have_css("img[src*='#{item2.image}']")
+      expect(page).to have_content("Active")
+      expect(page).to have_content(item2.inventory)
     end
 
     expect(page).to_not have_css("#item-#{item3.id}")
