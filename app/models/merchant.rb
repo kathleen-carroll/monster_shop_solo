@@ -1,6 +1,7 @@
 class Merchant <ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :item_orders, through: :items
+  has_many :orders, through: :item_orders
   has_many :users
 
   validates_presence_of :name,
@@ -28,6 +29,10 @@ class Merchant <ApplicationRecord
 
   def active_items
     items.where(active?: true).order(:id)
+  end
+
+  def pending_orders
+    orders.where("orders.status = 1").distinct
   end
 
 end

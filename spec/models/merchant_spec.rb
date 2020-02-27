@@ -12,6 +12,8 @@ describe Merchant, type: :model do
   describe "relationships" do
     it {should have_many :items}
     it {should have_many :users}
+    it {should have_many(:item_orders).through(:items)}
+    it {should have_many(:orders).through(:item_orders)}
   end
 
   describe 'instance methods' do
@@ -60,6 +62,17 @@ describe Merchant, type: :model do
       item5 = create(:random_item, merchant: @meg)
 
       expect(@meg.active_items).to eq([@tire, item3, item5])
+    end
+
+    it 'pending_orders' do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
+      order_2 = Order.create!(name: 'Brian', address: '123 Brian Ave', city: 'Denver', state: 'CO', zip: 17033, user: create(:regular_user), status: "shipped")
+      order_3 = Order.create!(name: 'Dao', address: '123 Mike Ave', city: 'Denver', state: 'CO', zip: 17033, user: create(:regular_user))
+      order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+      order_2.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+      order_3.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
+
+      expect(@meg.pending_orders).to eq([order_1, order_3])
     end
 
   end
