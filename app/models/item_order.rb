@@ -16,6 +16,10 @@ class ItemOrder <ApplicationRecord
     sum("item_orders.quantity * item_orders.price")
   end
 
+  def self.item_count
+    sum(:quantity)
+  end
+
   def subtotal
     price * quantity
   end
