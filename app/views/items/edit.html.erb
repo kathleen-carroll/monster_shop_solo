@@ -15,7 +15,7 @@
     <%= text_field_tag :image, "#{@item.image}" %>
 
     <%= label_tag :inventory %>
-    <%= text_field_tag :inventory, "#{@item.inventory}" %>
+    <%= number_field_tag :inventory, "#{@item.inventory}" %>
 
     <%= submit_tag 'Update Item' %>
   <% end %>
