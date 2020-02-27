@@ -28,7 +28,6 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def update
-
     if @item.update(item_params)
       flash[:success] = "#{@item.name} has been updated."
       redirect_to "/merchant/items"
