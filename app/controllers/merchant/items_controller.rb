@@ -1,6 +1,6 @@
 class Merchant::ItemsController < Merchant::BaseController
   def index
-    @items = current_user.merchant.items
+    @items = Merchant.find(current_user.merchant.id).items
   end
 
   def new
@@ -35,6 +35,7 @@ class Merchant::ItemsController < Merchant::BaseController
       redirect_to "/merchant/items"
     else
       flash[:error] = item.errors.full_messages.to_sentence
+      @item = item
       render :edit
     end
   end
