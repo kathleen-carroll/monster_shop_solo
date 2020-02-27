@@ -1,0 +1,21 @@
+<%= form_with url: profile_user_path, local: true, method: method do |f| %>
+  <p><%= f.label :name %></p>
+  <p><%= f.text_field :name, value: user.name %></p>
+
+  <p><%= f.label :address %></p>
+  <p><%= f.text_field :address, value: user.address %></p>
+
+  <p><%= f.label :city %></p>
+  <p><%= f.text_field :city, value: user.city %></p>
+
+  <p><%= f.label :state %></p>
+  <p><%= f.text_field :state, value: user.state %></p>
+
+  <p><%= f.label :zip %></p>
+  <p><%= f.text_field :zip, value: user.zip %></p>
+
+  <p><%= f.label :email %></p>
+  <p><%= f.email_field :email, value: user.email %></p>
+
+  <p><%= submit_tag button_text %></p>
+<% end %>

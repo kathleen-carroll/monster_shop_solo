@@ -1,0 +1,8 @@
+<h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
+<section class="grid-container">
+  <% @merchant.active_items.each do |item| %>
+  <section class = "grid-item" id= 'item-<%=item.id%>'>
+    <%= render partial: '/partials/item_info', locals: {item: item, path: item_path(item.id)} %>
+  </section>
+  <% end %>
+</section>

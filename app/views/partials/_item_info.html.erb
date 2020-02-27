@@ -1,0 +1,6 @@
+      <h2> <%=link_to item.name, path %> </h2>
+      <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
+      <%= link_to image_tag(item.image), "/items/#{item.id}", id: "image-#{item.id}" %>
+      <p> <%= item.description %> </p>
+      <p>Price: <%=number_to_currency(item.price) %> </p>
+      <p>Inventory: <%= item.inventory %> </p>
