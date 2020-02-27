@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "As a merchant employee" do
-  xit "can see all my items with info and deactivate the item" do
+  xit "I can deactivate an item" do
     merchant = create(:random_merchant)
     merchant2 = create(:random_merchant)
     user = create(:merchant_user, merchant: merchant)
@@ -13,29 +13,6 @@ RSpec.describe "As a merchant employee" do
 
     visit "/merchant/items"
 
-    #move this logic to an index_spec
-    within("#item-#{item1.id}") do
-      expect(page).to have_content(item1.name)
-      expect(page).to have_content(item1.description)
-      expect(page).to have_content(item1.price)
-      expect(page).to have_css("img[src*='#{item1.image}']")
-      expect(page).to have_content("Active")
-      expect(page).to have_content(item1.inventory)
-    end
-
-    #move this logic to an index_spec
-    within("#item-#{item2.id}") do
-      expect(page).to have_content(item2.name)
-      expect(page).to have_content(item2.description)
-      expect(page).to have_content(item2.price)
-      expect(page).to have_css("img[src*='#{item2.image}']")
-      expect(page).to have_content("Active")
-      expect(page).to have_content(item2.inventory)
-    end
-
-    #move this logic to an index_spec
-    expect(page).to_not have_css("#item-#{item3.id}")
-
     within("#item-#{item1.id}") { click_link "Deactivate" }
     expect(current_path).to eq("/merchant/items")
     expect(page).to have_content("#{item1.name} is no longer for sale.")
@@ -43,7 +20,7 @@ RSpec.describe "As a merchant employee" do
     within("#item-#{item2.id}") { expect(page).to have_content("Active") }
   end
 
-  xit "can activate item" do
+  xit "I can activate an item" do
     merchant = create(:random_merchant)
     merchant2 = create(:random_merchant)
     user = create(:merchant_user, merchant: merchant)
