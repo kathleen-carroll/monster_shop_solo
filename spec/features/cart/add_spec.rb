@@ -42,7 +42,7 @@ RSpec.describe 'Cart creation' do
       @pen.update(active?: false)
       click_on "Add To Cart"
 
-      expect(page).to have_content("Entry error, #{@pen.name} is an deactivated item!")
+      expect(page).to have_content("#{@pen.name} is no longer available.")
       expect(current_path).to eq("/items")
 
       within 'nav' do
