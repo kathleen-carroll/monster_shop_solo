@@ -31,4 +31,8 @@ class Merchant <ApplicationRecord
     items.where(active?: true).order(:id)
   end
 
+  def pending_orders
+    orders.where("orders.status = 1").distinct
+  end
+
 end
