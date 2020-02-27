@@ -16,7 +16,7 @@ class Merchant::ItemsController < Merchant::BaseController
     require_merchant_employee
     if @item.save
       flash[:success] = "#{@item.name} has been saved."
-      redirect_to "/merchants/#{merchant.id}/items"
+      redirect_to "/merchant/items"
     else
       flash[:error] = @item.errors.full_messages.to_sentence
       render :new
