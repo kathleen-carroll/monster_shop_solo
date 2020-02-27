@@ -12,7 +12,6 @@ Rails.application.routes.draw do
 
   resources :merchants
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'
-  # post '/merchants/:merchant_id/items', to: 'items#create'
 
   resources :items, only: %i[index show] do
     resources :reviews, only: %i[new create]
@@ -21,8 +20,8 @@ Rails.application.routes.draw do
   namespace :profile do
     get '/', to: 'users#show'
     get '/edit', to: 'users#edit'
-    get '/edit/pw', to: 'users#edit_pw'
     patch '/user', to: 'users#update'
+    get '/edit/pw', to: 'security#edit'
     patch '/user/pw', to: 'security#update'
     resources :orders, only: [:index, :show, :new, :create, :update]
   end

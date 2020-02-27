@@ -18,10 +18,6 @@ class Profile::UsersController < Profile::BaseController
     end
   end
 
-  def edit_pw
-    @user = current_user
-  end
-
   private
 
   def require_user

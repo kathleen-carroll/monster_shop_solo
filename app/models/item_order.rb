@@ -12,6 +12,14 @@ class ItemOrder <ApplicationRecord
       .where("items.merchant_id = #{id}")
   end
 
+  def self.total
+    sum("item_orders.quantity * item_orders.price")
+  end
+
+  def self.item_count
+    sum(:quantity)
+  end
+
   def subtotal
     price * quantity
   end
