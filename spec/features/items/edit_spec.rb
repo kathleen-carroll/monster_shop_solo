@@ -95,7 +95,8 @@ RSpec.describe "As a Merchant" do
         fill_in 'Image', with: "image"
         fill_in 'Inventory', with: "string"
 
-        click_on "Update Item"
+        click_on "Update Item
+"
 
         expect(page).to have_content("Inventory is not a number")
       end
