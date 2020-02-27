@@ -28,10 +28,10 @@ class Admin::MerchantsController < Admin::BaseController
     merchant.toggle!(:active?)
     if !merchant.active?
       merchant.items.update_all(active?: false)
-      flash[:notice] = "#{merchant.name} has been deactivated."
+      flash[:success] = "#{merchant.name} has been deactivated."
     else
       merchant.items.update_all(active?: true)
-      flash[:notice] = "#{merchant.name} has been activated."
+      flash[:success] = "#{merchant.name} has been activated."
     end
     redirect_to admin_merchants_path
   end
