@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'cart#show'
   delete '/cart', to: 'cart#empty'
   delete '/cart/:item_id', to: 'cart#remove_item'
-  patch '/cart/:item_id', to: 'cart#edit_quantity'
+  patch '/cart/:item_id', to: 'cart#edit'
 
   resources :orders, only: [:new, :create, :show]
 end
