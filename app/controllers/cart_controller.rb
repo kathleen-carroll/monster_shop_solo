@@ -29,15 +29,7 @@ class CartController < ApplicationController
 
   def edit
     return remove_item if cart.edit_quantity(params) == 0
-
     redirect_to '/cart'
-    # if params[:value] == "add"
-    #   cart.contents[item.id.to_s] += 1 if item.inventory != cart.contents[item.id.to_s]
-    # elsif params[:value] == "sub"
-    #   cart.contents[item.id.to_s] -= 1
-    #   return remove_item if cart.contents[item.id.to_s] == 0
-    # end
-
   end
 
   private
