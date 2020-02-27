@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :cart, 
-                :current_user, 
-                :current_admin?, 
-                :current_merchant?, 
+  helper_method :cart,
+                :current_user,
+                :current_admin?,
+                :current_merchant?,
                 :current_merchant_employee?,
                 :current_merchant_employee_for_item?
 
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_merchant_employee?
-    current_merchant? && current_user.merchant_id == @merchant.id
+    @merchant && current_merchant? && current_user.merchant_id == @merchant.id
   end
 
   def current_merchant_employee_for_item?

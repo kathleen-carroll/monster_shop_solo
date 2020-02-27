@@ -36,7 +36,6 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@tire.name)
         expect(page).to have_content(@tire.description)
         expect(page).to have_content("Price: $#{@tire.price}")
-        expect(page).to have_content("Active")
         expect(page).to have_content("Inventory: #{@tire.inventory}")
         expect(page).to have_link(@meg.name)
         expect(page).to have_css("img[src*='#{@tire.image}']")
@@ -46,7 +45,6 @@ RSpec.describe "Items Index Page" do
         expect(page).to have_link(@pull_toy.name)
         expect(page).to have_content(@pull_toy.description)
         expect(page).to have_content("Price: $#{@pull_toy.price}")
-        expect(page).to have_content("Active")
         expect(page).to have_content("Inventory: #{@pull_toy.inventory}")
         expect(page).to have_link(@brian.name)
         expect(page).to have_css("img[src*='#{@pull_toy.image}']")
@@ -79,50 +77,28 @@ RSpec.describe "Items Index Page" do
 
       visit '/items'
 
-      within("#most_popular") do
-        within("#top-1") do
-          expect(page).to have_link(item1.name)
-          expect(page).to have_content("Total amount ordered: #{item1.quantity_bought}")
-        end
-        within("#top-2") do
-          expect(page).to have_link(item2.name)
-          expect(page).to have_content("Total amount ordered: #{item2.quantity_bought}")
-        end
-        within("#top-3") do
-          expect(page).to have_link(item3.name)
-          expect(page).to have_content("Total amount ordered: #{item3.quantity_bought}")
-        end
-        within("#top-4") do
-          expect(page).to have_link(item4.name)
-          expect(page).to have_content("Total amount ordered: #{item4.quantity_bought}")
-        end
-        within("#top-5") do
-          expect(page).to have_link(item5.name)
-          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
-        end
-      end
+      within("#statistics") do
+        within("#top-1") { expect(page).to have_link(item1.name) }
+        within("#top-quantity-1") { expect(page).to have_content(item1.quantity_bought) }
+        within("#top-2") { expect(page).to have_link(item2.name) }
+        within("#top-quantity-2") { expect(page).to have_content(item2.quantity_bought) }
+        within("#top-3") { expect(page).to have_link(item3.name) }
+        within("#top-quantity-3") { expect(page).to have_content(item3.quantity_bought) }
+        within("#top-4") { expect(page).to have_link(item4.name) }
+        within("#top-quantity-4") { expect(page).to have_content(item4.quantity_bought) }
+        within("#top-5") { expect(page).to have_link(item5.name) }
+        within("#top-quantity-5") { expect(page).to have_content(item5.quantity_bought) }
 
-      within("#least_popular") do
-        within("#bottom-1") do
-          expect(page).to have_link(@tire.name)
-          expect(page).to have_content("Total amount ordered: #{@tire.quantity_bought}")
-        end
-        within("#bottom-2") do
-          expect(page).to have_link(@pull_toy.name)
-          expect(page).to have_content("Total amount ordered: #{@pull_toy.quantity_bought}")
-        end
-        within("#bottom-3") do
-          expect(page).to have_link(item7.name)
-          expect(page).to have_content("Total amount ordered: #{item7.quantity_bought}")
-        end
-        within("#bottom-4") do
-          expect(page).to have_link(item6.name)
-          expect(page).to have_content("Total amount ordered: #{item6.quantity_bought}")
-        end
-        within("#bottom-5") do
-          expect(page).to have_link(item5.name)
-          expect(page).to have_content("Total amount ordered: #{item5.quantity_bought}")
-        end
+        within("#bottom-1") { expect(page).to have_link(@tire.name) }
+        within("#bottom-quantity-1") { expect(page).to have_content(@tire.quantity_bought) }
+        within("#bottom-2") { expect(page).to have_link(@pull_toy.name) }
+        within("#bottom-quantity-2") { expect(page).to have_content(@pull_toy.quantity_bought) }
+        within("#bottom-3") { expect(page).to have_link(item7.name) }
+        within("#bottom-quantity-3") { expect(page).to have_content(item7.quantity_bought) }
+        within("#bottom-4") { expect(page).to have_link(item6.name) }
+        within("#bottom-quantity-4") { expect(page).to have_content(item6.quantity_bought) }
+        within("#bottom-5") { expect(page).to have_link(item5.name) }
+        within("#bottom-quantity-5") { expect(page).to have_content(item5.quantity_bought) }
       end
     end
   end

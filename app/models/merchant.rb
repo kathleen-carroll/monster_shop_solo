@@ -26,4 +26,8 @@ class Merchant <ApplicationRecord
     item_orders.joins(:order).order('orders.city asc').distinct.pluck('orders.city')
   end
 
+  def active_items
+    items.where(active?: true).order(:id)
+  end
+
 end

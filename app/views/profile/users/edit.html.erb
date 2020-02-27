@@ -1,14 +1,5 @@
 <div class="userInfo">
-<%= render partial: '/profile/user_data_form', locals: { user: @user, 
+<%= render partial: '/partials/user_data_form', locals: { user: @user,
                                                method: :patch,
-                                               button_text: 'Update Profile',
-                                               pre_fill: {
-                                                 name: @user.name,
-                                                 address: @user.address,
-                                                 city: @user.city,
-                                                 state: @user.state,
-                                                 zip: @user.zip,
-                                                 role: @user.role,
-                                                 email: @user.email
-                                               }} %>
+                                               button_text: 'Update Profile'} %>
 </div>
