@@ -27,7 +27,7 @@
         <td id="top-<%= index + 1 %>"><%= link_to pop.name, item_path(pop.id) %></td>
         <td id="top-quantity-<%= index + 1 %>"><%= pop.quantity_bought %></td>
         <td><%= index + 1 %><td>
-        <td id="bottom-<%= index + 1 %>"><%= link_to unpop.name, item_path(unpop.id) %> %></td>
+        <td id="bottom-<%= index + 1 %>"><%= link_to unpop.name, item_path(unpop.id) %></td>
         <td id="bottom-quantity-<%= index + 1 %>"><%= unpop.quantity_bought %></td>
       </tr>
     <% end %>

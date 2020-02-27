@@ -5,10 +5,10 @@ class CartController < ApplicationController
     item = Item.find(params[:item_id])
     if item.active?
       cart.add_item(item.id.to_s)
-      flash[:success] = "#{item.name} was successfully added to your cart"
+      flash[:success] = "#{item.name} was successfully added to your cart."
       redirect_to "/items"
     else
-      flash[:error] = "Entry error, #{item.name} is an deactivated item!"
+      flash[:error] = "#{item.name} is no longer available."
       redirect_to "/items"
     end
   end

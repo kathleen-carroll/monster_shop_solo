@@ -25,8 +25,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete(:cart)
     session.delete(:user_id)
+    session.delete(:cart)
     flash[:success] = "You are now logged out."
     redirect_to "/"
   end
@@ -35,13 +35,13 @@ class SessionsController < ApplicationController
 
   def welcome(user)
     if current_admin?
-      flash[:success] = "Welcome Admin #{user.email}! You are logged in."
+      flash[:success] = "Welcome Admin #{user.name}! You are logged in."
       redirect_to "/admin"
     elsif current_merchant?
-      flash[:success] = "Welcome Merchant #{user.email}! You are logged in."
+      flash[:success] = "Welcome Merchant #{user.name}! You are logged in."
       redirect_to "/merchant"
     else
-      flash[:success] = "Welcome #{user.email}! You are logged in."
+      flash[:success] = "Welcome #{user.name}! You are logged in."
       redirect_to profile_path
     end
   end
