@@ -7,7 +7,7 @@ class CartController < ApplicationController
       cart.add_item(item.id.to_s)
       flash[:success] = "#{item.name} was successfully added to your cart"
       redirect_to "/items"
-    else 
+    else
       flash[:error] = "Entry error, #{item.name} is an deactivated item!"
       redirect_to "/items"
     end
@@ -27,26 +27,18 @@ class CartController < ApplicationController
     redirect_to '/cart'
   end
 
-  def edit_quantity
-    item = Item.find(params[:item_id].to_i)
-    if params[:value] == "add"
-      cart.contents[item.id.to_s] += 1 if item.inventory != cart.contents[item.id.to_s]
-    elsif params[:value] == "sub"
-      cart.contents[item.id.to_s] -= 1
-      return remove_item if cart.contents[item.id.to_s] == 0
-    end
-    redirect_to '/cart'
-  end
+  def edit
+    return remove_item if cart.edit_quantity(params) == 0
 
-  # def increment_decrement
-  #   if params[:increment_decrement] == "increment"
-  #     cart.add_quantity(params[:item_id]) unless cart.limit_reached?(params[:item_id])
-  #   elsif params[:increment_decrement] == "decrement"
-  #     cart.subtract_quantity(params[:item_id])
-  #     return remove_item if cart.quantity_zero?(params[:item_id])
-  #   end
-  #   redirect_to "/cart"
-  # end
+    redirect_to '/cart'
+    # if params[:value] == "add"
+    #   cart.contents[item.id.to_s] += 1 if item.inventory != cart.contents[item.id.to_s]
+    # elsif params[:value] == "sub"
+    #   cart.contents[item.id.to_s] -= 1
+    #   return remove_item if cart.contents[item.id.to_s] == 0
+    # end
+
+  end
 
   private
 

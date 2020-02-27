@@ -32,4 +32,32 @@ class Cart
     end
   end
 
+  def edit_quantity(params)
+    item = Item.find(params[:item_id].to_i)
+    if params[:value] == "add"
+      contents[params[:item_id]] += 1 unless inventory_limit?("max", item)#item.inventory != contents[item.id.to_s]
+    elsif params[:value] == "sub"
+      contents[params[:item_id]] -= 1
+      return 0 if inventory_limit?("min", item) #contents[item.id.to_s] == 0
+    end
+  end
+
+  def inventory_limit?(level, item)
+    if level == "max"
+      item.inventory == contents[item.id.to_s]
+    elsif level == "min"
+      contents[item.id.to_s] == 0
+    end
+  end
+
+  # def increment_decrement
+  #   if params[:increment_decrement] == "increment"
+  #     cart.add_quantity(params[:item_id]) unless cart.limit_reached?(params[:item_id])
+  #   elsif params[:increment_decrement] == "decrement"
+  #     cart.subtract_quantity(params[:item_id])
+  #     return remove_item if cart.quantity_zero?(params[:item_id])
+  #   end
+  #   redirect_to "/cart"
+  # end
+
 end
