@@ -29,16 +29,16 @@ BE Mod 2 Week 4/5 Group Project
 `rake db:{drop,create,migrate,seed}`
 
 ### Merchants
-![image](https://files.slack.com/files-pri/T029P2S9M-FUP6YNHAB/screen_shot_2020-02-27_at_8.11.02_pm.png)
-![image](https://files.slack.com/files-pri/T029P2S9M-FUMB1PUQ0/screen_shot_2020-02-27_at_8.11.51_pm.png)
+![merchant index](https://files.slack.com/files-pri/T029P2S9M-FUP6YNHAB/screen_shot_2020-02-27_at_8.11.02_pm.png)
+![merchant show](https://files.slack.com/files-pri/T029P2S9M-FUMB1PUQ0/screen_shot_2020-02-27_at_8.11.51_pm.png)
 Merchants are stores that carry items.
 - index shows all merchants
 - show page shows information for a single merchant
 - can be activated/deactivated by administrator
 
 ### Items
-![image](https://files.slack.com/files-pri/T029P2S9M-FULT4DJ3W/screen_shot_2020-02-27_at_8.13.09_pm.png)
-![image](https://files.slack.com/files-pri/T029P2S9M-FU8H9F5PC/screen_shot_2020-02-27_at_8.12.35_pm.png)
+![item index](https://files.slack.com/files-pri/T029P2S9M-FULT4DJ3W/screen_shot_2020-02-27_at_8.13.09_pm.png)
+![item show](https://files.slack.com/files-pri/T029P2S9M-FU8H9F5PC/screen_shot_2020-02-27_at_8.12.35_pm.png)
 Items belong to merchants, and can be added to the cart.
 - items can be deactivated by merchant employees and admins
   - deactivated items will not show up in the items index
@@ -62,7 +62,8 @@ Items belong to merchants, and can be added to the cart.
   - Access user information
   - Cannot place orders
   - See all orders, ship and cancel orders
-  ![](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FQuCiMbc7FWAy2bxWUO%2Fgiphy.gif)
+  
+  ![admin control](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FQuCiMbc7FWAy2bxWUO%2Fgiphy.gif)
   
 
 ### Orders
