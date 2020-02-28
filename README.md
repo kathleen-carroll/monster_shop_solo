@@ -1,11 +1,18 @@
 # Monster Shop - Turing Back End Engineering, Module 2, Group Project
-## Heroku Link: https://monster-shop-dreamteam.herokuapp.com/
-## Schema Design: https://dbdiagram.io/d/5e4c68d49e76504e0ef19d9d
+### Heroku Link
+https://monster-shop-dreamteam.herokuapp.com/
 
-## Jordan Williams Github: https://github.com/iEv0lv3
-## David Atkins Github: https://github.com/d-atkins
-## Kathleen Carroll Github: https://github.com/kathleen-carroll
-## Raymond Nguyen Github:https://github.com/itemniner
+### Schema Design
+https://dbdiagram.io/d/5e4c68d49e76504e0ef19d9d
+
+### Contributors
+[Jordan Williams](https://github.com/iEv0lv3)
+
+[David Atkins](https://github.com/d-atkins)
+
+[Kathleen Carroll](https://github.com/kathleen-carroll)
+
+[Raymond Nguyen](https://github.com/itemniner)
 
 ### Overview:
 Monster Shop is an ecommerce website that allows you to browse through merchants and their items. This website allows admin, merchant, user and visitor access.
