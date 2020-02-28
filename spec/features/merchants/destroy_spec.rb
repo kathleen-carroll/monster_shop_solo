@@ -2,27 +2,19 @@ require 'rails_helper'
 
 RSpec.describe "As a visitor" do
   describe "When I visit a merchant show page" do
-    it "I can delete a merchant" do
+    it "I can't delete a merchant" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Richmond', state: 'VA', zip: 80203)
 
       visit "merchants/#{bike_shop.id}"
-
-      click_on "Delete Merchant"
-
-      expect(current_path).to eq('/merchants')
-      expect(page).to_not have_content("Brian's Bike Shop")
+      expect(page).to_not have_content("Delete Merchant")
     end
 
-    it "I can delete a merchant that has items" do
+    it "I can't delete a merchant that has items" do
       bike_shop = Merchant.create(name: "Brian's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
 
       visit "merchants/#{bike_shop.id}"
-
-      click_on "Delete Merchant"
-
-      expect(current_path).to eq('/merchants')
-      expect(page).to_not have_content("Brian's Bike Shop")
+      expect(page).to_not have_link("Delete Merchant")
     end
 
     it "I can't delete a merchant that has orders" do
@@ -46,7 +38,7 @@ RSpec.describe "As a visitor" do
 
       user = create(:regular_user)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-      
+
       visit "/cart"
       click_on "Checkout"
 
@@ -66,9 +58,6 @@ RSpec.describe "As a visitor" do
 
       visit "/merchants/#{meg.id}"
       expect(page).to_not have_link("Delete Merchant")
-
-      # visit "/merchants/#{brian.id}"
-      # expect(page).to have_link("Delete Merchant")
     end
   end
 end

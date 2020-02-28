@@ -1,7 +1,17 @@
-<% @users.each do |user|  %>
-  <section id="user_<%= user.id %>">
-    <p><%= link_to user.name, admin_user_path(user) %></p>
-    <p><%= user.created_at.to_formatted_s(:long) %></p>
-    <p><%= user.role %></p>
-  </section>
-<% end %>
+<h1 align = "center">Users</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Created</th>
+    <th>Role</th>
+  </tr>
+  <% @users.each do |user|  %>
+    <section id="user_<%= user.id %>">
+      <tr>
+        <th><p><%= link_to user.name, admin_user_path(user) %></p></th>
+        <th><p><%= user.created_at.to_formatted_s(:long) %></p></th>
+        <th><p><%= user.role %></p></th>
+      </tr>
+    </section>
+  <% end %>
+</table>

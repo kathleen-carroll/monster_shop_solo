@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
 
-  resources :merchants
+  resources :merchants, except: [:destroy]
   get '/merchants/:merchant_id/items', to: 'merchant_items#index'
 
   resources :items, only: %i[index show] do
