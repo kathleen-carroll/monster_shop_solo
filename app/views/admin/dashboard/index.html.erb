@@ -1,15 +1,27 @@
 <div class="adminDashboardContainer">
   <section class="activeOrders">
-    <% @orders.by_status.each do |order| %>
-      <div id="order_<%= order.id %>">
-        <p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p>
-        <p><%= link_to order.id, "/admin/users/#{order.user.id}/orders/#{order.id}" %></p>
-        <p><%= order.status  %></p>
-        <p><%= order.created_at.to_formatted_s(:long) %></p>
-        <% if order.status == 'packaged' %>
-          <%= link_to 'Ship Order', "/admin/orders/#{order.id}", method: :patch %>
-        <% end %>
-      </div>
-    <% end %>
+    <h1 align = "center">Order Info</h1>
+    <center>
+      <table>
+        <tr>
+          <th>Recipient Name</th>
+          <th>Order #</th>
+          <th>Placed</th>
+          <th>Status</th>
+        </tr>
+        <% @orders.by_status.each do |order| %>
+        <div id="order_<%= order.id %>">
+          <tr>
+            <td><p><%= link_to "#{order.user.name}", "/admin/users/#{order.user.id}" %></p></td>
+            <td>Order#<%= link_to order.id, "/admin/users/#{order.user.id}/orders/#{order.id}" %></td>
+            <td><p><%= order.status  %></p></td>
+            <td><p><%= order.created_at.to_formatted_s(:long) %></p></td>
+            <td><% if order.status == 'packaged' %>
+              <%= link_to 'Ship Order', "/admin/orders/#{order.id}", method: :patch %>
+            <% end %></td>
+          </tr>
+        </div>
+      <% end %>
+    </table>
   </section>
 </div>
