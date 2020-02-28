@@ -1,19 +1,33 @@
-#Monster Shop - Turing Back End Engineering, Module 2, Group Project
-##Heroku App: https://monster-shop-dreamteam.herokuapp.com/
-##Schema Design:
+# Monster Shop - Turing Back End Engineering, Module 2, Group Project<br>
+## Heroku App: https://monster-shop-dreamteam.herokuapp.com/
+## Schema Design: https://dbdiagram.io/d/5e4c68d49e76504e0ef19d9d
 
-##Jordan Williams Github: https://github.com/iEv0lv3
-##David Atkins Github: https://github.com/d-atkins
-##Kathleen Carroll Github: https://github.com/kathleen-carroll
-##Raymond Nguyen Github:https://github.com/itemniner
+## Jordan Williams Github: https://github.com/iEv0lv3
+## David Atkins Github: https://github.com/d-atkins
+## Kathleen Carroll Github: https://github.com/kathleen-carroll
+## Raymond Nguyen Github:https://github.com/itemniner
 # Monster Shop
+Students will be put into 3 or 4 person groups to complete the project.\n
+
+
+Implementation instructions:
+
+### Overview:
+Monster Shop is a mock-up ecommerced website that allows you to browse through merchants and their items. This website explores admin, merchant, user and visitor UI and access. 
+
+As a visitor, you can visit the app and explore merchants, merchant items and add items to your cart. Then you must register to checkout.
+
+As a user, you are generated a profile with the given email and password and your information is saved in the user database. Your information can be edited at anytime. You now have access to checkout out items in your cart, view orders or continue shopping. 
+
+As a merchant employee, you are generated a dashboard in which you can see the merchant you are employed to and your user information which you can edit at anytime. You now have access to fulfill orders, create items, delete items, and view orders placed by your merchant.
+
+As an administrator, you are generated a admin dashboard 
+
 BE Mod 2 Week 4/5 Group Project
 
 ## Background and Description
 
 "Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will automatically set the order status to "shipped". Each user role will have access to some or all CRUD functionality for application models.
-
-Students will be put into 3 or 4 person groups to complete the project.\n
 
 ## Learning Goals
 
