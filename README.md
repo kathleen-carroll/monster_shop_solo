@@ -1,27 +1,22 @@
-# Monster Shop - Turing Back End Engineering, Module 2, Group Project<br>
-## Heroku App: https://monster-shop-dreamteam.herokuapp.com/
+# Monster Shop - Turing Back End Engineering, Module 2, Group Project
+## Heroku Link: https://monster-shop-dreamteam.herokuapp.com/
 ## Schema Design: https://dbdiagram.io/d/5e4c68d49e76504e0ef19d9d
 
 ## Jordan Williams Github: https://github.com/iEv0lv3
 ## David Atkins Github: https://github.com/d-atkins
 ## Kathleen Carroll Github: https://github.com/kathleen-carroll
 ## Raymond Nguyen Github:https://github.com/itemniner
-# Monster Shop
-Students will be put into 3 or 4 person groups to complete the project.\n
-
-
-Implementation instructions:
 
 ### Overview:
-Monster Shop is a mock-up ecommerce website that allows you to browse through merchants and their items. This website explores admin, merchant, user and visitor UI and access.
+Monster Shop is an ecommerce website that allows you to browse through merchants and their items. This website allows admin, merchant, user and visitor access.
 
-As a visitor, you can visit the app and explore merchants, merchant items and add items to your cart. Then you must register to checkout.
+A visitor can visit the site to browse shops and their items. Items can be added to the cart. A visitor must login or register to checkout.
 
-As a user, you are generated a profile with the given email and password and your information is saved in the user database. Your information can be edited at anytime. You now have access to checkout out items in your cart, view orders or continue shopping.
+A regular user has a profile displaying their information, which is saved in the database. This information can be edited at any time. Users have access to checkout items from the cart, view orders, or continue shopping.
 
-As a merchant employee, you are generated a dashboard in which you can see the merchant you are employed to and your user information which you can edit at anytime. You now have access to fulfill orders, create items, delete items, and view orders placed by your merchant.
+A merchant employee has access to the merchant dashboard which gives access to fulfill orders, create items, delete items, and view orders placed for items sold by the merchant.
 
-As an administrator, you are generated a admin dashboard
+An administrator has access to the admin dashboard, which allows for CRUD functionality across all items, merchants, and users.
 
 BE Mod 2 Week 4/5 Group Project
 
@@ -37,13 +32,10 @@ BE Mod 2 Week 4/5 Group Project
 Merchants are stores that carry items.
 - can be activated/deactivated by administrator
 
-
-
 ### Items
 Items belong to merchants, and can be added to the cart.
 - Items can be deactivated by merchant employees and admins
   - deactivated items will not show up in the items index
-
 
 ### Users
 1. Visitor - this type of user is anonymously browsing our site and is not logged in. Permissions for visitors:
