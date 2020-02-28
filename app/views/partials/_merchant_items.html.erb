@@ -1,0 +1,23 @@
+<h1>My Items - <%= link_to "#{merchant_name}", "#{items_path}" %></h1>
+<p align="center"><%= link_to "Add New Item", "#{new_item_path}/new" %></p>
+
+<section class="grid-container">
+  <% @merchant.items.each do |item| %>
+    <section class = "grid-item" id= 'item-<%=item.id%>'>
+      <%= render partial: '/partials/item_info', locals: {item: item, path: "#{items_path}/#{item.id}"}%>
+      <% if item.active? %>
+        <p>
+          Active -
+          <%= link_to "Deactivate", "#{items_path}/#{item.id}/toggle", method: :patch %>
+        </p>
+      <% else %>
+        <p>
+          Inactive -
+          <%= link_to "Activate", "#{items_path}/#{item.id}/toggle", method: :patch %>
+        </p>
+      <% end %>
+      <%= link_to "Edit", "#{items_path}/#{item.id}/edit", method: :get %>
+      <%= link_to "Delete", "#{items_path}/#{item.id}", method: :delete %>
+    </section>
+  <% end %>
+</section>
