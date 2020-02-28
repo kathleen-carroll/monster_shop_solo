@@ -1,11 +1,11 @@
-#Monster Shop - Turing Back End Engineering, Module 2, Group Project
-##Heroku App: https://monster-shop-dreamteam.herokuapp.com/
-##Schema Design:
+# Monster Shop - Turing Back End Engineering, Module 2, Group Project<br>
+## Heroku App: https://monster-shop-dreamteam.herokuapp.com/
+## Schema Design:
 
-##Jordan Williams Github: https://github.com/iEv0lv3
-##David Atkins Github: https://github.com/d-atkins
-##Kathleen Carroll Github: https://github.com/kathleen-carroll
-##Raymond Nguyen Github:https://github.com/itemniner
+## Jordan Williams Github: https://github.com/iEv0lv3
+## David Atkins Github: https://github.com/d-atkins
+## Kathleen Carroll Github: https://github.com/kathleen-carroll
+## Raymond Nguyen Github:https://github.com/itemniner
 # Monster Shop
 BE Mod 2 Week 4/5 Group Project
 
