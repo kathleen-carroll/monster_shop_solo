@@ -46,11 +46,23 @@ Items belong to merchants, and can be added to the cart.
 
 
 ### Users
-There are four kinds of users:
-- Visitors
-- Regular users
-- Merchant employees
-- Administrator
+1. Visitor - this type of user is anonymously browsing our site and is not logged in. Permissions for visitors:
+  - access to merchants and items with ability to add items to cart.  Visitor must log in to checkout.
+  - can not access any pages outside of merchant and item shopping sites
+  - no profile information
+2. Regular User - this user is registered and logged in to the application while performing their work; can place items in a cart and create an order. Permissions for regular user:
+  - same access as visitor
+  - can edit profile information, can update password information, can place orders and cancel orders
+3. Merchant Employee - this user works for a merchant. They can fulfill orders on behalf of their merchant. They also have the same permissions as a regular user (adding items to a cart and checking out). Permissions for merchant employees:
+  - Merchants can fulfill orders
+  - Add, edit, delete, and update items
+  - Update merchant store information
+  - Place orders
+4. Admin User - a registered user who has "superuser" access to all areas of the application; user is logged in to perform their work
+  - Access to all merchants and ability to disable or enable
+  - Access user information
+  - Cannot place orders
+  - See all orders, ship and cancel orders
 
 ### Orders
 Orders can be made by regular users and merchant users when items are added to the cart.
