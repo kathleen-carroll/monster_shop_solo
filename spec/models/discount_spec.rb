@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Discount, type: :model do
   describe 'validations' do
     it { should validate_presence_of :name }
-    it { should validate_presence_of :threshold }
+    it { should validate_presence_of :item_count }
     it { should validate_presence_of :percent }
   end
 
