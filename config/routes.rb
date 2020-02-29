@@ -32,6 +32,14 @@ Rails.application.routes.draw do
     get '/users/:id/orders/:id', to: 'user_orders#show'
     patch '/users/:id/orders/:id', to: 'user_orders#update'
     get '/merchants/:id/orders/:id', to: 'merchant_orders#show'
+    get '/merchants/:id/items', to: 'merchant_items#index'
+    get '/merchants/:id/items/new', to: 'merchant_items#new'
+    post '/merchants/:id/items', to: 'merchant_items#create'
+    get '/merchants/:id/items/:id', to: 'merchant_items#show'
+    get '/merchants/:id/items/:id/edit', to: 'merchant_items#edit'
+    patch '/merchants/:id/items/:id', to: 'merchant_items#update'
+    delete '/merchants/:id/items/:id', to: 'merchant_items#destroy'
+    patch '/merchants/:id/items/:id/toggle', to: 'toggle_items#update'
     resources :users, only: %i[index show]
     resources :orders, only: [:update]
     resources :merchants, only: %i[index show update]
