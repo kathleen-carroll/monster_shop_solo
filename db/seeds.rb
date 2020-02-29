@@ -21,6 +21,7 @@ jw = Merchant.create(name: "Jordan's Jams and Jams", address: '123 Fruit Loop St
 davids = Merchant.create(name: "David's Donuts", address: '123 Dunking Donuts Dr', city: 'Denver', state: 'CO', zip: 80222)
 kats = Merchant.create(name: "Kathleen's Knits", address: '123 Pumpkin St', city: 'Denver', state: 'CO', zip: 80972)
 
+#discounts
 jw.discounts.create(name: 'Fiver', item_count: 20, percent: 5 )
 jw.discounts.create(name: 'Tenner', item_count: 40, percent: 10 )
 
