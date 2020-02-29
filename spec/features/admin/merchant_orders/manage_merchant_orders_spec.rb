@@ -9,6 +9,7 @@ RSpec.describe 'As an admin', type: :feature do
     @item1 = create(:random_item, merchant: @merchant)
     @item2 = create(:random_item, merchant: @merchant)
     @item3 = create(:random_item, merchant: @merchant)
+    @item4 = create(:random_item, merchant: @merchant)
     @order1 = create(:random_order)
     @order2 = create(:random_order)
     @order3 = create(:random_order)
@@ -20,14 +21,14 @@ RSpec.describe 'As an admin', type: :feature do
   describe "I visit a merchant's dashboard and click link 'My Items'" do
     it 'I see all item details the merchant would see' do
       visit "/admin/merchants/#{@merchant.id}/items"
-      save_and_open_page
+
       within("#item-#{@item1.id}") do
         expect(page).to have_link(@item1.name)
         expect(page).to have_link(@merchant.name)
         expect(page).to have_link('Delete')
         expect(page).to have_link('Edit')
         expect(page).to have_link('Deactivate')
-        expect(page).to have_content('Activate')
+        expect(page).to have_content('Active')
         expect(page).to have_content(@item1.inventory)
         expect(page).to have_content(@item1.price)
         expect(page).to have_content(@item1.description)
@@ -39,7 +40,7 @@ RSpec.describe 'As an admin', type: :feature do
         expect(page).to have_link('Delete')
         expect(page).to have_link('Edit')
         expect(page).to have_link('Deactivate')
-        expect(page).to have_content('Activate')
+        expect(page).to have_content('Active')
         expect(page).to have_content(@item2.inventory)
         expect(page).to have_content(@item2.price)
         expect(page).to have_content(@item2.description)
@@ -51,14 +52,19 @@ RSpec.describe 'As an admin', type: :feature do
         expect(page).to have_link('Delete')
         expect(page).to have_link('Edit')
         expect(page).to have_link('Deactivate')
-        expect(page).to have_content('Activate')
+        expect(page).to have_content('Active')
         expect(page).to have_content(@item3.inventory)
         expect(page).to have_content(@item3.price)
         expect(page).to have_content(@item3.description)
       end
     end
+  end
 
-    it 'I can deactivate and activate items' do
+  describe 'I can activate and deactivate items' do
+    it 'I click deactivate and activate' do
+
+      visit "/admin/merchants/#{@merchant.id}/items"
+
       within("#item-#{@item1.id}") do
         click_link 'Deactivate'
       end
@@ -69,57 +75,121 @@ RSpec.describe 'As an admin', type: :feature do
         click_link 'Activate'
       end
 
-      expect(page).to have_content("#{@item1.name} is available for sale.")
+      expect(page).to have_content("#{@item1.name} is now available for sale.")
     end
 
-    it 'I can delete items' do
+    describe "When I click Delete" do
+      it 'I can delete items from the merchant' do
 
-      within("#item-#{@item3.id}") do
-        click_link 'Delete'
+        visit "/admin/merchants/#{@merchant.id}/items"
+
+        within("#item-#{@item1.id}") do
+          click_link 'Delete'
+        end
+
+        expect(page).to have_content("Cannot delete an item with orders.")
+
+        within("#item-#{@item4.id}") do
+          click_link 'Delete'
+        end
+
+        expect(page).to have_content("'#{@item4.name}' has been deleted.")
       end
-
-      expect(page).to have_content("'#{@item1.name}' has been deleted.")
     end
 
-    it 'I can edit items' do
+    describe "When I click Edit" do
+      it 'I can edit items' do
 
-      within("#item-#{@item1.id}") do
-        click_link 'Edit'
+        visit "/admin/merchants/#{@merchant.id}/items"
+
+        within("#item-#{@item1.id}") do
+          click_link 'Edit'
+        end
+
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items/#{@item1.id}/edit")
+
+        expect(page).to have_field('name', with: "#{@item1.name}")
+        expect(page).to have_field('description', with: "#{@item1.description}")
+        expect(page).to have_field('price', with: "#{@item1.price}")
+        expect(page).to have_field('image', with: "#{@item1.image}")
+        expect(page).to have_field('inventory', with: "#{@item1.inventory}")
+
+        fill_in :name, with: 'Baller Item'
+        fill_in :description, with: ''
+
+        click_button 'Update Item'
+
+        expect(page).to have_content("Description can't be blank")
+
+        fill_in :name, with: 'Baller Item'
+        fill_in :description, with: 'An item for absolute ballers'
+
+        click_button 'Update Item'
+
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items")
+
+        within("#item-#{@item1.id}") do
+          expect(page).to have_link('Baller Item')
+          expect(page).to have_link(@merchant.name)
+          expect(page).to have_link('Delete')
+          expect(page).to have_link('Edit')
+          expect(page).to have_link('Deactivate')
+          expect(page).to have_content('Active')
+          expect(page).to have_content(@item1.inventory)
+          expect(page).to have_content(@item1.price)
+          expect(page).to have_content('An item for absolute ballers')
+        end
+
+        within("#item-#{@item1.id}") do
+          @item1.reload
+          click_link "#{@item1.name}"
+        end
+
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items/#{@item1.id}")
       end
+    end
 
-      expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items/#{@item1.id}/edit")
+    describe "When I click Add Item" do
+      it 'I can add a new item to the merchant' do
 
-      within("#name") do
-        expect(page).to have_content(@item1.name)
-      end
+        visit "/admin/merchants/#{@merchant.id}/items"
 
-      within("#description") do
-        expect(page).to have_content(@item1.description)
-      end
+        click_link 'Add New Item'
 
-      within("#price") do
-        expect(page).to have_content(@item1.price)
-      end
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items/new")
 
-      within("#image") do
-        expect(page).to have_content(@item1.image.to_s)
-      end
+        fill_in :name, with: 'Dope Item'
+        fill_in :inventory, with: 200
+        fill_in :price, with: 25.00
+        fill_in :description, with: ''
+        click_button 'Create Item'
 
-      within("#inventory") do
-        expect(page).to have_content(@item1.inventory)
+        expect(page).to have_content("Description can't be blank")
+
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items")
+
+        fill_in :name, with: 'Dope Item'
+        fill_in :inventory, with: 200
+        fill_in :price, with: 25.00
+        fill_in :description, with: 'A dope item for ballers'
+        click_button 'Create Item'
+
+        expect(current_path).to eq("/admin/merchants/#{@merchant.id}/items")
+
+        new_item = Item.last
+
+        within("#item-#{new_item.id}") do
+          expect(page).to have_link(new_item.name)
+          expect(page).to have_link(@merchant.name)
+          expect(page).to have_link('Delete')
+          expect(page).to have_link('Edit')
+          expect(page).to have_link('Deactivate')
+          expect(page).to have_content('Active')
+          expect(page).to have_content(new_item.inventory)
+          expect(page).to have_content(new_item.price)
+          expect(page).to have_content(new_item.description)
+        end
       end
     end
   end
 end
-
-# User Story 61, EXTENSION: Admin can manage items on behalf of a merchant
-
-# As an admin user
-# When I visit a merchant's profile page
-# I can click on the merchant's items link
-# And have access to all functionality the merchant does, including
-# - adding new items
-# - editing existing items
-# - enabling/disabling/deleting items
-
-# All content rules still apply (eg, item name cannot be blank, etc)
