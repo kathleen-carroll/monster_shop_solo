@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 ItemOrder.destroy_all
+Discount.destroy_all
 Order.destroy_all
 Item.destroy_all
 User.destroy_all
@@ -20,6 +21,8 @@ jw = Merchant.create(name: "Jordan's Jams and Jams", address: '123 Fruit Loop St
 davids = Merchant.create(name: "David's Donuts", address: '123 Dunking Donuts Dr', city: 'Denver', state: 'CO', zip: 80222)
 kats = Merchant.create(name: "Kathleen's Knits", address: '123 Pumpkin St', city: 'Denver', state: 'CO', zip: 80972)
 
+jw.discounts.create(name: 'Fiver', item_count: 20, percent: 5 )
+jw.discounts.create(name: 'Tenner', item_count: 40, percent: 10 )
 
 #all shop items
 tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
