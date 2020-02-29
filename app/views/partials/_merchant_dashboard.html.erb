@@ -1,7 +1,8 @@
 <h1>Merchant Info</h1>
 <p>Employer: <%= @merchant.name %> </p>
 <p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
-<h1><%= link_to 'My Items', "#{items_path}" %></h1>
+<h3><%= link_to 'My Items', "#{items_path}" %></h3>
+<h3><%= link_to 'My Discounts', "#{discounts_path}" %></h3>
 
 <h1>Order Info</h1>
 <center>
