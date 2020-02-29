@@ -1,0 +1,9 @@
+<div class='discountsContainer'>
+  <% @discounts.each do |discount| %>
+    <section id="discount-<%= discount.id %>">
+      <h5><%= discount.name  %></h5>
+      <p>Items required: <%= discount.item_count %></p>
+      <p>Discount: %<%= discount.percent %></p>
+    </section>
+  <% end %>
+</div>
