@@ -23,7 +23,7 @@ RSpec.describe 'As a merchant employee', type: :feature do
 
       expect(page).to have_content(@discount1.name)
       expect(page).to have_content("Items required: #{@discount1.item_count}")
-      expect(page).to have_content("Discount: %#{@discount1.percent}")
+      expect(page).to have_content("Discount: #{@discount1.percent}%")
     end
   end
 end

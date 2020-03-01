@@ -4,7 +4,7 @@
     <section id="discount-<%= discount.id %>">
       <h3><%= link_to discount.name, merchant_discount_path(discount) %></h3>
       <p>Items required: <%= discount.item_count %></p>
-      <p>Discount: %<%= discount.percent %></p>
+      <p>Discount: <%= discount.percent %>%</p>
     </section>
   <% end %>
 </div>

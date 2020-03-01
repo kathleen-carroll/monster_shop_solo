@@ -21,13 +21,13 @@ RSpec.describe 'As a merchant employee', type: :feature do
       within("#discount-#{@discount1.id}") do
         expect(page).to have_link(@discount1.name)
         expect(page).to have_content("Items required: #{@discount1.item_count}")
-        expect(page).to have_content("Discount: %#{@discount1.percent}")
+        expect(page).to have_content("Discount: #{@discount1.percent}%")
       end
 
       within("#discount-#{@discount2.id}") do
         expect(page).to have_link(@discount2.name)
         expect(page).to have_content("Items required: #{@discount2.item_count}")
-        expect(page).to have_content("Discount: %#{@discount2.percent}")
+        expect(page).to have_content("Discount: #{@discount2.percent}%")
       end
     end
   end
