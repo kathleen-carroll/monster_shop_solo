@@ -88,6 +88,40 @@ describe ItemOrder, type: :model do
       expect(order1.item_orders.by_merchant(shop.id)).to eq([item_order1, item_order2])
       expect(order1.item_orders.by_merchant(other_shop.id)).to eq([item_order3])
     end
+
+    it "total" do
+      shop = create(:random_merchant)
+      other_shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop)
+      item2 = create(:random_item, merchant: shop)
+      item3 = create(:random_item, merchant: other_shop)
+
+      order1 = create(:random_order)
+
+      create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 3)
+      create(:random_item_order, item: item2, order: order1, price: item2.price, quantity: 7)
+      create(:random_item_order, item: item3, order: order1, price: item3.price, quantity: 12)
+
+      expect(order1.item_orders.total).to eq((item1.price * 3)+(item2.price * 7)+(item3.price * 12))
+    end
+
+    it "item_count" do
+      shop = create(:random_merchant)
+      other_shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop)
+      item2 = create(:random_item, merchant: shop)
+      item3 = create(:random_item, merchant: other_shop)
+
+      order1 = create(:random_order)
+
+      create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 3)
+      create(:random_item_order, item: item2, order: order1, price: item2.price, quantity: 7)
+      create(:random_item_order, item: item3, order: order1, price: item3.price, quantity: 12)
+
+      expect(order1.item_orders.item_count).to eq(22)
+    end
   end
 
 end

@@ -68,6 +68,7 @@ RSpec.describe 'merchant employee orders show page', type: :feature do
 
       create(:random_item_order, item: @item1, order: impossible_order, price: @item1.price, quantity: 21)
       create(:random_item_order, item: @item1, order: exact_order, price: @item1.price, quantity: 20)
+      create(:random_item_order, order: exact_order)
 
       visit "/merchant/orders/#{impossible_order.id}"
 

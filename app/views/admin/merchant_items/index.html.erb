@@ -1,0 +1,5 @@
+<%= render partial: '/partials/merchant_items', locals: {
+  new_item_path: "/admin/merchants/#{@merchant.id}/items",
+  items_path: "/admin/merchants/#{@merchant.id}/items",
+  merchant_name: @merchant.name
+} %>

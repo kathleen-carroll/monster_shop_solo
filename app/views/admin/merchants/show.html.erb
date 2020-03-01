@@ -1,1 +1,4 @@
-<%= render "/partials/merchants_show" %>
+<%= render partial: "/partials/merchant_dashboard", locals: {
+  path: "/admin/merchants/#{@merchant.id}/orders/",
+  items_path: "/admin/merchants/#{@merchant.id}/items"
+} %>

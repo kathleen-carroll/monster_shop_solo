@@ -1,25 +1,5 @@
-
-<h1>Merchant Info</h1>
-<p>Employer: <%= @merchant.name %> </p>
-<p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
-<h1><%= link_to 'My Items', '/merchant/items' %></h1>
-
-<h1>Order Info</h1>
-<center>
-  <table>
-    <tr>
-      <th>Number</th>
-      <th>Placed</th>
-      <th>Number of Items</th>
-      <th>Total Price</th>
-    </tr>
-  <% @orders.each do |order| %>
-    <tr id="item-<%= order.id %>">
-      <td><p>Order#<%= link_to order.id, "/merchant/orders/#{order.id}" %> </p></td>
-      <td><p><%= order.created_at.to_formatted_s(:long) %></p></td>
-      <td><p><%= @item_orders2[order.id] %></p></td>
-      <td><p><%= number_to_currency(@item_orders[order.id]) %></p></td>
-    </tr>
-  <% end %>
-  <%= "No orders have been placed." if @orders.nil? %>
-</table>
+<%= render partial: "/partials/merchant_dashboard", locals: {
+  path: "merchant/orders/",
+  items_path: "/merchant/items",
+  discounts_path: "/merchant/discounts"
+} %>

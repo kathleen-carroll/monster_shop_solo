@@ -36,11 +36,6 @@ class MerchantsController <ApplicationController
     end
   end
 
-  def destroy
-    Merchant.destroy(params[:id])
-    redirect_to '/merchants'
-  end
-
   private
 
   def merchant_params

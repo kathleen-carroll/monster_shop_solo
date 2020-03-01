@@ -1,0 +1,25 @@
+<h1>Merchant Info</h1>
+<p>Employer: <%= @merchant.name %> </p>
+<p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
+<h3><%= link_to 'My Items', "#{items_path}" %></h3>
+<h3><%= link_to 'My Discounts', "#{discounts_path}" %></h3>
+
+<h1>Order Info</h1>
+<center>
+  <table>
+    <tr>
+      <th>Number</th>
+      <th>Placed</th>
+      <th>Number of Items</th>
+      <th>Total Price</th>
+    </tr>
+  <% @merchant.pending_orders.each do |order| %>
+    <tr id="item-<%= order.id %>">
+      <td><p>Order#<%= link_to order.id, "#{path}#{order.id}" %> </p></td>
+      <td><p><%= order.created_at.to_formatted_s(:long) %></p></td>
+      <td><p><%= order.item_orders.by_merchant(@merchant.id).item_count %></p></td>
+      <td><p><%= number_to_currency(order.item_orders.by_merchant(@merchant.id).total) %></p></td>
+    </tr>
+  <% end %>
+  <%= "No orders have been placed." if @merchant.pending_orders.nil? %>
+</table>

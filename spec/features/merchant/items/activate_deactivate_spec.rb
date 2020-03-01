@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "As a merchant employee" do
-  xit "I can deactivate an item" do
+  it "I can deactivate an item" do
     merchant = create(:random_merchant)
     merchant2 = create(:random_merchant)
     user = create(:merchant_user, merchant: merchant)
     item1 = create(:random_item, merchant: merchant)
     item2 = create(:random_item, merchant: merchant)
-    item3 = create(:random_item, merchant: merchant2)
+    create(:random_item, merchant: merchant2)
 
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
@@ -20,7 +20,7 @@ RSpec.describe "As a merchant employee" do
     within("#item-#{item2.id}") { expect(page).to have_content("Active") }
   end
 
-  xit "I can activate an item" do
+  it "I can activate an item" do
     merchant = create(:random_merchant)
     merchant2 = create(:random_merchant)
     user = create(:merchant_user, merchant: merchant)
