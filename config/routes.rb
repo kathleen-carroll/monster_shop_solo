@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
     get '/:merchant_id/coupons', to: 'coupons#index'
+    get '/:merchant_id/coupons/:id', to: 'coupons#show'
+    get '/:merchant_id/coupons/:id/edit', to: 'coupons#edit'
   end
 
   resources :reviews, only: [:edit, :update, :destroy]
