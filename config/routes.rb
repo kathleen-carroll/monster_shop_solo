@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     get '/:merchant_id/items/new', to: 'items#new'
     post '/:merchant_id/items', to: 'items#create'
     patch '/items/:id/toggle', to: 'toggle#update'
-    resources :discounts, only: [:index]
+    resources :discounts, only: %i[index show new create update destroy]
     resources :items, only: %i[index show edit update destroy]
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
