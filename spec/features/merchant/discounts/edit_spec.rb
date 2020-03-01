@@ -41,7 +41,7 @@ RSpec.describe 'As a merchant employee', type: :feature do
       within("#discount-#{@discount1.id}") do
         expect(page).to have_content("Very Special")
         expect(page).to have_content("Items required: 35")
-        expect(page).to have_content("Discount: %5")
+        expect(page).to have_content("Discount: 5.0%")
       end
     end
   end
