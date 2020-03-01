@@ -1,6 +1,0 @@
-<h1>Available Coupons</h1>
-
-<% @coupons.each do |coupon| %>
-  <p>Coupon#<%= link_to coupon.id, "/merchant/#{coupon.merchant.id}/coupons/#{coupon.id}" %></p>
-  <p><%= coupon.name %></p>
-<% end %>
