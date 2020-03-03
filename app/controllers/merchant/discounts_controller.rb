@@ -22,6 +22,23 @@ class Merchant::DiscountsController < Merchant::BaseController
     end
   end
 
+  def new
+    merchant = current_user.merchant
+    @discount = merchant.discounts.create(discount_params)
+  end
+
+  def create
+    merchant = current_user.merchant
+    @discount = merchant.discounts.create(discount_params)
+    if @discount.save
+      flash[:success] = "#{@discount.name} has been saved."
+      redirect_to "/merchant/discounts"
+    else
+      flash.now[:error] = @discount.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
   private
 
   def discount_params
