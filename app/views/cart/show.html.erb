@@ -3,6 +3,11 @@
 <% if !@items.empty? %>
 <center>
 <h4> <%= "Please register or log in to checkout." unless current_user %></h4>
+  <% if @discounts != [] %>
+    <% @discounts.each do |discount| %>
+      <h4> <%=discount.percent%>% off when you purchase  <%=discount.item_count%> of the same item from <%= discount.merchant.name %></h4>
+    <% end %>
+  <% end %>
 <table class = "cart-items">
   <tr>
     <th>Item</th>

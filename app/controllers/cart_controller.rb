@@ -15,6 +15,7 @@ class CartController < ApplicationController
 
   def show
     @items = cart.items
+    @discounts = cart.discounts
   end
 
   def empty

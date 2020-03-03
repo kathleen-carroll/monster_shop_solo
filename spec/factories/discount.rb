@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :discount, class: Discount do
     name              { Faker::Hipster.sentence(word_count: 3) }
-    item_count        { sample[20, 40, 60] }
-    percent           { sample[5, 10, 15] }
+    item_count        { ((Faker::Number.within(range: 20..100))/10).round * 10 }
+    percent           { ((Faker::Number.within(range: 5..35))/5).round * 5}
     association       :merchant, factory: :random_merchant
   end
 end

@@ -1,0 +1,5 @@
+<h1> All Discounts</h1>
+
+<% @discounts.each do |discount| %>
+<li> <%= link_to discount.name, merchant_discount_path(discount.id)%> </li>
+<% end %>
