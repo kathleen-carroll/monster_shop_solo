@@ -43,5 +43,27 @@ RSpec.describe "checkout discounts page" do
       expect(page).to have_content("Item Minimum: #{@discount.item_count}")
       expect(page).to have_content("Offered by: #{@discount.merchant.name}")
     end
+
+    it 'can edit discount from show page' do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+
+      visit "/merchant/discounts/#{@discount.id}"
+
+      click_on 'Edit Discount'
+
+      expect(current_path).to eq("/merchant/discounts/#{@discount.id}/edit")
+      find_field :name, with: @discount.name
+      find_field :percent, with: @discount.percent
+      find_field :item_count, with: @discount.item_count
+
+      fill_in :name, with: "March Special"
+      fill_in :percent, with: 10
+      fill_in :item_count, with: 10
+
+      click_button "Update Discount"
+      expect(current_path).to eq("/merchant/discounts")
+
+      expect(page).to have_content("#{@discount.name} has been updated.")
+    end
   end
 end
