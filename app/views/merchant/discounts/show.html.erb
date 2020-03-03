@@ -3,3 +3,5 @@
 <p>Discount Value: <%= @discount.percent %>% </p>
 <p>Item Minimum: <%= @discount.item_count %> </p>
 <p>Offered by: <%= @discount.merchant.name %> </p>
+
+<p> <%= link_to "Edit Discount", edit_merchant_discount_path(@discount.id) %> </p>
