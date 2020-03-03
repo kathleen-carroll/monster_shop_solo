@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "discounts page" do
-  describe "When I visit the discount page" do
     before(:each) do
       @item1 = create(:random_item)
       @item2 = create(:random_item, merchant: @item1.merchant)
@@ -18,12 +17,12 @@ RSpec.describe "discounts page" do
 
       click_on 'Remove Discount'
 
-      expect(current_path).to eq("/merchant/discounts/")
-      expect(page).to have_content("#{@discount.name} has been updated.")
+      expect(current_path).to eq("/merchant/discounts")
+      expect(page).to have_content("'#{@discount.name}' has been deleted.")
 
       within ".discounts" do
         expect(page).to_not have_content("#{@discount.name}")
+        expect(page).to have_content("#{@discount2.name}")
       end
     end
-  end
 end
