@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "checkout discounts page" do
-  describe "When I visit the cart checkout page" do
+RSpec.describe "discounts page" do
+  describe "When I visit the discount page" do
     before(:each) do
       @item1 = create(:random_item)
       @item2 = create(:random_item, merchant: @item1.merchant)
@@ -25,7 +25,7 @@ RSpec.describe "checkout discounts page" do
       visit '/merchant'
 
       click_on "Manage Discounts"
-      expect(current_path).to eq("/merchant/discounts")  #/#{@item1.merchant.id}
+      expect(current_path).to eq("/merchant/discounts") 
 
       expect(page).to have_content("#{@discount2.name}")
       expect(page).to_not have_content("#{@discount3.name}")
