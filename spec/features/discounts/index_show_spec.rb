@@ -9,7 +9,7 @@ RSpec.describe "checkout discounts page" do
       @discount2 = create(:discount, merchant: @item1.merchant)
       @discount3 = create(:discount)
       @user = create(:merchant_user, merchant: @item1.merchant)
-      
+
       # visit "/items/#{@item1.id}"
       # click_on "Add To Cart"
       # visit "/items/#{@item2.id}"
@@ -61,9 +61,27 @@ RSpec.describe "checkout discounts page" do
       fill_in :item_count, with: 10
 
       click_button "Update Discount"
-      expect(current_path).to eq("/merchant/discounts")
+      expect(current_path).to eq("/merchant/discounts/#{@discount.id}")
 
-      expect(page).to have_content("#{@discount.name} has been updated.")
+      expect(page).to have_content("March Special has been updated.")
+
+      click_on 'Edit Discount'
+
+      fill_in :name, with: ""
+      fill_in :percent, with: 10
+      fill_in :item_count, with: 10
+
+      click_button "Update Discount"
+
+      expect(page).to have_content("Name can't be blank")
+
+      fill_in :name, with: "Special"
+      fill_in :percent, with: 10
+      fill_in :item_count, with: ''
+
+      click_button "Update Discount"
+
+      expect(page).to have_content("Item count can't be blank")
     end
   end
 end
