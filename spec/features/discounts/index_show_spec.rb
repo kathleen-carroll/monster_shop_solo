@@ -9,7 +9,7 @@ RSpec.describe "checkout discounts page" do
       @discount2 = create(:discount, merchant: @item1.merchant)
       @discount3 = create(:discount)
       @user = create(:merchant_user, merchant: @item1.merchant)
-
+      
       # visit "/items/#{@item1.id}"
       # click_on "Add To Cart"
       # visit "/items/#{@item2.id}"
