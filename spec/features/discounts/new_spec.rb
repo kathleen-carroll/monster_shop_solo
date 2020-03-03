@@ -26,7 +26,10 @@ RSpec.describe "discounts page" do
       click_button "Create Discount"
       expect(current_path).to eq("/merchant/discounts")
 
-      expect(page).to have_content("March Special has been created.")
+      discount = Discount.last
+
+      expect(page).to have_content("March Special has been saved.")
+      expect(page).to have_link("#{discount.name}")
 
       click_on 'New Discount'
 
