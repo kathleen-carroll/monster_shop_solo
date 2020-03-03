@@ -1,0 +1,7 @@
+<h1> All Discounts</h1>
+
+<% @discounts.each do |discount| %>
+<li class = discounts> <%= link_to discount.name, merchant_discount_path(discount.id) if !discount.id.nil?%> </li>
+<% end %>
+
+<center><%= button_to "New Discount", new_merchant_discount_path, method: :get%></center>

@@ -49,4 +49,12 @@ class Cart
       contents[item.id.to_s] == 0
     end
   end
+
+  def merchants
+    items.keys.map {|item| item.merchant}
+  end
+
+  def discounts
+    merchants.map {|merchant| merchant.discounts}.flatten.uniq
+  end
 end
