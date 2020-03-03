@@ -17,7 +17,7 @@ RSpec.describe "discounts page" do
 
       click_on 'New Discount'
 
-      expect(current_path).to eq("/merchant/discounts/#{@discount.id}/new")
+      expect(current_path).to eq("/merchant/discounts/new")
 
       fill_in :name, with: "March Special"
       fill_in :percent, with: 10
