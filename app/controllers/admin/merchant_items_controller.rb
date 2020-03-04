@@ -44,9 +44,9 @@ class Admin::MerchantItemsController < Admin::BaseController
   def destroy
     item = Item.find(params[:id])
     merchant = item.merchant
-    if !item
-      flash[:error] = "Item already deleted."
-    elsif item.no_orders?
+    # if !item
+    #   flash[:error] = "Item already deleted."
+    if item.no_orders?
       flash[:success] = "'#{item.name}' has been deleted."
       item.destroy
     else
