@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe "on the admin merchant index" do
-  xit "shows a button to enable or disable merchant" do
+  it "shows a button to enable or disable merchant" do
     user = create(:admin_user)
     merchant = create(:random_merchant)
-    
+
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
     visit "/admin/merchants"
@@ -22,7 +22,7 @@ RSpec.describe "on the admin merchant index" do
       click_on "Disable"
     end
     expect(page).to have_content("#{merchant.name} has been deactivated.")
-    
+
     expect(current_path).to eq("/admin/merchants")
 
     within "#merchant-#{merchant.id}" do
@@ -44,7 +44,7 @@ RSpec.describe "on the admin merchant index" do
     item4 = create(:random_item, merchant: merchant)
     item5 = create(:random_item, merchant: merchant_2)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    
+
     visit "/items"
 
     expect(page).to have_content(item1.name)
@@ -54,7 +54,7 @@ RSpec.describe "on the admin merchant index" do
     expect(page).to have_content(item5.name)
 
     visit "/admin/merchants"
-    
+
     within "#merchant-#{merchant.id}" do
       click_button "Disable"
     end
@@ -98,9 +98,8 @@ RSpec.describe "on the admin merchant index" do
     within "#merchant-#{merchant.id}" do
       click_button "Enable"
     end
-    
+
     expect(current_path).to eq("/admin/merchants")
     expect(page).to have_content("#{merchant.name} has been activated.")
   end
 end
-
