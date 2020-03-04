@@ -11,7 +11,7 @@ class Order <ApplicationRecord
   end
 
   def grandtotal
-    item_orders.sum('price * quantity')
+    item_orders.sum('price * quantity * (1 - (CAST(COALESCE(discount_percent, 0) as float)/100))')
   end
 
   def item_count

@@ -23,12 +23,33 @@ class Cart
   end
 
   def subtotal(item)
-    item.price * @contents[item.id.to_s]
+    if item.merchant.discounts != [] && !min_discount_qty(item.merchant).nil? && items[item] >= min_discount_qty(item.merchant)
+      item.price * @contents[item.id.to_s] * (1 - (discount_subtotal(item).last.percent.to_f/100))
+    else
+      item.price * @contents[item.id.to_s]
+    end
+  end
+
+  def min_discount_qty(merchant)
+    Discount.joins(:merchant)
+      .where("discounts.merchant_id = #{merchant.id}")
+      .order(:item_count)
+      .limit(1)
+      .pluck('discounts.item_count')
+      .first
+  end
+
+  def discount_subtotal(item)
+    qty = items[item]
+    discount = Discount
+                .joins(:merchant)
+                .where("discounts.merchant_id = #{item.merchant.id} and #{qty} >= discounts.item_count")
   end
 
   def total
     @contents.sum do |item_id,quantity|
-      Item.find(item_id).price * quantity
+      item = Item.find(item_id)
+      subtotal(item)
     end
   end
 
@@ -51,10 +72,10 @@ class Cart
   end
 
   def merchants
-    items.keys.map {|item| item.merchant}
+    items.keys.map {|item| Merchant.joins(:items).where("items.merchant_id = #{item.merchant_id}")}.flatten.uniq
   end
 
   def discounts
-    merchants.map {|merchant| merchant.discounts}.flatten.uniq
+    merchants.map {|merchant| Discount.where("discounts.merchant_id = #{merchant.id}")}.flatten.uniq
   end
 end

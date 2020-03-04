@@ -25,13 +25,16 @@ describe Order, type: :model do
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 
       @order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
+      @order_2 = Order.create!(name: 'Kat', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: create(:regular_user))
 
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
+      @order_2.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3, discount_percent: 20)
     end
 
     it 'grandtotal' do
       expect(@order_1.grandtotal).to eq(230)
+      expect(@order_2.grandtotal).to eq(24.0)
     end
 
     it "item_count" do
