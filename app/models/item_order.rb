@@ -14,7 +14,7 @@ class ItemOrder <ApplicationRecord
   end
 
   def self.total
-    sum("item_orders.quantity * item_orders.price * (1 - CAST(COALESCE(item_orders.discount_percent, 0)/100 as int))")
+    sum("item_orders.quantity * item_orders.price * (1 - CAST(COALESCE(item_orders.discount_percent, 0) as float)/100)")
   end
 
   def self.item_count
