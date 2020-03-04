@@ -1,6 +1,6 @@
-# Monster Shop - Turing Back End Engineering, Module 2, Group Project
+# Monster Shop - Turing Back End Engineering, Module 2, Solo Project
 #### Heroku Link
-https://monster-shop-dreamteam.herokuapp.com/
+https://monster-shop-kc.herokuapp.com/
 
 #### Contributors
 
