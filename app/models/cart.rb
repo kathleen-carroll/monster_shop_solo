@@ -72,10 +72,13 @@ class Cart
   end
 
   def merchants
-    items.keys.map {|item| item.merchant}
+    # require "pry"; binding.pry
+    # items.keys.map {|item| item.merchant}
+    items.keys.map {|item| Merchant.joins(:items).where("items.merchant_id = #{item.merchant_id}")}.flatten.uniq
   end
 
   def discounts
-    merchants.map {|merchant| merchant.discounts}.flatten.uniq
+    merchants.map {|merchant| Discount.where("discounts.merchant_id = #{merchant.id}")}.flatten.uniq
+    # merchants.map {|merchant| merchant.discounts}.flatten.uniq
   end
 end
