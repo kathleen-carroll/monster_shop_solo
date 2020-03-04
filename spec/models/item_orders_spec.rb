@@ -68,6 +68,21 @@ describe ItemOrder, type: :model do
       expect(item_order2.can_fulfill?).to eq(false)
       expect(item_order1.can_fulfill?).to eq(true)
     end
+
+    it "discounted?" do
+      shop = create(:random_merchant)
+
+      item1 = create(:random_item, merchant: shop, inventory: 20)
+
+      order1 = create(:random_order)
+      order2 = create(:random_order)
+
+      item_order1 = create(:random_item_order, item: item1, order: order1, price: item1.price, quantity: 10, discount_percent: 20)
+      item_order2 = create(:random_item_order, item: item1, order: order2, price: item1.price, quantity: 25)
+
+      expect(item_order2.discounted?).to eq(false)
+      expect(item_order1.discounted?).to eq(true)
+    end
   end
 
   describe 'class methods' do
