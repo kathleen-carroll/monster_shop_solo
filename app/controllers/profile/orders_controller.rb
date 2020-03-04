@@ -16,7 +16,6 @@ class Profile::OrdersController < Profile::BaseController
       cart.items.each do |item,quantity|
         if cart.subtotal(item) != (quantity * item.price)
           discount = cart.discount_subtotal(item).last.percent
-          # require "pry"; binding.pry
           order.item_orders.create({
             item: item,
             quantity: quantity,

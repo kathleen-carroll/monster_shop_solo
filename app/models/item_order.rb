@@ -2,7 +2,6 @@ class ItemOrder <ApplicationRecord
   validates_presence_of :item_id, :order_id, :price, :quantity
   enum status: %w(unfulfilled fulfilled)
   validates :discount_percent, presence: true, if: :discounted?
-  # validates_presence_of :discount_percent, optional: true
 
   belongs_to :item
   belongs_to :order

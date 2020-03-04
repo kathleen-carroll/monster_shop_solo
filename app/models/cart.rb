@@ -41,15 +41,15 @@ class Cart
 
   def discount_subtotal(item)
     qty = items[item]
-    discount = Discount.joins(:merchant).where("discounts.merchant_id = #{item.merchant.id} and #{qty} >= discounts.item_count")
-    # require "pry"; binding.pry
+    discount = Discount
+                .joins(:merchant)
+                .where("discounts.merchant_id = #{item.merchant.id} and #{qty} >= discounts.item_count")
   end
 
   def total
     @contents.sum do |item_id,quantity|
       item = Item.find(item_id)
       subtotal(item)
-      # Item.find(item_id).price * quantity
     end
   end
 

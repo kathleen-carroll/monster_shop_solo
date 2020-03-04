@@ -12,7 +12,6 @@ RSpec.describe "checkout discounts page" do
       @discount4 = create(:discount, merchant: @item4.merchant, item_count: 5, percent: 7)
       contents = {@item1.id.to_s => 1, @item2.id.to_s => 1}
       @cart = Cart.new(contents)
-      # @cart = Cart.new(session[:cart])
 
       visit "/items/#{@item1.id}"
       click_on "Add To Cart"
@@ -40,7 +39,6 @@ RSpec.describe "checkout discounts page" do
       within("#cart-item-#{@item2.id}") do
         expect(page).to have_content("$#{@item2.price}")
         expect(page).to_not have_content("$1,402.38") # price * 21
-        discount_val = (@item2.price * 21) * 0.95 # 1332.26
         expect(page).to have_content("$1,332.26")
       end
 
@@ -52,10 +50,9 @@ RSpec.describe "checkout discounts page" do
 
       within("#cart-item-#{@item2.id}") do
         5.times do click_on "+" end
-        discount_val2 = (@item2.price * 26) * 0.90
         expect(page).to have_content("$1,562.65")
       end
-      # total = @item1.price + discount_val2
+
       expect(page).to have_content("Total: $1,618.15")
     end
 
