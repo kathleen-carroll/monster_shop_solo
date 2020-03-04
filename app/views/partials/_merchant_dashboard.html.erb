@@ -2,7 +2,7 @@
 <p>Employer: <%= @merchant.name %> </p>
 <p>Employer Address: <%= "#{@merchant.address} #{@merchant.city}, #{@merchant.state} #{@merchant.zip}" %></p>
 <h3><%= link_to 'My Items', "#{items_path}" %></h3>
-<h3><%= link_to 'My Discounts', "#{discounts_path}" %></h3>
+<h3><%= link_to 'My Discounts', "#{merchant_discounts_path}" %></h3>
 
 <h1>Order Info</h1>
 <center>
