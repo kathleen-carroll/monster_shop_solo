@@ -12,11 +12,12 @@ class Order <ApplicationRecord
 
   def grandtotal
     # require "pry"; binding.pry
-    item_orders.sum do |item_order|
-      require "pry"; binding.pry
-      # 'price * quantity' #if item_order.discount.nil?
-      price * quantity * ( 1 - (discount.percent.to_f/100) ) #if !item_order.discount.nil?
-    end
+    item_orders.sum('price * quantity * (1 - (CAST(COALESCE(discount_percent, 0) as float)/100))')
+    # item_orders.sum do |item_order|
+    #   require "pry"; binding.pry
+    #   # 'price * quantity' #if item_order.discount.nil?
+    #   price * quantity * ( 1 - (discount.percent.to_f/100) ) #if !item_order.discount.nil?
+    # end
   end
 
   def item_count

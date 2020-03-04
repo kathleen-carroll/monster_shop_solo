@@ -1,8 +1,8 @@
 class ItemOrder <ApplicationRecord
   validates_presence_of :item_id, :order_id, :price, :quantity
   enum status: %w(unfulfilled fulfilled)
-  # validates :discount, presence: true, if: :merchant?
-  belongs_to :discount, optional: true
+  validates :discount_percent, presence: true, if: :discounted?
+  # validates_presence_of :discount_percent, optional: true
 
   belongs_to :item
   belongs_to :order
@@ -15,7 +15,7 @@ class ItemOrder <ApplicationRecord
   end
 
   def self.total
-    sum("item_orders.quantity * item_orders.price")
+    sum("item_orders.quantity * item_orders.price * (1 - CAST(COALESCE(item_orders.discount_percent, 0)/100 as int))")
   end
 
   def self.item_count
@@ -23,7 +23,7 @@ class ItemOrder <ApplicationRecord
   end
 
   def subtotal
-    price * quantity
+    price * quantity * (1 - discount_percent.to_f/100)
   end
 
   def restock
@@ -42,5 +42,9 @@ class ItemOrder <ApplicationRecord
 
   def can_fulfill?
     item.inventory >= quantity
+  end
+
+  def discounted?
+    !self.discount_percent.nil?
   end
 end

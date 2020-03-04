@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "checkout discounts page" do
     before(:each) do
-      @item1 = create(:random_item, price: 55.50)
+      @item1 = create(:random_item, price: 55.50, inventory: 40)
       @item2 = create(:random_item, merchant: @item1.merchant, price: 66.78, inventory: 30)
       @item3 = create(:random_item, inventory: 60, price: 5)
       @item4 = create(:random_item, inventory: 50, price: 10)
