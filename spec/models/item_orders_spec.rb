@@ -119,6 +119,13 @@ describe ItemOrder, type: :model do
       create(:random_item_order, item: item3, order: order1, price: item3.price, quantity: 12)
 
       expect(order1.item_orders.total).to eq((item1.price * 3)+(item2.price * 7)+(item3.price * 12))
+
+      discount = create(:discount, merchant: shop, item_count: 5, percent: 50)
+      order2 = create(:random_order)
+      create(:random_item_order, item: item1, order: order2, price: item1.price, quantity: 3)
+      create(:random_item_order, item: item2, order: order2, price: item2.price, quantity: 7)
+
+      expect(order2.item_orders.total).to eq((item1.price * 3)+((item2.price * 7)/2))
     end
 
     it "item_count" do
