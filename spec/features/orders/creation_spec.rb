@@ -6,6 +6,8 @@
 # - Details of the order:
 
 # - the date when the order was created
+require 'rails_helper'
+
 RSpec.describe("Order Creation") do
   describe "When I check out from my cart" do
     before(:each) do
@@ -108,6 +110,35 @@ RSpec.describe("Order Creation") do
       expect(page).to have_button("Create Order")
     end
 
+    it 'i can create order with discount' do
+      discount = create(:discount, merchant: @mike, item_count: 10, percent: 20)
 
+      visit '/cart'
+
+      within("#cart-item-#{@pencil.id}") do
+        10.times do click_on "+" end
+      end
+      click_on 'Checkout'
+
+      name = "Kathleen"
+      address = "123 Sesame St."
+      city = "NYC"
+      state = "New York"
+      zip = 10001
+
+      fill_in :name, with: name
+      fill_in :address, with: address
+      fill_in :city, with: city
+      fill_in :state, with: state
+      fill_in :zip, with: zip
+
+      click_button "Create Order"
+
+      order = Order.last
+
+      expect(page).to have_content("Your order was created.")
+      expect(page).to have_content("#{order.grandtotal}")
+      expect(page).to_not have_content("$22")
+    end
   end
 end
