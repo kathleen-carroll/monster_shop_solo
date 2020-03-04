@@ -1,6 +1,8 @@
 class ItemOrder <ApplicationRecord
   validates_presence_of :item_id, :order_id, :price, :quantity
   enum status: %w(unfulfilled fulfilled)
+  # validates :discount, presence: true, if: :merchant?
+  belongs_to :discount, optional: true
 
   belongs_to :item
   belongs_to :order

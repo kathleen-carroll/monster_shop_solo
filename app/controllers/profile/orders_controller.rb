@@ -14,11 +14,20 @@ class Profile::OrdersController < Profile::BaseController
     order = current_user.orders.create(order_params)
     if order.save
       cart.items.each do |item,quantity|
-        order.item_orders.create({
-          item: item,
-          quantity: quantity,
-          price: item.price
-          })
+        if cart.subtotal(item) != (quantity * item.price)
+          order.item_orders.create({
+            item: item,
+            quantity: quantity,
+            price: item.price,
+            discount: cart.discount_subtotal(item).last
+            })
+        else
+          order.item_orders.create({
+            item: item,
+            quantity: quantity,
+            price: item.price
+            })
+        end
       end
       session.delete(:cart)
       flash[:success] = "Your order was created."
