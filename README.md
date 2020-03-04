@@ -3,18 +3,15 @@
 https://monster-shop-dreamteam.herokuapp.com/
 
 #### Contributors
-[Jordan Williams](https://github.com/iEv0lv3)
-
-[David Atkins](https://github.com/d-atkins)
 
 [Kathleen Carroll](https://github.com/kathleen-carroll)
 
-[Raymond Nguyen](https://github.com/itemniner)
-
 ### Overview:
+*This project was a continuation of previous e-commerce sit.  This project added discounts with full functionality to retail site.
+
 Monster Shop is fictitious  e-commerce website where users are able to browse items from various shops, add them to their cart, and make orders.
 
-Monster Shop is made up of merchants and items. Merchants have many items, and items belong to merchants. Items can be ordered and reviewed by users. CRUD functionality for merchants, items, and orders is determined by user role: visitor, regular user, merchant employee, and administrator.
+Monster Shop is made up of merchants and items. Merchants have many items, and items belong to merchants. Items can be ordered and reviewed by users. CRUD functionality for merchants, items, and orders is determined by user role: visitor, regular user, merchant employee, and administrator.  
 
 Monster Shop is built in Rails and uses ActiveRecord to store and query data.
 
