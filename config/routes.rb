@@ -93,7 +93,7 @@ Rails.application.routes.draw do
   delete '/cart', to: 'cart#empty'
   delete '/cart/:item_id', to: 'cart#remove_item'
   patch '/cart/:item_id', to: 'cart#edit'
-  resources 'cart', only: [:edit, :show]
+  # resources 'cart', only: [:edit], path: 'cart/:item_id/edit'
 
   # resources :orders, only: [:new, :create, :show]
   get '/orders/:id', to: 'orders#show'
